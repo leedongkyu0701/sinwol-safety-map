@@ -2,8 +2,14 @@ import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 
 import { assertUniqueValues } from "../../../src/shared/lib/validation";
-import { fireWaterFacilitiesSchema } from "../../../src/shared/schemas/facility";
-import { metadataSchema } from "../../../src/shared/schemas/metadata";
+import {
+  fireWaterFacilitiesSchema,
+  shelterFacilitiesSchema,
+} from "../../../src/shared/schemas/facility";
+import {
+  metadataSchema,
+  type DataMetadata,
+} from "../../../src/shared/schemas/metadata";
 import { FIRE_WATER_SUBTYPES } from "../../../src/shared/types/facility";
 import {
   FIRE_WATER_INPUT_PATH,
@@ -11,8 +17,15 @@ import {
   FIRE_WATER_SOURCE_NAME,
   METADATA_OUTPUT_PATH,
 } from "../fire-water/constants";
+import {
+  SHELTER_ACTIVE_STATUS,
+  SHELTER_OUTPUT_PATH,
+  SHELTER_SOURCE_NAME,
+} from "../shelters/constants";
 import { calculateFileSha256 } from "./file-hash";
 import { readJsonFileIfExists } from "./write-json";
+
+const FORBIDDEN_MISSING_STRINGS = new Set(["nan", "n/a"]);
 
 function readRequiredJson(path: string): unknown {
   const value = readJsonFileIfExists(path);
@@ -24,26 +37,25 @@ function readRequiredJson(path: string): unknown {
   return value;
 }
 
-function containsNanString(value: unknown): boolean {
+function containsForbiddenMissingString(value: unknown): boolean {
   if (typeof value === "string") {
-    return value.trim().toLowerCase() === "nan";
+    return FORBIDDEN_MISSING_STRINGS.has(value.trim().toLowerCase());
   }
 
   if (Array.isArray(value)) {
-    return value.some(containsNanString);
+    return value.some(containsForbiddenMissingString);
   }
 
   if (value !== null && typeof value === "object") {
-    return Object.values(value).some(containsNanString);
+    return Object.values(value).some(containsForbiddenMissingString);
   }
 
   return false;
 }
 
-function run(): void {
+function verifyFireWater(metadata: DataMetadata): number {
   const rawFacilities = readRequiredJson(FIRE_WATER_OUTPUT_PATH);
   const facilities = fireWaterFacilitiesSchema.parse(rawFacilities);
-  const metadata = metadataSchema.parse(readRequiredJson(METADATA_OUTPUT_PATH));
 
   assertUniqueValues(
     facilities.map((facility) => facility.sourceId),
@@ -69,16 +81,9 @@ function run(): void {
     "Fire water metadata must contain the source XLSX SHA-256",
   );
   assert.equal(
-    containsNanString(rawFacilities),
+    containsForbiddenMissingString(rawFacilities),
     false,
-    'Published fire water data must not contain the string "nan"',
-  );
-
-  const subtypeCounts = Object.fromEntries(
-    FIRE_WATER_SUBTYPES.map((subtype) => [
-      subtype,
-      facilities.filter((facility) => facility.subtype === subtype).length,
-    ]),
+    "Published fire water data contains a forbidden missing-value string",
   );
 
   if (existsSync(FIRE_WATER_INPUT_PATH)) {
@@ -89,13 +94,77 @@ function run(): void {
     );
   }
 
-  console.log("Published data verification passed\n");
-  console.log(`Fire water rows: ${facilities.length.toLocaleString("en-US")}`);
-  console.log(`Subtype: ${JSON.stringify(subtypeCounts)}`);
-  console.log(`Metadata count: ${metadata.sources.fireWater.count}`);
-  console.log(
-    `Source SHA-256: ${metadata.sources.fireWater.sourceFileSha256}`,
+  const subtypeCounts = Object.fromEntries(
+    FIRE_WATER_SUBTYPES.map((subtype) => [
+      subtype,
+      facilities.filter((facility) => facility.subtype === subtype).length,
+    ]),
   );
+
+  console.log(`Fire water rows: ${facilities.length.toLocaleString("en-US")}`);
+  console.log(`Fire water subtype: ${JSON.stringify(subtypeCounts)}`);
+
+  return facilities.length;
+}
+
+function verifyShelters(metadata: DataMetadata): number {
+  const rawFacilities = readRequiredJson(SHELTER_OUTPUT_PATH);
+  const facilities = shelterFacilitiesSchema.parse(rawFacilities);
+
+  assertUniqueValues(
+    facilities.map((facility) => facility.sourceId),
+    "shelter sourceId",
+  );
+  assertUniqueValues(
+    facilities.map((facility) => facility.id),
+    "shelter id",
+  );
+  assert.equal(
+    facilities.every((facility) => facility.category === "SHELTER"),
+    true,
+    "All published shelters must use the SHELTER category",
+  );
+  assert.equal(
+    facilities.every(
+      (facility) => facility.details.status === SHELTER_ACTIVE_STATUS,
+    ),
+    true,
+    "All published shelters must be active",
+  );
+  assert.equal(
+    metadata.sources.shelter.count,
+    facilities.length,
+    "Shelter metadata count must match the published dataset",
+  );
+  assert.equal(
+    metadata.sources.shelter.source,
+    SHELTER_SOURCE_NAME,
+    "Shelter metadata source must match the configured source",
+  );
+  assert.equal(
+    typeof metadata.sources.shelter.fetchedAt,
+    "string",
+    "Shelter metadata must contain fetchedAt",
+  );
+  assert.equal(
+    containsForbiddenMissingString(rawFacilities),
+    false,
+    "Published shelter data contains a forbidden missing-value string",
+  );
+
+  console.log(`Shelter rows: ${facilities.length.toLocaleString("en-US")}`);
+  console.log(`Shelter fetchedAt: ${metadata.sources.shelter.fetchedAt}`);
+
+  return facilities.length;
+}
+
+function run(): void {
+  const metadata = metadataSchema.parse(readRequiredJson(METADATA_OUTPUT_PATH));
+  const fireWaterCount = verifyFireWater(metadata);
+  const shelterCount = verifyShelters(metadata);
+
+  console.log("\nPublished data verification passed");
+  console.log(`Total published rows: ${fireWaterCount + shelterCount}`);
 }
 
 try {

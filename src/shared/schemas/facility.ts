@@ -88,7 +88,7 @@ export const shelterFacilitySchema: z.ZodType<ShelterFacility> = z
   .object({
     ...baseFacilityShape,
     category: z.literal("SHELTER"),
-    subtype: nonEmptyStringSchema,
+    subtype: z.literal("CIVIL_DEFENSE_SHELTER"),
     details: z.object({ status: z.literal("사용중") }).strict(),
   })
   .strict()
@@ -149,3 +149,7 @@ export const facilitySchema: z.ZodType<Facility> = z.union([
 export const fireWaterFacilitiesSchema = z
   .array(fireWaterFacilitySchema)
   .min(1, "Fire water dataset must not be empty");
+
+export const shelterFacilitiesSchema = z
+  .array(shelterFacilitySchema)
+  .min(1, "Shelter dataset must not be empty");

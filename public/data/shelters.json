@@ -1,0 +1,706 @@
+[
+  {
+    "id": "shelter:3140000-S200200048",
+    "name": "보성아파트 지하1층 주차장",
+    "latitude": 37.52588948642731,
+    "longitude": 126.84483015393481,
+    "address": "서울특별시 양천구 오목로13길 33 (신월동, 신월보성아파트)",
+    "roadAddress": "서울특별시 양천구 오목로13길 33 (신월동, 신월보성아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 465번지 5호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S200200048",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S200200050",
+    "name": "우당아파트 지하1층 주차장",
+    "latitude": 37.52316912339077,
+    "longitude": 126.84753542250728,
+    "address": "서울특별시 양천구 오목로 90-0 (신월동)",
+    "roadAddress": "서울특별시 양천구 오목로 90-0 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 506번지 1호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S200200050",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S200200060",
+    "name": "금용아파트 지하1층 주차장",
+    "latitude": 37.5205409967632,
+    "longitude": 126.842070802091,
+    "address": "서울특별시 양천구 신월로17길 22 (신월동, 금용아파트)",
+    "roadAddress": "서울특별시 양천구 신월로17길 22 (신월동, 금용아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 533번지 1호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S200200060",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S200200061",
+    "name": "성은교회 지하1층 주차장",
+    "latitude": 37.53942497764134,
+    "longitude": 126.83317101603956,
+    "address": "서울특별시 양천구 화곡로 100 (신월동)",
+    "roadAddress": "서울특별시 양천구 화곡로 100 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 64번지 2호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S200200061",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S200200071",
+    "name": "신월시영아파트 지하1층",
+    "latitude": 37.516731245550105,
+    "longitude": 126.83467164910816,
+    "address": "서울특별시 양천구 신월로 99 (신월동, 신월시영아파트)",
+    "roadAddress": "서울특별시 양천구 신월로 99 (신월동, 신월시영아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 987번지 1호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S200200071",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S200900006",
+    "name": "대주파크빌 지하1층 주차장",
+    "latitude": 37.51482771785731,
+    "longitude": 126.84246714276327,
+    "address": "서울특별시 양천구 남부순환로85길 16 (신월동, 대주파크빌)",
+    "roadAddress": "서울특별시 양천구 남부순환로85길 16 (신월동, 대주파크빌)",
+    "lotAddress": "서울특별시 양천구 신월동 1028번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S200900006",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000007",
+    "name": "신월대림아파트 지하1,2층 주차장",
+    "latitude": 37.523721021098595,
+    "longitude": 126.84544789676774,
+    "address": "서울특별시 양천구 오목로13길 7 (신월동, 신월대림아파트)",
+    "roadAddress": "서울특별시 양천구 오목로13길 7 (신월동, 신월대림아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 491번지 1호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000007",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000008",
+    "name": "태진아파트 지하1,2층 주차장",
+    "latitude": 37.5263102445269,
+    "longitude": 126.84647742250174,
+    "address": "서울특별시 양천구 중앙로55길 25 (신월동, 태진아파트)",
+    "roadAddress": "서울특별시 양천구 중앙로55길 25 (신월동, 태진아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 467번지 3호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000008",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000009",
+    "name": "신도신월1차 아파트 지하1층 주차장",
+    "latitude": 37.51772471985094,
+    "longitude": 126.84663575193994,
+    "address": "서울특별시 양천구 신월로20길 33 (신월동, 신도신월1차아파트)",
+    "roadAddress": "서울특별시 양천구 신월로20길 33 (신월동, 신도신월1차아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1029번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000009",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000010",
+    "name": "금하뜨라네아파트 지하1층 주차장",
+    "latitude": 37.5346083305875,
+    "longitude": 126.82365073767333,
+    "address": "서울특별시 양천구 가로공원로56길 10-0 (신월동)",
+    "roadAddress": "서울특별시 양천구 가로공원로56길 10-0 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 142번지 14호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000010",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000011",
+    "name": "금강아파트 지하1,2층 주차장",
+    "latitude": 37.52692922205694,
+    "longitude": 126.83315654942582,
+    "address": "서울특별시 양천구 남부순환로64길 23-0 (신월동)",
+    "roadAddress": "서울특별시 양천구 남부순환로64길 23-0 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 207번지 24호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000011",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000013",
+    "name": "수명아파트 지하1층 주차장",
+    "latitude": 37.54084851161791,
+    "longitude": 126.82708308285088,
+    "address": "서울특별시 양천구 화곡로3길 15 (신월동)",
+    "roadAddress": "서울특별시 양천구 화곡로3길 15 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 12번지 4호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000013",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000018",
+    "name": "양천롯데캐슬아파트 지하1-2층 주차장",
+    "latitude": 37.523532227118,
+    "longitude": 126.840418153315,
+    "address": "서울특별시 양천구 오목로5길 19 (신월동, 양천롯데캐슬)",
+    "roadAddress": "서울특별시 양천구 오목로5길 19 (신월동, 양천롯데캐슬)",
+    "lotAddress": "서울특별시 양천구 신월동 1057번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000018",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000019",
+    "name": "삼정그린뷰아파트 지하1층주차장",
+    "latitude": 37.5228259887505,
+    "longitude": 126.839065227268,
+    "address": "서울특별시 양천구 오목로3길 17-0 (신월동)",
+    "roadAddress": "서울특별시 양천구 오목로3길 17-0 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 1041번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000019",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201000020",
+    "name": "신월대성유니드아파트 101동 지하1층 주차장",
+    "latitude": 37.5205626702647,
+    "longitude": 126.84120910754,
+    "address": "서울특별시 양천구 신월로15길 25 (신월동, 신월대성유니드아파트)",
+    "roadAddress": "서울특별시 양천구 신월로15길 25 (신월동, 신월대성유니드아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1033번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201000020",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100003",
+    "name": "신월문화체육센타 지하1층",
+    "latitude": 37.51995851861528,
+    "longitude": 126.83505280715674,
+    "address": "서울특별시 양천구 지양로 47 (신월동, 신월문화체육센타)",
+    "roadAddress": "서울특별시 양천구 지양로 47 (신월동, 신월문화체육센타)",
+    "lotAddress": "서울특별시 양천구 신월동 987번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100003",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100006",
+    "name": "성산교회 지하1층 주차장",
+    "latitude": 37.536792417429815,
+    "longitude": 126.82803055179807,
+    "address": "서울특별시 양천구 남부순환로 339 (신월동)",
+    "roadAddress": "서울특별시 양천구 남부순환로 339 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 51번지 8호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100006",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100008",
+    "name": "수명산태승훼미리아파트 지하1층주차장",
+    "latitude": 37.54117127158363,
+    "longitude": 126.83101771286859,
+    "address": "서울특별시 양천구 월정로 262 (신월동)",
+    "roadAddress": "서울특별시 양천구 월정로 262 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 18번지 17호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100008",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100009",
+    "name": "아름다운세상아파트 지하1층주차장",
+    "latitude": 37.54216235631118,
+    "longitude": 126.82752365799303,
+    "address": "서울특별시 양천구 화곡로3길 31 (신월동)",
+    "roadAddress": "서울특별시 양천구 화곡로3길 31 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 1038번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100009",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100010",
+    "name": "수명산롯데캐슬아파트 지하1층주차장",
+    "latitude": 37.543937201232794,
+    "longitude": 126.82833527439233,
+    "address": "서울특별시 양천구 월정로 303-0 (신월동)",
+    "roadAddress": "서울특별시 양천구 월정로 303-0 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 1036번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100010",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100016",
+    "name": "신목동 샤르망 오피스텔 지하1층,2층 주차장",
+    "latitude": 37.528360240563295,
+    "longitude": 126.83916952588305,
+    "address": "서울특별시 양천구 월정로 101 (신월동, 신목동샤르망오피스텔)",
+    "roadAddress": "서울특별시 양천구 월정로 101 (신월동, 신목동샤르망오피스텔)",
+    "lotAddress": "서울특별시 양천구 신월동 235번지 7호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100016",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100017",
+    "name": "신월6차보람아파트 지하1층 주차장",
+    "latitude": 37.53047716245915,
+    "longitude": 126.83514090659511,
+    "address": "서울특별시 양천구 곰달래로7길 7 (신월동, 신월6차보람아파트)",
+    "roadAddress": "서울특별시 양천구 곰달래로7길 7 (신월동, 신월6차보람아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 125번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100017",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201100018",
+    "name": "나산아파트 지하1층,2층 주차장",
+    "latitude": 37.5278123769851,
+    "longitude": 126.83432994903049,
+    "address": "서울특별시 양천구 남부순환로65길 6 (신월동, 나산아파트)",
+    "roadAddress": "서울특별시 양천구 남부순환로65길 6 (신월동, 나산아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 217번지 2호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201100018",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201200001",
+    "name": "신월대성유니드아파트 103동 지하1층 주차장",
+    "latitude": 37.5202395301226,
+    "longitude": 126.841356401207,
+    "address": "서울특별시 양천구 신월로15길 21 (신월동, 신월대성유니드아파트)",
+    "roadAddress": "서울특별시 양천구 신월로15길 21 (신월동, 신월대성유니드아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1034번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201200001",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201600004",
+    "name": "해맞이 공영주차장 지하1,2,3층 주차장",
+    "latitude": 37.51995851861528,
+    "longitude": 126.83505280715674,
+    "address": "서울특별시 양천구 지양로 47 (신월동, 신월문화체육센타)",
+    "roadAddress": "서울특별시 양천구 지양로 47 (신월동, 신월문화체육센타)",
+    "lotAddress": "서울특별시 양천구 신월동 987번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201600004",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201700002",
+    "name": "가로공원공영주차장 지하1,2층",
+    "latitude": 37.53627843317215,
+    "longitude": 126.83081598159181,
+    "address": "서울특별시 양천구 가로공원로 지하 133 (신월동, 가로공원공영주차장)",
+    "roadAddress": "서울특별시 양천구 가로공원로 지하 133 (신월동, 가로공원공영주차장)",
+    "lotAddress": "서울특별시 양천구 신월동 263번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201700002",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201700008",
+    "name": "방주기픈샘2차아파트 지하1층 주차장",
+    "latitude": 37.52570057960008,
+    "longitude": 126.8429290807853,
+    "address": "서울특별시 양천구 중앙로55길 59 (신월동, 방주기픈샘아파트2차)",
+    "roadAddress": "서울특별시 양천구 중앙로55길 59 (신월동, 방주기픈샘아파트2차)",
+    "lotAddress": "서울특별시 양천구 신월동 1047번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201700008",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201700009",
+    "name": "은성아파트 지하1층 주차장",
+    "latitude": 37.532253835673856,
+    "longitude": 126.83345239199052,
+    "address": "서울특별시 양천구 곰달래로5길 30 (신월동, 은성아파트)",
+    "roadAddress": "서울특별시 양천구 곰달래로5길 30 (신월동, 은성아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 110번지 1호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201700009",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201800001",
+    "name": "은일로즈힐아파트 지하1층주차장",
+    "latitude": 37.516057001818105,
+    "longitude": 126.83680807501023,
+    "address": "서울특별시 양천구 신월로 116 (신월동, 은일로즈힐아파트)",
+    "roadAddress": "서울특별시 양천구 신월로 116 (신월동, 은일로즈힐아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1003번지 4호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201800001",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201800003",
+    "name": "양천벽산블루밍1단지 지하1층 주차장",
+    "latitude": 37.5247262411343,
+    "longitude": 126.839232470182,
+    "address": "서울특별시 양천구 월정로9길 17 (신월동, 양천벽산블루밍1단지)",
+    "roadAddress": "서울특별시 양천구 월정로9길 17 (신월동, 양천벽산블루밍1단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1026번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201800003",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201800004",
+    "name": "양천벽산블루밍2단지 지하1층 주차장",
+    "latitude": 37.5248203897497,
+    "longitude": 126.838920739785,
+    "address": "서울특별시 양천구 월정로9길 20 (신월동, 양천벽산블루밍2단지)",
+    "roadAddress": "서울특별시 양천구 월정로9길 20 (신월동, 양천벽산블루밍2단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1027번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201800004",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201800005",
+    "name": "수명산동원데자뷰아파트 지하1층주차장",
+    "latitude": 37.54312506110384,
+    "longitude": 126.82795838500061,
+    "address": "서울특별시 양천구 화곡로3길 43 (신월동, 수명산동원데쟈뷰아파트)",
+    "roadAddress": "서울특별시 양천구 화곡로3길 43 (신월동, 수명산동원데쟈뷰아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1060번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201800005",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201800006",
+    "name": "삼익플라주아파트 지하1층주차장",
+    "latitude": 37.53643573281698,
+    "longitude": 126.83037099456679,
+    "address": "서울특별시 양천구 가로공원로 129 (신월동, 삼익플라주)",
+    "roadAddress": "서울특별시 양천구 가로공원로 129 (신월동, 삼익플라주)",
+    "lotAddress": "서울특별시 양천구 신월동 81번지 10호",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201800006",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201800008",
+    "name": "벽산블루밍1단지 지하1,2층 주차장",
+    "latitude": 37.51400025195235,
+    "longitude": 126.84175926660481,
+    "address": "서울특별시 양천구 신정로13길 50 (신월동, 벽산아파트)",
+    "roadAddress": "서울특별시 양천구 신정로13길 50 (신월동, 벽산아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1022번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201800008",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S201800009",
+    "name": "벽산블루밍2단지 지하1,2층 주차장",
+    "latitude": 37.51395544926008,
+    "longitude": 126.84160893759159,
+    "address": "서울특별시 양천구 신정로13길 51 (신월동, 벽산블루밍2단지)",
+    "roadAddress": "서울특별시 양천구 신정로13길 51 (신월동, 벽산블루밍2단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1023번지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S201800009",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202000001",
+    "name": "목동센트럴아이파크위브 1단지 지하1,2층 주차장",
+    "latitude": 37.5162093846086,
+    "longitude": 126.84204414731629,
+    "address": "서울특별시 양천구 남부순환로83길 17 (신월동, 목동 센트럴 아이파크 위브 1단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 17 (신월동, 목동 센트럴 아이파크 위브 1단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1075 목동 센트럴 아이파크 위브 1단지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202000001",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202000002",
+    "name": "목동센트럴아이파크위브 2단지 지하1,2층 주차장",
+    "latitude": 37.51599117427996,
+    "longitude": 126.84211485687753,
+    "address": "서울특별시 양천구 남부순환로83길 18 (신월동, 목동 센트럴 아이파크 위브 2단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 18 (신월동, 목동 센트럴 아이파크 위브 2단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1076 목동 센트럴 아이파크 위브 2단지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202000002",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202000003",
+    "name": "목동센트럴아이파크위브 3단지 지하1,2,3층 주차장",
+    "latitude": 37.51725398748863,
+    "longitude": 126.84514879623548,
+    "address": "서울특별시 양천구 남부순환로83길 48 (신월동, 목동 센트럴 아이파크 위브 3단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 48 (신월동, 목동 센트럴 아이파크 위브 3단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1077 목동 센트럴 아이파크 위브 3단지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202000003",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202000004",
+    "name": "목동센트럴아이파크위브 4단지 지하1,2,3층 주차장",
+    "latitude": 37.517408209177454,
+    "longitude": 126.8449095683771,
+    "address": "서울특별시 양천구 남부순환로83길 47 (신월동, 목동 센트럴 아이파크 위브 4단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 47 (신월동, 목동 센트럴 아이파크 위브 4단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1078 목동 센트럴 아이파크 위브 4단지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202000004",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202100001",
+    "name": "신정뉴타운롯데캐슬아파트 지하1,2층 주차장",
+    "latitude": 37.51744696011278,
+    "longitude": 126.84795924486492,
+    "address": "서울특별시 양천구 중앙로29길 61 (신월동, 신정뉴타운롯데캐슬)",
+    "roadAddress": "서울특별시 양천구 중앙로29길 61 (신월동, 신정뉴타운롯데캐슬)",
+    "lotAddress": "서울특별시 양천구 신월동 1063 신정뉴타운롯데캐슬",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202100001",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202100002",
+    "name": "신정뉴타운두산위브아파트 지하1,2층 주차장",
+    "latitude": 37.519606712276115,
+    "longitude": 126.84521152116903,
+    "address": "서울특별시 양천구 신월로20길 7 (신월동, 신정뉴타운두산위브아파트)",
+    "roadAddress": "서울특별시 양천구 신월로20길 7 (신월동, 신정뉴타운두산위브아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1055 신정뉴타운두산위브아파트",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202100002",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202300001",
+    "name": "신목동파라곤아파트 지하1,2층 주차장",
+    "latitude": 37.52248989882481,
+    "longitude": 126.8436518305852,
+    "address": "서울특별시 양천구 오목로 55 (신월동)",
+    "roadAddress": "서울특별시 양천구 오목로 55 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 489-3",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202300001",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202300009",
+    "name": "신월코아루1단지아파트(지하1층) 주차장",
+    "latitude": 37.5321778196423,
+    "longitude": 126.829531624647,
+    "address": "서울특별시 양천구 남부순환로56길 9 (신월동, 코아루1단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로56길 9 (신월동, 코아루1단지)",
+    "lotAddress": "서울특별시 양천구 신월동 197-2 코아루1단지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202300009",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  },
+  {
+    "id": "shelter:3140000-S202300010",
+    "name": "신월코아루2단지아파트(지하1층) 주차장",
+    "latitude": 37.5317825451518,
+    "longitude": 126.828981585046,
+    "address": "서울특별시 양천구 남부순환로56길 15 (신월동, 신월동코아루2단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로56길 15 (신월동, 신월동코아루2단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1058 신월동코아루2단지",
+    "source": "서울시 민방위대피시설 인허가 정보",
+    "sourceId": "3140000-S202300010",
+    "category": "SHELTER",
+    "subtype": "CIVIL_DEFENSE_SHELTER",
+    "details": {
+      "status": "사용중"
+    }
+  }
+]

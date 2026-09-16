@@ -1,6 +1,6 @@
 # 신월동 안전지도
 
-서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. 현재 Fire Water 정적 데이터 Pipeline까지 구현되어 있으며 지도 UI는 아직 구현하지 않았습니다.
+서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. 현재 Fire Water와 Shelter 정적 데이터 Pipeline까지 구현되어 있으며 지도 UI는 아직 구현하지 않았습니다.
 
 ## Tech Stack
 
@@ -39,6 +39,7 @@ npm run dev
 - `npm run data:test-utils`: 공통 Normalize/Validation Utility 단위 검증
 - `npm run data:verify`: Published JSON Schema, ID, Metadata, Source SHA 검증
 - `npm run data:fire-water`: Fire Water XLSX ETL 및 Published JSON 생성
+- `npm run data:shelters`: 서울 Open Data API에서 Shelter Snapshot 생성
 
 ## Fire Water Data
 
@@ -62,6 +63,16 @@ ETL은 기존 Published count보다 20%를 초과해 감소하거나 결과가 0
 npm run data:test-utils
 npm run data:verify
 ```
+
+## Shelter Data
+
+Shelter ETL은 [서울시 민방위대피시설 인허가 정보](https://data.seoul.go.kr/dataList/OA-16149/A/1/datasetView.do)의 `LOCALDATA_114602` API를 사용합니다. `SEOUL_OPEN_DATA_KEY`를 `.env.local` 또는 실행 환경에 설정해야 하며, Key는 브라우저 Bundle이나 Published JSON에 포함하지 않습니다.
+
+```bash
+npm run data:shelters
+```
+
+서울시 전체 데이터를 동적으로 Pagination한 뒤 양천구의 신월동 시설 중 `사용중`인 데이터만 `public/data/shelters.json`에 Publish합니다. 동일한 Published 결과로 재실행하면 기존 `fetchedAt`과 `generatedAt`을 유지합니다.
 
 ## Documents
 

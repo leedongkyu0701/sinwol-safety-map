@@ -57,7 +57,7 @@ NAVER Maps JavaScript API v3 Dynamic Map만 사용할 예정이다. 초기 범�
 Hybrid Snapshot Strategy를 사용한다.
 
 - Fire Water: 공식 최신 XLSX Snapshot을 명시적으로 갱신
-- Shelter: 향후 Daily API Sync
+- Shelter: 서울 Open Data API Snapshot, 향후 Daily Sync
 - AED: 향후 Daily API Sync
 - Other: Source가 추가될 때 갱신 정책 정의
 
