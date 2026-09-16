@@ -24,6 +24,20 @@ export function readJsonFileIfExists(path: string): unknown | undefined {
   return JSON.parse(readFileSync(path, "utf8")) as unknown;
 }
 
+export function readJsonArrayCountIfExists(path: string): number | undefined {
+  const value = readJsonFileIfExists(path);
+
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if (!Array.isArray(value)) {
+    throw new Error(`${path} must contain a JSON array`);
+  }
+
+  return value.length;
+}
+
 export function writeJsonIfChanged(path: string, value: unknown): boolean {
   const serialized = serializeJson(value);
 

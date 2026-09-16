@@ -23,6 +23,10 @@
 
 현재 신월동 Raw 데이터는 57건이며, 사용중 44건만 Published 대상이다. 사용중지 13건은 Raw 단계에서 보존한다. Identity는 `MNG_NO`이고 동일 좌표를 이유로 중복 제거하지 않는다.
 
+Source는 서울 Open Data API `LOCALDATA_114602`다. `OGDP_INST_CD=3140000`으로 양천구를 확인하고 지번주소에 `신월동`이 포함된 Row를 지역 대상으로 삼는다. 현재 실제 응답에서 `XCRD`는 latitude, `YCRD`는 longitude이므로 별도 좌표 변환 없이 사용한다. 신월동 범위에 `사용중`, `사용중지` 외 상태가 나타나면 자동 Publish를 중단한다.
+
+Shelter Dataset도 0건과 기존 정상 Snapshot 대비 20% 초과 감소를 자동 Publish하지 않는다. 57건, 44건, 13건은 현재 Snapshot Audit 기준이며 영구 Business Rule이 아니다.
+
 ## AED
 
 현재 양천구 데이터는 416건, 신월동 Raw Candidate는 112건이다. `serialSeq`를 Source Identity로 사용하며 기관명, 주소 또는 좌표가 같다는 이유로 중복 제거하지 않는다.

@@ -15,7 +15,7 @@ import {
 } from "../shared/metadata";
 import {
   hasSameJsonContent,
-  readJsonFileIfExists,
+  readJsonArrayCountIfExists,
   writeJsonIfChanged,
 } from "../shared/write-json";
 import {
@@ -28,22 +28,10 @@ import {
 import { parseFireWaterWorkbook } from "./parse";
 import { transformFireWaterRows } from "./transform";
 
-function readPreviousPublishedCount(): number | undefined {
-  const existing = readJsonFileIfExists(FIRE_WATER_OUTPUT_PATH);
-
-  if (existing === undefined) {
-    return undefined;
-  }
-
-  if (!Array.isArray(existing)) {
-    throw new Error(`${FIRE_WATER_OUTPUT_PATH} must contain a JSON array`);
-  }
-
-  return existing.length;
-}
-
 function run(): void {
-  const previousPublishedCount = readPreviousPublishedCount();
+  const previousPublishedCount = readJsonArrayCountIfExists(
+    FIRE_WATER_OUTPUT_PATH,
+  );
   const existingMetadata = readMetadataIfExists(METADATA_OUTPUT_PATH);
   const parsed = parseFireWaterWorkbook(FIRE_WATER_INPUT_PATH);
   const transformed = transformFireWaterRows(parsed.rows);

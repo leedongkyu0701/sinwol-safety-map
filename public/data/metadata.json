@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-16T14:47:49.793Z",
+  "generatedAt": "2026-09-16T15:16:57.374Z",
   "sources": {
     "fireWater": {
       "count": 936,
@@ -9,7 +9,9 @@
       "sourceFileSha256": "7ee13b1a5efaf9fc745977ec70313f6c734aaffc87af537077dd9cc286db4143"
     },
     "shelter": {
-      "count": 0
+      "count": 44,
+      "source": "서울시 민방위대피시설 인허가 정보",
+      "fetchedAt": "2026-09-16T15:16:57.360Z"
     },
     "aed": {
       "count": 0

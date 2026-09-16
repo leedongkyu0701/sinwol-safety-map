@@ -17,9 +17,11 @@ import {
   aedFacilitySchema,
   fireWaterFacilitiesSchema,
   otherFacilitySchema,
+  shelterFacilitiesSchema,
   shelterFacilitySchema,
 } from "../../../src/shared/schemas/facility";
 import { mapFireWaterSubtype } from "../fire-water/transform";
+import { transformShelterRows } from "../shelters/transform";
 import { updateSourceMetadata } from "./metadata";
 
 assert.equal(normalizeOptionalString("nan"), undefined);
@@ -75,6 +77,7 @@ assert.equal(mapFireWaterSubtype(2), "UNDERGROUND_HYDRANT");
 assert.equal(mapFireWaterSubtype("06"), "EMERGENCY_FIRE_DEVICE");
 assert.throws(() => mapFireWaterSubtype("99"));
 assert.equal(fireWaterFacilitiesSchema.safeParse([]).success, false);
+assert.equal(shelterFacilitiesSchema.safeParse([]).success, false);
 
 const baseFacility = {
   name: "검증용 시설",
@@ -125,6 +128,64 @@ assert.equal(
   }).success,
   true,
 );
+
+const shelterTransform = transformShelterRows([
+  {
+    OGDP_INST_CD: "3140000",
+    MNG_NO: "3140000-S1",
+    SALS_STTS_NM: "사용중",
+    LOTNO_ADDR: "서울특별시 양천구 신월동 1",
+    ROAD_NM_ADDR: "서울특별시 양천구 테스트로 1",
+    BPLC_NM: "테스트 대피시설",
+    XCRD: "37.52",
+    YCRD: "126.84",
+  },
+  {
+    OGDP_INST_CD: "3140000",
+    MNG_NO: "3140000-S2",
+    SALS_STTS_NM: "사용중지",
+    LOTNO_ADDR: "서울특별시 양천구 신월동 2",
+    ROAD_NM_ADDR: "서울특별시 양천구 테스트로 2",
+    BPLC_NM: "중지 대피시설",
+    XCRD: "37.53",
+    YCRD: "126.85",
+  },
+  {
+    OGDP_INST_CD: "9999999",
+    MNG_NO: "OUTSIDE-S1",
+    SALS_STTS_NM: "사용중",
+    LOTNO_ADDR: "서울특별시 다른구 신월동 1",
+    ROAD_NM_ADDR: null,
+    BPLC_NM: "지역 외 시설",
+    XCRD: "37.54",
+    YCRD: "126.86",
+  },
+]);
+
+assert.equal(shelterTransform.yangcheonRows, 2);
+assert.equal(shelterTransform.sinwolRows, 2);
+assert.equal(shelterTransform.activeRows, 1);
+assert.equal(shelterTransform.inactiveRows, 1);
+assert.equal(shelterTransform.facilities.length, 1);
+assert.equal(shelterTransform.facilities[0].latitude, 37.52);
+assert.equal(shelterTransform.facilities[0].longitude, 126.84);
+assert.equal(shelterTransform.facilities[0].id, "shelter:3140000-S1");
+assert.deepEqual(shelterTransform.unknownStatuses, []);
+
+const shelterUnknownStatus = transformShelterRows([
+  {
+    OGDP_INST_CD: "3140000",
+    MNG_NO: "3140000-S3",
+    SALS_STTS_NM: "새로운상태",
+    LOTNO_ADDR: "서울특별시 양천구 신월동 3",
+    ROAD_NM_ADDR: "서울특별시 양천구 테스트로 3",
+    BPLC_NM: "상태 검증 시설",
+    XCRD: "37.52",
+    YCRD: "126.84",
+  },
+]);
+
+assert.deepEqual(shelterUnknownStatus.unknownStatuses, ["새로운상태"]);
 
 const existingMetadata: DataMetadata = {
   schemaVersion: 1,

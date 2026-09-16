@@ -56,6 +56,7 @@ export interface FireWaterFacility extends BaseFacility {
 
 export interface ShelterFacility extends BaseFacility {
   category: "SHELTER";
+  subtype: "CIVIL_DEFENSE_SHELTER";
   details: {
     status: "사용중";
   };

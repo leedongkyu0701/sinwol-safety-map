@@ -55,6 +55,13 @@ npm run build
 
 기능 개발 시 관련 실행 검증을 추가하고, 결과와 남은 제약을 최종 보고에 기록한다.
 
+## Pull Requests
+
+- PR을 생성하기 전에 `.github/pull_request_template.md`를 읽는다.
+- PR 본문은 저장소 템플릿의 제목과 섹션 순서를 그대로 사용하며, 임의의 형식으로 대체하거나 우회하지 않는다.
+- 해당 사항이 없는 섹션은 삭제하지 말고 `해당 없음`이라고 명시한다.
+- 템플릿이 변경되면 가장 최신 버전을 기준으로 PR 본문을 작성한다.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
