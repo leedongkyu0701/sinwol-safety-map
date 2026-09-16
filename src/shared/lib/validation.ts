@@ -9,6 +9,13 @@ export type FacilityIdNamespace =
   | "aed"
   | "other";
 
+export interface ReasonableRecordCountOptions {
+  label: string;
+  nextCount: number;
+  previousCount?: number;
+  maxDecreaseRatio: number;
+}
+
 export function createNamespacedId(
   namespace: FacilityIdNamespace,
   sourceId: string,
@@ -20,6 +27,53 @@ export function createNamespacedId(
   }
 
   return `${namespace}:${normalizedSourceId}`;
+}
+
+export function hasNamespacedId(
+  namespace: FacilityIdNamespace,
+  id: string,
+  sourceId: string,
+): boolean {
+  return id === createNamespacedId(namespace, sourceId);
+}
+
+export function assertReasonableRecordCount({
+  label,
+  nextCount,
+  previousCount,
+  maxDecreaseRatio,
+}: ReasonableRecordCountOptions): void {
+  if (!Number.isInteger(nextCount) || nextCount < 0) {
+    throw new Error(`${label} next count must be a non-negative integer`);
+  }
+
+  if (nextCount === 0) {
+    throw new Error(`Refusing to publish empty ${label} dataset`);
+  }
+
+  if (maxDecreaseRatio < 0 || maxDecreaseRatio > 1) {
+    throw new Error("maxDecreaseRatio must be between 0 and 1");
+  }
+
+  if (previousCount === undefined) {
+    return;
+  }
+
+  if (!Number.isInteger(previousCount) || previousCount < 0) {
+    throw new Error(`${label} previous count must be a non-negative integer`);
+  }
+
+  if (previousCount === 0 || nextCount >= previousCount) {
+    return;
+  }
+
+  const decreaseRatio = (previousCount - nextCount) / previousCount;
+
+  if (decreaseRatio > maxDecreaseRatio) {
+    throw new Error(
+      `Refusing to publish ${label} dataset: count decreased from ${previousCount} to ${nextCount} (${(decreaseRatio * 100).toFixed(1)}%, allowed ${(maxDecreaseRatio * 100).toFixed(1)}%)`,
+    );
+  }
 }
 
 export function assertSeoulCoordinate(

@@ -36,7 +36,8 @@ npm run dev
 - `npm run start`: 프로덕션 서버 실행
 - `npm run lint`: ESLint 검사
 - `npm run typecheck`: TypeScript 검사
-- `npm run data:verify`: 공통 Normalize/Validation Utility 검증
+- `npm run data:test-utils`: 공통 Normalize/Validation Utility 단위 검증
+- `npm run data:verify`: Published JSON Schema, ID, Metadata, Source SHA 검증
 - `npm run data:fire-water`: Fire Water XLSX ETL 및 Published JSON 생성
 
 ## Fire Water Data
@@ -51,6 +52,15 @@ Raw XLSX는 Git에 커밋하지 않습니다. 파일을 준비한 뒤 다음 명
 
 ```bash
 npm run data:fire-water
+```
+
+ETL은 기존 Published count보다 20%를 초과해 감소하거나 결과가 0건이면 기존 Snapshot을 덮어쓰지 않습니다. `metadata.json`에서는 Fire Water 항목만 갱신하며 다른 Source의 Metadata를 보존합니다.
+
+생성 결과는 Raw XLSX 없이도 검증할 수 있습니다. Raw XLSX가 로컬에 있으면 Source SHA-256도 함께 대조합니다.
+
+```bash
+npm run data:test-utils
+npm run data:verify
 ```
 
 ## Documents

@@ -11,6 +11,10 @@ import {
   type OtherFacility,
   type ShelterFacility,
 } from "@/shared/types/facility";
+import {
+  hasNamespacedId,
+  type FacilityIdNamespace,
+} from "@/shared/lib/validation";
 
 const nonEmptyStringSchema = z.string().trim().min(1);
 
@@ -43,6 +47,20 @@ const baseFacilityShape = {
   sourceId: nonEmptyStringSchema,
 };
 
+function validateNamespacedId(
+  namespace: FacilityIdNamespace,
+  facility: { id: string; sourceId: string },
+  context: z.RefinementCtx,
+): void {
+  if (!hasNamespacedId(namespace, facility.id, facility.sourceId)) {
+    context.addIssue({
+      code: "custom",
+      path: ["id"],
+      message: `Facility id must use the ${namespace} namespace`,
+    });
+  }
+}
+
 export const facilityCategorySchema = z.enum(FACILITY_CATEGORIES);
 export const fireWaterSubtypeSchema = z.enum(FIRE_WATER_SUBTYPES);
 
@@ -57,19 +75,13 @@ export const fireWaterFacilitySchema: z.ZodType<FireWaterFacility> = z
         pressure: z.number().refine(Number.isFinite).min(0).optional(),
         safetyCenter: nonEmptyStringSchema.optional(),
         fireStation: nonEmptyStringSchema.optional(),
-        phone: nonEmptyStringSchema.optional(),
+        fireStationPhone: nonEmptyStringSchema.optional(),
       })
       .strict(),
   })
   .strict()
   .superRefine((facility, context) => {
-    if (facility.id !== `fire-water:${facility.sourceId}`) {
-      context.addIssue({
-        code: "custom",
-        path: ["id"],
-        message: "Fire water id must be namespaced from sourceId",
-      });
-    }
+    validateNamespacedId("fire-water", facility, context);
   });
 
 export const shelterFacilitySchema: z.ZodType<ShelterFacility> = z
@@ -79,7 +91,10 @@ export const shelterFacilitySchema: z.ZodType<ShelterFacility> = z
     subtype: nonEmptyStringSchema,
     details: z.object({ status: z.literal("사용중") }).strict(),
   })
-  .strict();
+  .strict()
+  .superRefine((facility, context) => {
+    validateNamespacedId("shelter", facility, context);
+  });
 
 const dailyHoursSchema = z
   .object({
@@ -107,16 +122,22 @@ export const aedFacilitySchema: z.ZodType<AedFacility> = z
       })
       .strict(),
   })
-  .strict();
+  .strict()
+  .superRefine((facility, context) => {
+    validateNamespacedId("aed", facility, context);
+  });
 
 export const otherFacilitySchema: z.ZodType<OtherFacility> = z
   .object({
     ...baseFacilityShape,
     category: z.literal("OTHER"),
     subtype: nonEmptyStringSchema,
-    details: z.record(z.string(), z.unknown()),
+    details: z.object({}).strict(),
   })
-  .strict();
+  .strict()
+  .superRefine((facility, context) => {
+    validateNamespacedId("other", facility, context);
+  });
 
 export const facilitySchema: z.ZodType<Facility> = z.union([
   fireWaterFacilitySchema,
@@ -125,4 +146,6 @@ export const facilitySchema: z.ZodType<Facility> = z.union([
   otherFacilitySchema,
 ]);
 
-export const fireWaterFacilitiesSchema = z.array(fireWaterFacilitySchema);
+export const fireWaterFacilitiesSchema = z
+  .array(fireWaterFacilitySchema)
+  .min(1, "Fire water dataset must not be empty");

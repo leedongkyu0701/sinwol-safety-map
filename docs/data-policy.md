@@ -55,3 +55,7 @@ Raw
 Raw 데이터에는 Published에 불필요한 개인정보성 필드가 포함될 수 있으므로 `data/raw`는 Git에 커밋하지 않는다. 브라우저에는 `public/data`의 최소 필요 필드만 제공한다.
 
 공공데이터에 없는 상태나 의미를 임의로 생성하지 않는다. 빈 문자열, `null`, `undefined`, `nan`, `N/A`는 Source 규칙에 따라 missing value로 정규화한다. 검증 실패 또는 비정상적인 Count 급변이 발생하면 신규 Snapshot을 Publish하지 않는다.
+
+각 ETL은 기존 Metadata에서 자신의 Source 항목만 갱신하며 다른 Source 항목을 초기화하지 않는다. Source summary는 필요에 따라 `sourceUpdatedAt`, API 수집 시각인 `fetchedAt`, File Source의 `sourceFileSha256`을 포함한다.
+
+Published Dataset은 0건일 경우 항상 거부한다. Fire Water는 기존 정상 Snapshot보다 count가 20%를 초과해 감소하면 자동 Publish를 중단하고 사람이 Source와 Filter 결과를 검토한다. 현재 936건과 subtype 분포는 Snapshot Audit 기준이며 영구 Business Rule로 강제하지 않는다.

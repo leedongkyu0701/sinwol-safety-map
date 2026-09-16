@@ -50,7 +50,7 @@ export interface FireWaterFacility extends BaseFacility {
     pressure?: number;
     safetyCenter?: string;
     fireStation?: string;
-    phone?: string;
+    fireStationPhone?: string;
   };
 }
 
@@ -98,7 +98,7 @@ export interface AedFacility extends BaseFacility {
 
 export interface OtherFacility extends BaseFacility {
   category: "OTHER";
-  details: Record<string, unknown>;
+  details: Record<string, never>;
 }
 
 export type Facility =
