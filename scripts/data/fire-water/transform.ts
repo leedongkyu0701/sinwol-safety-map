@@ -27,6 +27,7 @@ export interface FireWaterTransformResult {
   yangcheonRows: number;
   sinwolRows: number;
   sourceUpdatedAt: string;
+  sourceUnknownSubtypeCodes: string[];
 }
 
 function normalizeSourceCode(value: unknown): string | undefined {
@@ -52,7 +53,7 @@ export function mapFireWaterSubtype(value: unknown): FireWaterSubtype {
   return FIRE_WATER_SUBTYPE_BY_CODE[code as FireWaterSourceCode];
 }
 
-function assertKnownSubtypeCodes(rows: readonly RawFireWaterRow[]): void {
+function findUnknownSubtypeCodes(rows: readonly RawFireWaterRow[]): string[] {
   const unknownCodes = new Set<string>();
 
   for (const row of rows) {
@@ -63,9 +64,15 @@ function assertKnownSubtypeCodes(rows: readonly RawFireWaterRow[]): void {
     }
   }
 
-  if (unknownCodes.size > 0) {
+  return [...unknownCodes].sort();
+}
+
+function assertKnownSubtypeCodes(rows: readonly RawFireWaterRow[]): void {
+  const unknownCodes = findUnknownSubtypeCodes(rows);
+
+  if (unknownCodes.length > 0) {
     throw new Error(
-      `Unknown fire water subtype codes found: ${[...unknownCodes].sort().join(", ")}`,
+      `Unknown fire water subtype codes found in Sinwol rows: ${unknownCodes.join(", ")}`,
     );
   }
 }
@@ -121,7 +128,8 @@ function transformRow(row: RawFireWaterRow): FireWaterFacility {
   );
   const safetyCenter = normalizeOptionalString(row.safetyCenter);
   const fireStation = normalizeOptionalString(row.fireStation);
-  const phone = normalizeOptionalString(row.phone);
+  const fireStationPhone = normalizeOptionalString(row.phone);
+  const detailLocation = normalizeOptionalString(row.detailLocation);
 
   const facility: FireWaterFacility = {
     id: createNamespacedId("fire-water", sourceId),
@@ -133,9 +141,7 @@ function transformRow(row: RawFireWaterRow): FireWaterFacility {
     address,
     ...(roadAddress === undefined ? {} : { roadAddress }),
     ...(lotAddress === undefined ? {} : { lotAddress }),
-    ...(normalizeOptionalString(row.detailLocation) === undefined
-      ? {}
-      : { detailLocation: normalizeOptionalString(row.detailLocation) }),
+    ...(detailLocation === undefined ? {} : { detailLocation }),
     source: FIRE_WATER_SOURCE_NAME,
     sourceId,
     details: {
@@ -143,7 +149,7 @@ function transformRow(row: RawFireWaterRow): FireWaterFacility {
       ...(pressure === undefined ? {} : { pressure }),
       ...(safetyCenter === undefined ? {} : { safetyCenter }),
       ...(fireStation === undefined ? {} : { fireStation }),
-      ...(phone === undefined ? {} : { phone }),
+      ...(fireStationPhone === undefined ? {} : { fireStationPhone }),
     },
   };
 
@@ -153,10 +159,16 @@ function transformRow(row: RawFireWaterRow): FireWaterFacility {
 export function transformFireWaterRows(
   rows: readonly RawFireWaterRow[],
 ): FireWaterTransformResult {
-  assertKnownSubtypeCodes(rows);
-
+  const sourceUnknownSubtypeCodes = findUnknownSubtypeCodes(rows);
   const yangcheonRows = rows.filter(isYangcheonRow);
   const sinwolRows = yangcheonRows.filter(isSinwolRow);
+
+  if (sinwolRows.length === 0) {
+    throw new Error("Refusing to publish empty fire water dataset");
+  }
+
+  assertKnownSubtypeCodes(sinwolRows);
+
   const sourceDates = new Set(
     sinwolRows.map((row) =>
       normalizeRequiredString(
@@ -189,5 +201,6 @@ export function transformFireWaterRows(
     yangcheonRows: yangcheonRows.length,
     sinwolRows: sinwolRows.length,
     sourceUpdatedAt: [...sourceDates][0],
+    sourceUnknownSubtypeCodes,
   };
 }

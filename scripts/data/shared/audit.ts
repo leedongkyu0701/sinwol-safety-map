@@ -27,10 +27,15 @@ export interface FireWaterAudit {
     longitude: { min: number; max: number };
   };
   missingDetailLocation: number;
+  sourceUnknownSubtypeCodes: string[];
   baselineMatches: boolean;
 }
 
 function range(values: readonly number[]): { min: number; max: number } {
+  if (values.length === 0) {
+    throw new Error("Cannot calculate a coordinate range for an empty dataset");
+  }
+
   return { min: Math.min(...values), max: Math.max(...values) };
 }
 
@@ -40,6 +45,7 @@ export function auditFireWaterFacilities(
     sourceRows: number;
     yangcheonRows: number;
     sinwolRows: number;
+    sourceUnknownSubtypeCodes: string[];
   },
 ): FireWaterAudit {
   const subtypeCounts = Object.fromEntries(
@@ -90,11 +96,16 @@ export function auditFireWaterFacilities(
     missingDetailLocation: facilities.filter(
       (facility) => facility.detailLocation === undefined,
     ).length,
+    sourceUnknownSubtypeCodes: counts.sourceUnknownSubtypeCodes,
     baselineMatches,
   };
 }
 
 export function assertFireWaterAudit(audit: FireWaterAudit): void {
+  if (audit.publishedRows === 0) {
+    throw new Error("Refusing to publish empty fire water dataset");
+  }
+
   if (
     audit.missing.id > 0 ||
     audit.missing.address > 0 ||
@@ -139,4 +150,10 @@ export function printFireWaterAudit(audit: FireWaterAudit): void {
   console.log(
     `\nCurrent snapshot baseline: ${audit.baselineMatches ? "MATCH" : "DIFF"}`,
   );
+
+  if (audit.sourceUnknownSubtypeCodes.length > 0) {
+    console.warn(
+      `\nWarning: source rows outside Sinwol contain unknown subtype codes: ${audit.sourceUnknownSubtypeCodes.join(", ")}`,
+    );
+  }
 }

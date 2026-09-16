@@ -1,36 +1,107 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 
+import { assertUniqueValues } from "../../../src/shared/lib/validation";
+import { fireWaterFacilitiesSchema } from "../../../src/shared/schemas/facility";
+import { metadataSchema } from "../../../src/shared/schemas/metadata";
+import { FIRE_WATER_SUBTYPES } from "../../../src/shared/types/facility";
 import {
-  normalizeOptionalString,
-  parseOptionalNumber,
-  parseRequiredNumber,
-} from "../../../src/shared/lib/normalize";
-import {
-  assertSeoulCoordinate,
-  assertUniqueValues,
-  createNamespacedId,
-} from "../../../src/shared/lib/validation";
-import { mapFireWaterSubtype } from "../fire-water/transform";
+  FIRE_WATER_INPUT_PATH,
+  FIRE_WATER_OUTPUT_PATH,
+  FIRE_WATER_SOURCE_NAME,
+  METADATA_OUTPUT_PATH,
+} from "../fire-water/constants";
+import { calculateFileSha256 } from "./file-hash";
+import { readJsonFileIfExists } from "./write-json";
 
-assert.equal(normalizeOptionalString("nan"), undefined);
-assert.equal(normalizeOptionalString("NaN"), undefined);
-assert.equal(normalizeOptionalString("N/A"), undefined);
-assert.equal(normalizeOptionalString("  value  "), "value");
-assert.equal(parseOptionalNumber(" 2.5 "), 2.5);
-assert.equal(parseOptionalNumber(""), undefined);
-assert.equal(parseRequiredNumber("37.52", "latitude"), 37.52);
-assert.throws(() => parseRequiredNumber("Infinity", "coordinate"));
-assert.doesNotThrow(() => assertSeoulCoordinate(37.52, 126.84));
-assert.throws(() => assertSeoulCoordinate(35.18, 129.07));
-assert.equal(
-  createNamespacedId("fire-water", "양천-신월-001"),
-  "fire-water:양천-신월-001",
-);
-assert.doesNotThrow(() => assertUniqueValues(["a", "b"], "id"));
-assert.throws(() => assertUniqueValues(["a", "a"], "id"));
-assert.equal(mapFireWaterSubtype("01"), "ABOVE_GROUND_HYDRANT");
-assert.equal(mapFireWaterSubtype(2), "UNDERGROUND_HYDRANT");
-assert.equal(mapFireWaterSubtype("06"), "EMERGENCY_FIRE_DEVICE");
-assert.throws(() => mapFireWaterSubtype("99"));
+function readRequiredJson(path: string): unknown {
+  const value = readJsonFileIfExists(path);
 
-console.log("Data utility verification passed");
+  if (value === undefined) {
+    throw new Error(`Required published JSON not found: ${path}`);
+  }
+
+  return value;
+}
+
+function containsNanString(value: unknown): boolean {
+  if (typeof value === "string") {
+    return value.trim().toLowerCase() === "nan";
+  }
+
+  if (Array.isArray(value)) {
+    return value.some(containsNanString);
+  }
+
+  if (value !== null && typeof value === "object") {
+    return Object.values(value).some(containsNanString);
+  }
+
+  return false;
+}
+
+function run(): void {
+  const rawFacilities = readRequiredJson(FIRE_WATER_OUTPUT_PATH);
+  const facilities = fireWaterFacilitiesSchema.parse(rawFacilities);
+  const metadata = metadataSchema.parse(readRequiredJson(METADATA_OUTPUT_PATH));
+
+  assertUniqueValues(
+    facilities.map((facility) => facility.sourceId),
+    "fire water sourceId",
+  );
+  assertUniqueValues(
+    facilities.map((facility) => facility.id),
+    "fire water id",
+  );
+  assert.equal(
+    metadata.sources.fireWater.count,
+    facilities.length,
+    "Fire water metadata count must match the published dataset",
+  );
+  assert.equal(
+    metadata.sources.fireWater.source,
+    FIRE_WATER_SOURCE_NAME,
+    "Fire water metadata source must match the configured source",
+  );
+  assert.equal(
+    typeof metadata.sources.fireWater.sourceFileSha256,
+    "string",
+    "Fire water metadata must contain the source XLSX SHA-256",
+  );
+  assert.equal(
+    containsNanString(rawFacilities),
+    false,
+    'Published fire water data must not contain the string "nan"',
+  );
+
+  const subtypeCounts = Object.fromEntries(
+    FIRE_WATER_SUBTYPES.map((subtype) => [
+      subtype,
+      facilities.filter((facility) => facility.subtype === subtype).length,
+    ]),
+  );
+
+  if (existsSync(FIRE_WATER_INPUT_PATH)) {
+    assert.equal(
+      metadata.sources.fireWater.sourceFileSha256,
+      calculateFileSha256(FIRE_WATER_INPUT_PATH),
+      "Published metadata SHA-256 must match the local source XLSX",
+    );
+  }
+
+  console.log("Published data verification passed\n");
+  console.log(`Fire water rows: ${facilities.length.toLocaleString("en-US")}`);
+  console.log(`Subtype: ${JSON.stringify(subtypeCounts)}`);
+  console.log(`Metadata count: ${metadata.sources.fireWater.count}`);
+  console.log(
+    `Source SHA-256: ${metadata.sources.fireWater.sourceFileSha256}`,
+  );
+}
+
+try {
+  run();
+} catch (error) {
+  console.error("Published data verification failed:");
+  console.error(error instanceof Error ? error.message : error);
+  process.exitCode = 1;
+}

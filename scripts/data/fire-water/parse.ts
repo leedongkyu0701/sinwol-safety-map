@@ -17,14 +17,12 @@ export interface RawFireWaterRow {
   typeCode: unknown;
   city: unknown;
   district: unknown;
-  districtCode: unknown;
   roadAddress: unknown;
   lotAddress: unknown;
   latitude: unknown;
   longitude: unknown;
   detailLocation: unknown;
   safetyCenter: unknown;
-  protectiveFrame: unknown;
   installedYear: unknown;
   pressure: unknown;
   fireStation: unknown;
@@ -122,14 +120,12 @@ export function parseFireWaterWorkbook(inputPath: string): ParsedFireWaterSource
         typeCode: get("typeCode"),
         city: get("city"),
         district: get("district"),
-        districtCode: get("districtCode"),
         roadAddress: get("roadAddress"),
         lotAddress: get("lotAddress"),
         latitude: get("latitude"),
         longitude: get("longitude"),
         detailLocation: get("detailLocation"),
         safetyCenter: get("safetyCenter"),
-        protectiveFrame: get("protectiveFrame"),
         installedYear: get("installedYear"),
         pressure: get("pressure"),
         fireStation: get("fireStation"),

@@ -6,6 +6,7 @@ export const METADATA_OUTPUT_PATH = "public/data/metadata.json";
 
 export const FIRE_WATER_SHEET_NAME = "소방용수시설(서울)";
 export const FIRE_WATER_SOURCE_NAME = "서울특별시 소방용수시설 현황";
+export const FIRE_WATER_MAX_COUNT_DECREASE_RATIO = 0.2;
 
 export const FIRE_WATER_SUBTYPE_BY_CODE = {
   "01": "ABOVE_GROUND_HYDRANT",
@@ -23,14 +24,12 @@ export const SOURCE_HEADER_PREFIXES = {
   typeCode: "시설유형코드",
   city: "시도명",
   district: "시군구명",
-  districtCode: "시군구코드",
   roadAddress: "소재지도로명주소",
   lotAddress: "소재지지번주소",
   latitude: "위도",
   longitude: "경도",
   detailLocation: "상세위치",
   safetyCenter: "안전센터명",
-  protectiveFrame: "보호틀유무",
   installedYear: "설치연도",
   pressure: "출수압력",
   fireStation: "관할소방서명",

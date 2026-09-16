@@ -63,6 +63,8 @@ Hybrid Snapshot Strategy를 사용한다.
 
 시설 데이터가 바뀌지 않으면 Published JSON과 Metadata를 갱신하거나 Commit하지 않는다. Metadata의 `fetchedAt`과 `generatedAt`은 현재 Published Snapshot을 만든 시점을 의미하며, 변경 없는 동기화 시도는 GitHub Actions 실행 기록으로 남긴다.
 
+각 Source ETL은 기존 `metadata.json`을 읽고 자신의 Source 항목만 갱신한다. 다른 Source의 count와 시각 정보는 그대로 보존한다. File 기반 Source는 가능한 경우 SHA-256을 기록해 Published Snapshot과 원본의 연관성을 확인할 수 있게 한다.
+
 ## Deployment
 
 - Frontend: Vercel

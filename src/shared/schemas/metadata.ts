@@ -8,6 +8,11 @@ const sourceSummarySchema = z
       .string()
       .regex(/^\d{4}-\d{2}-\d{2}$/)
       .optional(),
+    fetchedAt: z.string().datetime({ offset: true }).optional(),
+    sourceFileSha256: z
+      .string()
+      .regex(/^[a-f0-9]{64}$/)
+      .optional(),
   })
   .strict();
 
