@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-16T14:01:56.488Z",
+  "sources": {
+    "fireWater": {
+      "count": 936,
+      "source": "서울특별시 소방용수시설 현황",
+      "sourceUpdatedAt": "2026-09-10"
+    },
+    "shelter": {
+      "count": 0
+    },
+    "aed": {
+      "count": 0
+    },
+    "other": {
+      "count": 0
+    }
+  }
+}
