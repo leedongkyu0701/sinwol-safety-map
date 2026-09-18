@@ -1,0 +1,98 @@
+name: Sync public data
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-data-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test data utilities
+        run: npm run data:test-utils
+
+      - name: Sync shelter data
+        run: npm run data:shelters
+        env:
+          SEOUL_OPEN_DATA_KEY: ${{ secrets.SEOUL_OPEN_DATA_KEY }}
+
+      - name: Sync AED data
+        run: npm run data:aeds
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+
+      - name: Verify published data
+        run: npm run data:verify
+
+      - name: Stage verified data changes
+        id: changes
+        shell: bash
+        run: |
+          allowed_pattern='^(public/data/shelters\.json|public/data/aeds\.json|public/data/metadata\.json|data/review/aed-mobility-pending\.json)$'
+          changed_files="$({
+            git diff --name-only
+            git ls-files --others --exclude-standard
+          } | sort -u)"
+          unexpected_files="$(printf '%s\n' "$changed_files" | grep -Ev "^$|${allowed_pattern}" || true)"
+
+          if [[ -n "$unexpected_files" ]]; then
+            echo "::error::The data sync modified files outside the allowlist:"
+            printf '%s\n' "$unexpected_files"
+            exit 1
+          fi
+
+          git add -- \
+            public/data/shelters.json \
+            public/data/aeds.json \
+            public/data/metadata.json \
+            data/review/aed-mobility-pending.json
+
+          staged_files="$(git diff --cached --name-only)"
+          unexpected_staged="$(printf '%s\n' "$staged_files" | grep -Ev "^$|${allowed_pattern}" || true)"
+
+          if [[ -n "$unexpected_staged" ]]; then
+            echo "::error::Unexpected files were staged:"
+            printf '%s\n' "$unexpected_staged"
+            exit 1
+          fi
+
+          if git diff --cached --quiet; then
+            echo "No public data changes"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Verified public data changes:"
+            git diff --cached --name-only
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push data changes
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(data): sync public safety data"
+          git push origin HEAD:main

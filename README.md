@@ -12,7 +12,7 @@
 - SheetJS 0.20.3
 - fast-xml-parser 5
 - NAVER Maps JavaScript API v3 예정
-- GitHub Actions 예정
+- GitHub Actions
 - Vercel 예정
 
 ## Getting Started
@@ -87,6 +87,12 @@ npm run data:aeds
 서울특별시 양천구 데이터를 동적으로 Pagination하고 `buildAddress`에 `신월동`이 포함된 시설을 처리합니다. 새 이동형 후보가 탐지되면 해당 시설만 Published 대상에서 일시 제외하고, 비민감 검토 자료를 `data/review/aed-mobility-pending.json`에 갱신합니다. 나머지 AED의 Publish는 계속 진행합니다.
 
 검토자는 Pending 목록을 확인하고 `data/review/aed-mobility.json`에 `FIXED` 또는 `MOBILE` 결정을 기록한 뒤 ETL을 다시 실행합니다. 결정된 시설은 다음 실행에서 Pending 목록에서 자동 제거됩니다. 최종 `public/data/aeds.json`에는 자동 또는 검토로 확정된 `FIXED` 시설만 포함됩니다. 동일한 Published 결과로 재실행하면 기존 `fetchedAt`과 `generatedAt`을 유지합니다.
+
+## Data Automation
+
+Pull Request와 `main` Push에서는 외부 API를 호출하지 않고 코드와 Commit된 Published Snapshot을 검증합니다. Shelter와 AED는 매일 03:17 UTC(12:17 KST)에 GitHub Actions로 동기화하며, Fire Water XLSX Snapshot은 수동으로 갱신합니다.
+
+정기 동기화에는 Repository Secrets `SEOUL_OPEN_DATA_KEY`, `DATA_GO_KR_SERVICE_KEY`가 필요합니다. 새 AED 이동형 후보는 Published에서 제외한 뒤 Pending Review File에 기록하고 나머지 데이터는 계속 갱신합니다. 데이터가 동일하면 Commit하지 않으며, API 또는 검증 실패 시 기존 정상 Snapshot을 유지합니다.
 
 ## Documents
 
