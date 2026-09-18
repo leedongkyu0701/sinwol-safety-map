@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "data:test-utils": "tsx scripts/data/shared/test-utils.ts",
+    "data:audit": "tsx scripts/data/shared/audit-published.ts",
     "data:verify": "tsx scripts/data/shared/verify.ts",
     "data:fire-water": "tsx scripts/data/fire-water/index.ts",
     "data:shelters": "tsx scripts/data/shelters/index.ts",
