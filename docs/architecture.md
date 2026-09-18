@@ -46,7 +46,24 @@ Official Public Data
 
 ## Map
 
-NAVER Maps JavaScript API v3 Dynamic Map만 사용할 예정이다. 초기 범위에서는 Geocoding, Reverse Geocoding, Directions, Static Map을 사용하지 않는다.
+NAVER Maps JavaScript API v3 Dynamic Map을 직접 사용한다. `app/page.tsx`는 Server Component로 Route composition만 담당하고, `SafetyMap`에서 Client Component boundary를 시작한다.
+
+```text
+SafetyMap Feature
+→ singleton NAVER SDK Loader
+→ useNaverMap lifecycle
+→ NAVER Map instance
+```
+
+SDK script는 Application Runtime에서 재사용하고 Map instance, ResizeObserver, Component listener는 mount 단위로 정리한다. 초기 범위에서는 Geocoding, Reverse Geocoding, Directions, Static Map을 사용하지 않는다.
+
+## Frontend Structure
+
+- `app`: Route composition과 Next.js의 `not-found`, route error, global error boundary를 담당한다.
+- `features`: 사용자 기능에 종속된 Component, Hook, Config와 Library를 함께 둔다.
+- `shared`: 둘 이상의 화면이나 Feature에서 재사용되는 Domain Contract, Utility와 최소 공용 UI만 둔다.
+
+공용 UI의 조건부 class 조합은 `cn()`으로 통일한다. `clsx`가 조건을 조합하고 `tailwind-merge`가 Tailwind utility 충돌을 정리한다. Feature 전용 UI는 재사용 가능성을 예상해 미리 `shared`로 올리지 않는다.
 
 ## User Location
 
