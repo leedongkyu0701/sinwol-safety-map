@@ -31,7 +31,7 @@ npm run dev
 
 필요한 변수명은 `.env.example`을 참고합니다. 실제 Key는 `.env.local`에만 저장하며 Git에 커밋하지 않습니다.
 
-NAVER Dynamic Map은 `NEXT_PUBLIC_NAVER_MAP_NCP_KEY_ID`를 사용합니다. 로컬 실행 전에 NAVER Cloud Application의 Web Service URL에 개발 Origin(기본값 `http://localhost:3000`)을 등록해야 합니다. Public Data API Key는 지도 Client Runtime에서 사용하지 않습니다.
+NAVER Dynamic Map은 `NEXT_PUBLIC_NAVER_MAP_NCP_KEY_ID`를 사용합니다. 로컬 실행 전에 NAVER Cloud Application의 Web Service URL에 `http://localhost`를 등록해야 합니다. Public Data API Key는 지도 Client Runtime에서 사용하지 않습니다.
 
 ## Scripts
 
