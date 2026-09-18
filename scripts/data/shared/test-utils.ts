@@ -26,14 +26,19 @@ import {
   shelterFacilitySchema,
 } from "../../../src/shared/schemas/facility";
 import { mapFireWaterSubtype } from "../fire-water/transform";
+import { assertAedAudit, auditAedFacilities } from "../aed/audit";
 import {
   aedMobilityRegistrySchema,
+  aedPendingReviewSchema,
+  createAedPendingReview,
   detectMobilityCandidate,
+  findSourceIdOverlap,
   findStaleReviewDecisions,
   resolveMobilityDecision,
   type AedMobilityRegistry,
 } from "../aed/mobility";
 import { normalizeAedOperatingHours } from "../aed/operating-hours";
+import { aedSourceRowSchema } from "../aed/schema";
 import { transformAedRows } from "../aed/transform";
 import { transformShelterRows } from "../shelters/transform";
 import { updateSourceMetadata } from "./metadata";
@@ -274,6 +279,7 @@ assert.equal(normalizeAedTime("0000", "start"), "0000");
 assert.equal(normalizeAedTime("2500", "end"), "2500");
 assert.throws(() => normalizeAedTime("2400", "start"));
 assert.throws(() => normalizeAedTime("2460", "end"));
+assert.throws(() => normalizeAedTime("2501", "end"));
 assert.equal(formatAedTimeRange("0000", "2400"), "24시간");
 assert.equal(formatAedTimeRange("0900", "1800"), "09:00–18:00");
 assert.equal(formatAedTimeRange("0900", "2500"), "09:00–익일 01:00");
@@ -289,7 +295,12 @@ const candidateInput = {
 const detectedCandidate = detectMobilityCandidate(candidateInput);
 assert.equal(detectedCandidate.isCandidate, true);
 assert.deepEqual(detectedCandidate.reasons, ["buildPlace contains 순찰차"]);
-assert.equal(resolveMobilityDecision(candidateInput).mobility, undefined);
+assert.deepEqual(resolveMobilityDecision(candidateInput), {
+  isCandidate: true,
+  reasons: ["buildPlace contains 순찰차"],
+  reviewed: false,
+  status: "PENDING",
+});
 assert.deepEqual(
   resolveMobilityDecision(candidateInput, {
     sourceId: "candidate-1",
@@ -301,15 +312,22 @@ assert.deepEqual(
     reasons: ["buildPlace contains 순찰차"],
     mobility: "FIXED",
     reviewed: true,
+    status: "REVIEWED_FIXED",
   },
 );
-assert.equal(
+assert.deepEqual(
   resolveMobilityDecision({
     sourceId: "fixed-1",
     org: "고정 시설",
     buildAddress: "서울특별시 양천구 신월동",
-  }).mobility,
-  "FIXED",
+  }),
+  {
+    isCandidate: false,
+    reasons: [],
+    mobility: "FIXED",
+    reviewed: false,
+    status: "AUTO_FIXED",
+  },
 );
 
 const mobilityRegistry: AedMobilityRegistry = {
@@ -336,6 +354,18 @@ assert.equal(
   false,
 );
 
+const parsedAedSourceRow = aedSourceRowSchema.parse({
+  serialSeq: "privacy-1",
+  org: "개인정보 제거 검증",
+  buildAddress: "서울특별시 양천구 신월동",
+  wgs84Lat: "37.52",
+  wgs84Lon: "126.84",
+  manager: "제거 대상",
+  managerTel: "제거 대상",
+});
+assert.equal(Object.hasOwn(parsedAedSourceRow, "manager"), false);
+assert.equal(Object.hasOwn(parsedAedSourceRow, "managerTel"), false);
+
 const noHours = normalizeAedOperatingHours(
   {
     serialSeq: "hours-1",
@@ -361,6 +391,122 @@ assert.throws(() =>
     [duplicateAedRow, duplicateAedRow],
     { schemaVersion: 1, decisions: [] },
   ),
+);
+
+const createAedFixture = (
+  sourceId: string,
+  buildPlace: string,
+) => ({
+  serialSeq: sourceId,
+  org: "AED 검증 기관",
+  buildAddress: "서울특별시 양천구 신월동 1",
+  buildPlace,
+  clerkTel: "02-1234-5678",
+  wgs84Lat: "37.52",
+  wgs84Lon: "126.84",
+  mfg: "검증 제조사",
+  model: "검증 모델",
+});
+
+const autoFixedTransform = transformAedRows(
+  [createAedFixture("AUTO-1", "건물 1층 로비")],
+  { schemaVersion: 1, decisions: [] },
+);
+assert.equal(autoFixedTransform.autoFixed, 1);
+assert.equal(autoFixedTransform.facilities.length, 1);
+assert.equal(autoFixedTransform.pendingCandidates.length, 0);
+
+const pendingTransform = transformAedRows(
+  [createAedFixture("NEW-1", "구급차 내부")],
+  { schemaVersion: 1, decisions: [] },
+);
+assert.equal(pendingTransform.autoFixed, 0);
+assert.equal(pendingTransform.facilities.length, 0);
+assert.deepEqual(
+  pendingTransform.pendingCandidates.map((candidate) => candidate.sourceId),
+  ["NEW-1"],
+);
+const pendingSnapshot = createAedPendingReview(
+  pendingTransform.pendingCandidates,
+);
+assert.equal(aedPendingReviewSchema.safeParse(pendingSnapshot).success, true);
+assert.equal(Object.hasOwn(pendingSnapshot, "generatedAt"), false);
+assert.deepEqual(
+  findSourceIdOverlap(
+    pendingSnapshot.candidates.map((candidate) => candidate.sourceId),
+    pendingTransform.facilities.map((facility) => facility.sourceId),
+  ),
+  [],
+);
+
+const pendingWorkflowTransform = transformAedRows(
+  [
+    createAedFixture("AUTO-2", "건물 안내데스크"),
+    createAedFixture("NEW-1", "구급차 내부"),
+  ],
+  { schemaVersion: 1, decisions: [] },
+);
+const pendingWorkflowAudit = auditAedFacilities(
+  pendingWorkflowTransform.facilities,
+  2,
+  1,
+  pendingWorkflowTransform,
+);
+assert.doesNotThrow(() => assertAedAudit(pendingWorkflowAudit));
+assert.equal(pendingWorkflowAudit.mobility.pendingReview, 1);
+assert.equal(pendingWorkflowAudit.publishedRows, 1);
+
+const reviewedFixedTransform = transformAedRows(
+  [createAedFixture("NEW-1", "구급차 내부")],
+  {
+    schemaVersion: 1,
+    decisions: [{ sourceId: "NEW-1", mobility: "FIXED" }],
+  },
+);
+assert.equal(reviewedFixedTransform.reviewedFixed, 1);
+assert.equal(reviewedFixedTransform.pendingCandidates.length, 0);
+assert.deepEqual(
+  reviewedFixedTransform.facilities.map((facility) => facility.sourceId),
+  ["NEW-1"],
+);
+
+const reviewedMobileTransform = transformAedRows(
+  [createAedFixture("NEW-1", "구급차 내부")],
+  {
+    schemaVersion: 1,
+    decisions: [{ sourceId: "NEW-1", mobility: "MOBILE" }],
+  },
+);
+assert.equal(reviewedMobileTransform.reviewedMobile, 1);
+assert.equal(reviewedMobileTransform.pendingCandidates.length, 0);
+assert.equal(reviewedMobileTransform.facilities.length, 0);
+assert.deepEqual(
+  findSourceIdOverlap(
+    ["NEW-1"],
+    reviewedMobileTransform.facilities.map((facility) => facility.sourceId),
+  ),
+  [],
+);
+
+const duplicatePendingCandidate = {
+  sourceId: "PENDING-1",
+  org: "검토 기관",
+  address: "서울특별시 양천구 신월동",
+  reasons: ["buildPlace contains 구급차"],
+};
+assert.deepEqual(
+  createAedPendingReview([
+    { ...duplicatePendingCandidate, sourceId: "PENDING-2" },
+    duplicatePendingCandidate,
+  ]).candidates.map((candidate) => candidate.sourceId),
+  ["PENDING-1", "PENDING-2"],
+);
+assert.equal(
+  aedPendingReviewSchema.safeParse({
+    schemaVersion: 1,
+    candidates: [duplicatePendingCandidate, duplicatePendingCandidate],
+  }).success,
+  false,
 );
 
 console.log("Data utility tests passed");

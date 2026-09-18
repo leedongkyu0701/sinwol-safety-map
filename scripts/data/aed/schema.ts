@@ -31,7 +31,7 @@ export const aedSourceRowSchema = z
     holSttTme: optionalSourceValueSchema,
     holEndTme: optionalSourceValueSchema,
   })
-  .passthrough();
+  .strip();
 
 export type AedSourceRow = z.infer<typeof aedSourceRowSchema>;
 

@@ -14,9 +14,14 @@ import {
 import { FIRE_WATER_SUBTYPES } from "../../../src/shared/types/facility";
 import {
   AED_OUTPUT_PATH,
+  AED_PENDING_REVIEW_PATH,
   AED_SOURCE_NAME,
 } from "../aed/constants";
-import { readAedMobilityRegistry } from "../aed/mobility";
+import {
+  aedPendingReviewSchema,
+  findSourceIdOverlap,
+  readAedMobilityRegistry,
+} from "../aed/mobility";
 import {
   FIRE_WATER_INPUT_PATH,
   FIRE_WATER_OUTPUT_PATH,
@@ -185,6 +190,8 @@ function verifyShelters(metadata: DataMetadata): number {
 function verifyAeds(metadata: DataMetadata): number {
   const rawFacilities = readRequiredJson(AED_OUTPUT_PATH);
   const facilities = aedFacilitiesSchema.parse(rawFacilities);
+  const rawPendingReview = readRequiredJson(AED_PENDING_REVIEW_PATH);
+  const pendingReview = aedPendingReviewSchema.parse(rawPendingReview);
   const mobilityRegistry = readAedMobilityRegistry();
   const reviewedMobileSourceIds = new Set(
     mobilityRegistry.decisions
@@ -215,10 +222,21 @@ function verifyAeds(metadata: DataMetadata): number {
     true,
     "All published AEDs must be FIXED",
   );
-  assert.equal(
-    facilities.some((facility) => reviewedMobileSourceIds.has(facility.sourceId)),
-    false,
+  assert.deepEqual(
+    findSourceIdOverlap(
+      reviewedMobileSourceIds,
+      facilities.map((facility) => facility.sourceId),
+    ),
+    [],
     "Reviewed MOBILE AEDs must not be published",
+  );
+  assert.deepEqual(
+    findSourceIdOverlap(
+      pendingReview.candidates.map((candidate) => candidate.sourceId),
+      facilities.map((facility) => facility.sourceId),
+    ),
+    [],
+    "Pending AED candidates must not be published",
   );
   assert.equal(
     metadata.sources.aed.count,
@@ -245,8 +263,14 @@ function verifyAeds(metadata: DataMetadata): number {
     false,
     "Published AED data contains a forbidden manager field",
   );
+  assert.equal(
+    containsForbiddenKey(rawPendingReview, new Set(["manager", "managerTel"])),
+    false,
+    "AED pending review contains a forbidden manager field",
+  );
 
   console.log(`AED rows: ${facilities.length.toLocaleString("en-US")}`);
+  console.log(`AED pending review: ${pendingReview.candidates.length}`);
   console.log(`AED fetchedAt: ${metadata.sources.aed.fetchedAt}`);
 
   return facilities.length;
