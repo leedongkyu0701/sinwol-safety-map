@@ -31,16 +31,17 @@ Shelter Dataset도 0건과 기존 정상 Snapshot 대비 20% 초과 감소를 �
 
 현재 양천구 데이터는 416건, 신월동 Raw Candidate는 112건이다. `serialSeq`를 Source Identity로 사용하며 기관명, 주소 또는 좌표가 같다는 이유로 중복 제거하지 않는다.
 
-Keyword Detector는 `org`, `buildPlace`, `buildAddress`의 비민감 텍스트로 이동형 후보를 찾지만 후보를 곧바로 `MOBILE`로 확정하지 않는다. 사람의 결정은 `data/review/aed-mobility.json`에 Source ID 기준으로 기록한다. 새 후보에 결정이 없으면 Publish를 중단한다.
+Keyword Detector는 `org`, `buildPlace`, `buildAddress`의 비민감 텍스트로 이동형 후보를 찾지만 후보를 곧바로 `MOBILE`로 확정하지 않는다. 사람의 결정은 `data/review/aed-mobility.json`에 Source ID 기준으로 기록한다. 결정이 없는 새 후보는 `data/review/aed-mobility-pending.json`에 현재 검토 대기 Snapshot으로 기록하고 해당 시설만 Published에서 제외한다. 새 후보가 있어도 나머지 AED의 Publish는 중단하지 않는다.
 
 - FIXED: Published JSON, 기본 지도 표시, Nearby 계산 대상
 - MOBILE: Raw/Normalized 데이터에 보존하고 기본 Published JSON과 Nearby 계산에서 제외
+- PENDING: Published Facility 상태가 아닌 ETL 검토 상태이며, Decision이 생길 때까지 Published에서 제외
 
 `manager`, `managerTel`은 Published JSON에 포함하지 않는다. 기관의 공개 대표전화인 `clerkTel`만 필요한 경우 사용할 수 있다.
 
 Published AED의 `subtype`은 `AED`, `mobility`는 `FIXED`로 제한한다. `MOBILE` 결정은 Review Registry에 보존하되 `public/data/aeds.json`에는 포함하지 않는다.
 
-요일별 운영시간은 Date로 변환하지 않고 네 자리 HHMM 문자열로 보존한다. 시작시간은 `0000`~`2359`, 종료시간은 Source convention을 반영해 `0000`~`2959`를 허용하며 분은 `00`~`59`여야 한다. `2400`, `2430`, `2500` 같은 익일 종료 표현을 지원한다. 요일 정보가 없다는 이유로 휴무라고 추론하지 않으며, 요일이 존재할 때는 시작과 종료가 모두 있어야 한다.
+요일별 운영시간은 Date로 변환하지 않고 네 자리 HHMM 문자열로 보존한다. 시작시간은 `0000`~`2359`, 종료시간은 현재 Source에서 검증된 `0000`~`2500`을 허용하며 분은 `00`~`59`여야 한다. `2400`, `2430`, `2500` 같은 익일 종료 표현을 지원한다. `2500`을 초과하는 새 값은 Source 의미를 재검토할 수 있도록 ETL을 실패시킨다. 요일 정보가 없다는 이유로 휴무라고 추론하지 않으며, 요일이 존재할 때는 시작과 종료가 모두 있어야 한다.
 
 ## OTHER
 

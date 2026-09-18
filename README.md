@@ -84,9 +84,9 @@ AED ETL은 국립중앙의료원 `AEDInfoInqireService` API를 사용합니다. 
 npm run data:aeds
 ```
 
-서울특별시 양천구 데이터를 동적으로 Pagination하고 `buildAddress`에 `신월동`이 포함된 시설을 처리합니다. 새 이동형 후보가 탐지되면 ETL은 Publish 전에 중단하며, 비민감 검토 자료를 `data/raw/aed/mobility-candidates.json`에 생성합니다.
+서울특별시 양천구 데이터를 동적으로 Pagination하고 `buildAddress`에 `신월동`이 포함된 시설을 처리합니다. 새 이동형 후보가 탐지되면 해당 시설만 Published 대상에서 일시 제외하고, 비민감 검토 자료를 `data/review/aed-mobility-pending.json`에 갱신합니다. 나머지 AED의 Publish는 계속 진행합니다.
 
-검토자는 `data/review/aed-mobility.json`에 `FIXED` 또는 `MOBILE` 결정을 기록한 뒤 ETL을 다시 실행합니다. 최종 `public/data/aeds.json`에는 `FIXED` 시설만 포함됩니다. 동일한 Published 결과로 재실행하면 기존 `fetchedAt`과 `generatedAt`을 유지합니다.
+검토자는 Pending 목록을 확인하고 `data/review/aed-mobility.json`에 `FIXED` 또는 `MOBILE` 결정을 기록한 뒤 ETL을 다시 실행합니다. 결정된 시설은 다음 실행에서 Pending 목록에서 자동 제거됩니다. 최종 `public/data/aeds.json`에는 자동 또는 검토로 확정된 `FIXED` 시설만 포함됩니다. 동일한 Published 결과로 재실행하면 기존 `fetchedAt`과 `generatedAt`을 유지합니다.
 
 ## Documents
 

@@ -18,11 +18,10 @@ export function normalizeAedTime(
     throw new Error(`AED ${boundary} time must use four HHMM digits: ${normalized}`);
   }
 
-  const hour = Number(normalized.slice(0, 2));
   const minute = Number(normalized.slice(2));
-  const maximumHour = boundary === "start" ? 23 : 29;
+  const maximumTime = boundary === "start" ? 2359 : 2500;
 
-  if (hour > maximumHour || minute > 59) {
+  if (Number(normalized) > maximumTime || minute > 59) {
     throw new Error(`Invalid AED ${boundary} time: ${normalized}`);
   }
 

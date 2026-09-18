@@ -58,7 +58,7 @@ Hybrid Snapshot Strategy를 사용한다.
 
 - Fire Water: 공식 최신 XLSX Snapshot을 명시적으로 갱신
 - Shelter: 서울 Open Data API Snapshot, 향후 Daily Sync
-- AED: 국립중앙의료원 API Snapshot, 사람 검토를 통과한 뒤 향후 Daily Sync
+- AED: 국립중앙의료원 API Snapshot. 미검토 이동형 후보만 Tracked Pending 목록에 보류하고 나머지는 Publish하는 구조로 향후 Daily Sync
 - Other: Source가 추가될 때 갱신 정책 정의
 
 시설 데이터가 바뀌지 않으면 Published JSON과 Metadata를 갱신하거나 Commit하지 않는다. Metadata의 `fetchedAt`과 `generatedAt`은 현재 Published Snapshot을 만든 시점을 의미하며, 변경 없는 동기화 시도는 GitHub Actions 실행 기록으로 남긴다.

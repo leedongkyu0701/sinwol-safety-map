@@ -1,7 +1,8 @@
 import { findDuplicateValues } from "../../../src/shared/lib/validation";
 import type { AedFacility } from "../../../src/shared/types/facility";
 import { CURRENT_AED_SNAPSHOT_BASELINE } from "./constants";
-import type { AedReviewCandidate, AedTransformResult } from "./transform";
+import type { AedPendingCandidate } from "./mobility";
+import type { AedTransformResult } from "./transform";
 
 export interface DuplicateAedCoordinateGroup {
   latitude: number;
@@ -16,10 +17,10 @@ export interface AedAudit {
   publishedRows: number;
   mobility: {
     detectedCandidates: number;
+    autoFixed: number;
     reviewedFixed: number;
     reviewedMobile: number;
-    unresolvedCandidates: number;
-    mobileRows: number;
+    pendingReview: number;
   };
   missing: {
     sourceId: number;
@@ -104,10 +105,10 @@ export function auditAedFacilities(
     publishedRows: facilities.length,
     mobility: {
       detectedCandidates: transformed.detectedCandidates,
+      autoFixed: transformed.autoFixed,
       reviewedFixed: transformed.reviewedFixed,
       reviewedMobile: transformed.reviewedMobile,
-      unresolvedCandidates: transformed.unresolvedCandidates.length,
-      mobileRows: transformed.mobileRows,
+      pendingReview: transformed.pendingCandidates.length,
     },
     missing: {
       sourceId: facilities.filter((facility) => facility.sourceId.length === 0)
@@ -157,9 +158,24 @@ export function auditAedFacilities(
 }
 
 export function assertAedAudit(audit: AedAudit): void {
-  if (audit.mobility.unresolvedCandidates > 0) {
+  const classifiedRows =
+    audit.mobility.autoFixed +
+    audit.mobility.reviewedFixed +
+    audit.mobility.reviewedMobile +
+    audit.mobility.pendingReview;
+
+  if (classifiedRows !== audit.sinwolRows) {
     throw new Error(
-      `AED mobility review required for ${audit.mobility.unresolvedCandidates} candidate(s)`,
+      `AED mobility counts do not match Sinwol rows: ${classifiedRows} of ${audit.sinwolRows}`,
+    );
+  }
+
+  if (
+    audit.publishedRows !==
+    audit.mobility.autoFixed + audit.mobility.reviewedFixed
+  ) {
+    throw new Error(
+      "Published AED count must equal AUTO FIXED plus REVIEWED FIXED",
     );
   }
 
@@ -183,20 +199,27 @@ export function assertAedAudit(audit: AedAudit): void {
   }
 }
 
-export function printMobilityReview(
-  candidates: readonly AedReviewCandidate[],
+export function printPendingReviewWarning(
+  candidates: readonly AedPendingCandidate[],
 ): void {
-  console.error("\nAED Mobility Review Required\n");
-  console.error("sourceId | org | buildPlace | address | reasons");
+  if (candidates.length === 0) {
+    return;
+  }
+
+  console.warn(
+    `\nWarning: ${candidates.length} AED mobility candidate(s) require review.`,
+  );
+  console.warn("They were excluded from the published snapshot.\n");
+  console.warn("sourceId | org | buildPlace | address | reasons");
 
   for (const candidate of candidates) {
-    console.error(
+    console.warn(
       [
         candidate.sourceId,
         candidate.org,
         candidate.buildPlace ?? "<missing>",
         candidate.address,
-        candidate.candidateReasons.join(", "),
+        candidate.reasons.join(", "),
       ].join(" | "),
     );
   }
@@ -210,10 +233,11 @@ export function printAedAudit(audit: AedAudit): void {
   console.log(`Published FIXED rows: ${audit.publishedRows.toLocaleString("en-US")}`);
   console.log("\nMobility:");
   console.log(`- detected candidates: ${audit.mobility.detectedCandidates}`);
+  console.log(`- auto FIXED: ${audit.mobility.autoFixed}`);
   console.log(`- reviewed FIXED: ${audit.mobility.reviewedFixed}`);
   console.log(`- reviewed MOBILE: ${audit.mobility.reviewedMobile}`);
-  console.log(`- unresolved candidates: ${audit.mobility.unresolvedCandidates}`);
-  console.log(`- excluded MOBILE: ${audit.mobility.mobileRows}`);
+  console.log(`- pending review: ${audit.mobility.pendingReview}`);
+  console.log(`- published FIXED: ${audit.publishedRows}`);
   console.log("\nMissing required fields:");
   console.log(`- sourceId: ${audit.missing.sourceId}`);
   console.log(`- name: ${audit.missing.name}`);

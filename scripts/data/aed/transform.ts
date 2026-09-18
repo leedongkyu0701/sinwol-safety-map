@@ -17,6 +17,7 @@ import {
   resolveMobilityDecision,
   type AedMobilityDecision,
   type AedMobilityRegistry,
+  type AedPendingCandidate,
 } from "./mobility";
 import {
   createEmptyOperatingHoursAudit,
@@ -26,22 +27,14 @@ import {
 } from "./operating-hours";
 import type { AedSourceRow } from "./schema";
 
-export interface AedReviewCandidate {
-  sourceId: string;
-  org: string;
-  buildPlace?: string;
-  address: string;
-  candidateReasons: string[];
-}
-
 export interface AedTransformResult {
   facilities: AedFacility[];
   sinwolRows: number;
   detectedCandidates: number;
+  autoFixed: number;
   reviewedFixed: number;
   reviewedMobile: number;
-  mobileRows: number;
-  unresolvedCandidates: AedReviewCandidate[];
+  pendingCandidates: AedPendingCandidate[];
   staleDecisions: AedMobilityDecision[];
   operatingHoursAudit: AedOperatingHoursAudit;
 }
@@ -80,12 +73,12 @@ export function transformAedRows(
   );
   const decisionMap = createDecisionMap(registry);
   const facilities: AedFacility[] = [];
-  const unresolvedCandidates: AedReviewCandidate[] = [];
+  const pendingCandidates: AedPendingCandidate[] = [];
   const operatingHoursAudit = createEmptyOperatingHoursAudit();
   let detectedCandidates = 0;
+  let autoFixed = 0;
   let reviewedFixed = 0;
   let reviewedMobile = 0;
-  let mobileRows = 0;
 
   for (const [index, row] of sinwolRows.entries()) {
     const rowLabel = `Sinwol AED row ${index + 1}`;
@@ -124,27 +117,30 @@ export function transformAedRows(
       detectedCandidates += 1;
     }
 
-    if (resolution.reviewed && resolution.mobility === "FIXED") {
+    if (resolution.status === "AUTO_FIXED") {
+      autoFixed += 1;
+    }
+
+    if (resolution.status === "REVIEWED_FIXED") {
       reviewedFixed += 1;
     }
 
-    if (resolution.reviewed && resolution.mobility === "MOBILE") {
+    if (resolution.status === "REVIEWED_MOBILE") {
       reviewedMobile += 1;
     }
 
-    if (resolution.mobility === undefined) {
-      unresolvedCandidates.push({
+    if (resolution.status === "PENDING") {
+      pendingCandidates.push({
         sourceId,
         org: name,
         ...(detailLocation === undefined ? {} : { buildPlace: detailLocation }),
         address,
-        candidateReasons: resolution.reasons,
+        reasons: resolution.reasons,
       });
       continue;
     }
 
     if (resolution.mobility === "MOBILE") {
-      mobileRows += 1;
       continue;
     }
 
@@ -178,16 +174,16 @@ export function transformAedRows(
   }
 
   facilities.sort(compareSourceId);
-  unresolvedCandidates.sort(compareSourceId);
+  pendingCandidates.sort(compareSourceId);
 
   return {
     facilities,
     sinwolRows: sinwolRows.length,
     detectedCandidates,
+    autoFixed,
     reviewedFixed,
     reviewedMobile,
-    mobileRows,
-    unresolvedCandidates,
+    pendingCandidates,
     staleDecisions: findStaleReviewDecisions(registry, currentSourceIds).sort(
       compareSourceId,
     ),

@@ -3,8 +3,8 @@ export const AED_API_BASE_URL =
 export const AED_API_ENDPOINT = "getEgytAedManageInfoInqire";
 export const AED_OUTPUT_PATH = "public/data/aeds.json";
 export const AED_REVIEW_PATH = "data/review/aed-mobility.json";
-export const AED_CANDIDATE_OUTPUT_PATH =
-  "data/raw/aed/mobility-candidates.json";
+export const AED_PENDING_REVIEW_PATH =
+  "data/review/aed-mobility-pending.json";
 export const METADATA_OUTPUT_PATH = "public/data/metadata.json";
 
 export const AED_SOURCE_NAME =
