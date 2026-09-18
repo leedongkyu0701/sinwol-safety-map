@@ -1,6 +1,6 @@
 # 신월동 안전지도
 
-서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. 현재 Fire Water와 Shelter 정적 데이터 Pipeline까지 구현되어 있으며 지도 UI는 아직 구현하지 않았습니다.
+서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. 현재 Fire Water, Shelter, AED 정적 데이터 Pipeline을 구축하고 있으며 지도 UI는 아직 구현하지 않았습니다.
 
 ## Tech Stack
 
@@ -10,6 +10,7 @@
 - Tailwind CSS 4
 - Zod 4
 - SheetJS 0.20.3
+- fast-xml-parser 5
 - NAVER Maps JavaScript API v3 예정
 - GitHub Actions 예정
 - Vercel 예정
@@ -40,6 +41,7 @@ npm run dev
 - `npm run data:verify`: Published JSON Schema, ID, Metadata, Source SHA 검증
 - `npm run data:fire-water`: Fire Water XLSX ETL 및 Published JSON 생성
 - `npm run data:shelters`: 서울 Open Data API에서 Shelter Snapshot 생성
+- `npm run data:aeds`: data.go.kr API에서 AED Snapshot 생성
 
 ## Fire Water Data
 
@@ -73,6 +75,18 @@ npm run data:shelters
 ```
 
 서울시 전체 데이터를 동적으로 Pagination한 뒤 양천구의 신월동 시설 중 `사용중`인 데이터만 `public/data/shelters.json`에 Publish합니다. 동일한 Published 결과로 재실행하면 기존 `fetchedAt`과 `generatedAt`을 유지합니다.
+
+## AED Data
+
+AED ETL은 국립중앙의료원 `AEDInfoInqireService` API를 사용합니다. `DATA_GO_KR_SERVICE_KEY`를 `.env.local` 또는 실행 환경에 설정해야 하며, Key는 브라우저 Bundle이나 Published JSON에 포함하지 않습니다.
+
+```bash
+npm run data:aeds
+```
+
+서울특별시 양천구 데이터를 동적으로 Pagination하고 `buildAddress`에 `신월동`이 포함된 시설을 처리합니다. 새 이동형 후보가 탐지되면 ETL은 Publish 전에 중단하며, 비민감 검토 자료를 `data/raw/aed/mobility-candidates.json`에 생성합니다.
+
+검토자는 `data/review/aed-mobility.json`에 `FIXED` 또는 `MOBILE` 결정을 기록한 뒤 ETL을 다시 실행합니다. 최종 `public/data/aeds.json`에는 `FIXED` 시설만 포함됩니다. 동일한 Published 결과로 재실행하면 기존 `fetchedAt`과 `generatedAt`을 유지합니다.
 
 ## Documents
 

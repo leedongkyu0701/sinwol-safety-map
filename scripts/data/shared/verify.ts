@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 
 import { assertUniqueValues } from "../../../src/shared/lib/validation";
 import {
+  aedFacilitiesSchema,
   fireWaterFacilitiesSchema,
   shelterFacilitiesSchema,
 } from "../../../src/shared/schemas/facility";
@@ -11,6 +12,11 @@ import {
   type DataMetadata,
 } from "../../../src/shared/schemas/metadata";
 import { FIRE_WATER_SUBTYPES } from "../../../src/shared/types/facility";
+import {
+  AED_OUTPUT_PATH,
+  AED_SOURCE_NAME,
+} from "../aed/constants";
+import { readAedMobilityRegistry } from "../aed/mobility";
 import {
   FIRE_WATER_INPUT_PATH,
   FIRE_WATER_OUTPUT_PATH,
@@ -48,6 +54,24 @@ function containsForbiddenMissingString(value: unknown): boolean {
 
   if (value !== null && typeof value === "object") {
     return Object.values(value).some(containsForbiddenMissingString);
+  }
+
+  return false;
+}
+
+function containsForbiddenKey(
+  value: unknown,
+  forbiddenKeys: ReadonlySet<string>,
+): boolean {
+  if (Array.isArray(value)) {
+    return value.some((item) => containsForbiddenKey(item, forbiddenKeys));
+  }
+
+  if (value !== null && typeof value === "object") {
+    return Object.entries(value).some(
+      ([key, child]) =>
+        forbiddenKeys.has(key) || containsForbiddenKey(child, forbiddenKeys),
+    );
   }
 
   return false;
@@ -158,13 +182,86 @@ function verifyShelters(metadata: DataMetadata): number {
   return facilities.length;
 }
 
+function verifyAeds(metadata: DataMetadata): number {
+  const rawFacilities = readRequiredJson(AED_OUTPUT_PATH);
+  const facilities = aedFacilitiesSchema.parse(rawFacilities);
+  const mobilityRegistry = readAedMobilityRegistry();
+  const reviewedMobileSourceIds = new Set(
+    mobilityRegistry.decisions
+      .filter((decision) => decision.mobility === "MOBILE")
+      .map((decision) => decision.sourceId),
+  );
+
+  assertUniqueValues(
+    facilities.map((facility) => facility.sourceId),
+    "AED sourceId",
+  );
+  assertUniqueValues(
+    facilities.map((facility) => facility.id),
+    "AED id",
+  );
+  assert.equal(
+    facilities.every((facility) => facility.category === "AED"),
+    true,
+    "All published AEDs must use the AED category",
+  );
+  assert.equal(
+    facilities.every((facility) => facility.subtype === "AED"),
+    true,
+    "All published AEDs must use the AED subtype",
+  );
+  assert.equal(
+    facilities.every((facility) => facility.details.mobility === "FIXED"),
+    true,
+    "All published AEDs must be FIXED",
+  );
+  assert.equal(
+    facilities.some((facility) => reviewedMobileSourceIds.has(facility.sourceId)),
+    false,
+    "Reviewed MOBILE AEDs must not be published",
+  );
+  assert.equal(
+    metadata.sources.aed.count,
+    facilities.length,
+    "AED metadata count must match the published dataset",
+  );
+  assert.equal(
+    metadata.sources.aed.source,
+    AED_SOURCE_NAME,
+    "AED metadata source must match the configured source",
+  );
+  assert.equal(
+    typeof metadata.sources.aed.fetchedAt,
+    "string",
+    "AED metadata must contain fetchedAt",
+  );
+  assert.equal(
+    containsForbiddenMissingString(rawFacilities),
+    false,
+    "Published AED data contains a forbidden missing-value string",
+  );
+  assert.equal(
+    containsForbiddenKey(rawFacilities, new Set(["manager", "managerTel"])),
+    false,
+    "Published AED data contains a forbidden manager field",
+  );
+
+  console.log(`AED rows: ${facilities.length.toLocaleString("en-US")}`);
+  console.log(`AED fetchedAt: ${metadata.sources.aed.fetchedAt}`);
+
+  return facilities.length;
+}
+
 function run(): void {
   const metadata = metadataSchema.parse(readRequiredJson(METADATA_OUTPUT_PATH));
   const fireWaterCount = verifyFireWater(metadata);
   const shelterCount = verifyShelters(metadata);
+  const aedCount = verifyAeds(metadata);
 
   console.log("\nPublished data verification passed");
-  console.log(`Total published rows: ${fireWaterCount + shelterCount}`);
+  console.log(
+    `Total published rows: ${fireWaterCount + shelterCount + aedCount}`,
+  );
 }
 
 try {

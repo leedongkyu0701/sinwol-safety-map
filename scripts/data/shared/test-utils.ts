@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 
 import {
+  formatAedTimeRange,
+  normalizeAedTime,
+} from "../../../src/shared/lib/operating-hours";
+import {
   normalizeOptionalString,
   parseOptionalNumber,
   parseRequiredNumber,
@@ -14,6 +18,7 @@ import {
 } from "../../../src/shared/lib/validation";
 import type { DataMetadata } from "../../../src/shared/schemas/metadata";
 import {
+  aedFacilitiesSchema,
   aedFacilitySchema,
   fireWaterFacilitiesSchema,
   otherFacilitySchema,
@@ -21,6 +26,15 @@ import {
   shelterFacilitySchema,
 } from "../../../src/shared/schemas/facility";
 import { mapFireWaterSubtype } from "../fire-water/transform";
+import {
+  aedMobilityRegistrySchema,
+  detectMobilityCandidate,
+  findStaleReviewDecisions,
+  resolveMobilityDecision,
+  type AedMobilityRegistry,
+} from "../aed/mobility";
+import { normalizeAedOperatingHours } from "../aed/operating-hours";
+import { transformAedRows } from "../aed/transform";
 import { transformShelterRows } from "../shelters/transform";
 import { updateSourceMetadata } from "./metadata";
 
@@ -38,6 +52,7 @@ assert.equal(
   createNamespacedId("fire-water", "양천-신월-001"),
   "fire-water:양천-신월-001",
 );
+assert.equal(createNamespacedId("aed", "080-1"), "aed:080-1");
 assert.equal(
   hasNamespacedId(
     "fire-water",
@@ -78,6 +93,7 @@ assert.equal(mapFireWaterSubtype("06"), "EMERGENCY_FIRE_DEVICE");
 assert.throws(() => mapFireWaterSubtype("99"));
 assert.equal(fireWaterFacilitiesSchema.safeParse([]).success, false);
 assert.equal(shelterFacilitiesSchema.safeParse([]).success, false);
+assert.equal(aedFacilitiesSchema.safeParse([]).success, false);
 
 const baseFacility = {
   name: "검증용 시설",
@@ -97,6 +113,36 @@ assert.equal(
     details: { status: "사용중" },
   }).success,
   true,
+);
+assert.equal(
+  aedFacilitySchema.safeParse({
+    ...baseFacility,
+    id: "aed:source-1",
+    category: "AED",
+    subtype: "AED",
+    details: { mobility: "FIXED" },
+  }).success,
+  true,
+);
+assert.equal(
+  aedFacilitySchema.safeParse({
+    ...baseFacility,
+    id: "aed:source-1",
+    category: "AED",
+    subtype: "AED",
+    details: { mobility: "MOBILE" },
+  }).success,
+  false,
+);
+assert.equal(
+  aedFacilitySchema.safeParse({
+    ...baseFacility,
+    id: "aed:source-1",
+    category: "AED",
+    subtype: "PORTABLE_AED",
+    details: { mobility: "FIXED" },
+  }).success,
+  false,
 );
 assert.equal(
   aedFacilitySchema.safeParse({
@@ -223,5 +269,98 @@ const unchangedMetadata = updateSourceMetadata(
 );
 
 assert.equal(unchangedMetadata.generatedAt, existingMetadata.generatedAt);
+
+assert.equal(normalizeAedTime("0000", "start"), "0000");
+assert.equal(normalizeAedTime("2500", "end"), "2500");
+assert.throws(() => normalizeAedTime("2400", "start"));
+assert.throws(() => normalizeAedTime("2460", "end"));
+assert.equal(formatAedTimeRange("0000", "2400"), "24시간");
+assert.equal(formatAedTimeRange("0900", "1800"), "09:00–18:00");
+assert.equal(formatAedTimeRange("0900", "2500"), "09:00–익일 01:00");
+assert.equal(formatAedTimeRange("0900", "2430"), "09:00–익일 00:30");
+assert.equal(formatAedTimeRange("0900", "2440"), "09:00–익일 00:40");
+
+const candidateInput = {
+  sourceId: "candidate-1",
+  org: "테스트 기관",
+  buildPlace: "순찰차 내부",
+  buildAddress: "서울특별시 양천구 신월동",
+};
+const detectedCandidate = detectMobilityCandidate(candidateInput);
+assert.equal(detectedCandidate.isCandidate, true);
+assert.deepEqual(detectedCandidate.reasons, ["buildPlace contains 순찰차"]);
+assert.equal(resolveMobilityDecision(candidateInput).mobility, undefined);
+assert.deepEqual(
+  resolveMobilityDecision(candidateInput, {
+    sourceId: "candidate-1",
+    mobility: "FIXED",
+    note: "건물 내부 고정",
+  }),
+  {
+    isCandidate: true,
+    reasons: ["buildPlace contains 순찰차"],
+    mobility: "FIXED",
+    reviewed: true,
+  },
+);
+assert.equal(
+  resolveMobilityDecision({
+    sourceId: "fixed-1",
+    org: "고정 시설",
+    buildAddress: "서울특별시 양천구 신월동",
+  }).mobility,
+  "FIXED",
+);
+
+const mobilityRegistry: AedMobilityRegistry = {
+  schemaVersion: 1,
+  decisions: [
+    { sourceId: "candidate-1", mobility: "MOBILE" },
+    { sourceId: "stale-1", mobility: "FIXED" },
+  ],
+};
+assert.deepEqual(
+  findStaleReviewDecisions(mobilityRegistry, new Set(["candidate-1"])).map(
+    (decision) => decision.sourceId,
+  ),
+  ["stale-1"],
+);
+assert.equal(
+  aedMobilityRegistrySchema.safeParse({
+    schemaVersion: 1,
+    decisions: [
+      { sourceId: "duplicate", mobility: "FIXED" },
+      { sourceId: "duplicate", mobility: "MOBILE" },
+    ],
+  }).success,
+  false,
+);
+
+const noHours = normalizeAedOperatingHours(
+  {
+    serialSeq: "hours-1",
+    org: "시간 검증 시설",
+    buildAddress: "서울특별시 양천구 신월동",
+    wgs84Lat: "37.52",
+    wgs84Lon: "126.84",
+  },
+  "hours test",
+);
+assert.equal(noHours.operatingHours, undefined);
+assert.equal(noHours.audit.missingDayFields, 8);
+
+const duplicateAedRow = {
+  serialSeq: "duplicate-aed",
+  org: "중복 검증 시설",
+  buildAddress: "서울특별시 양천구 신월동",
+  wgs84Lat: "37.52",
+  wgs84Lon: "126.84",
+};
+assert.throws(() =>
+  transformAedRows(
+    [duplicateAedRow, duplicateAedRow],
+    { schemaVersion: 1, decisions: [] },
+  ),
+);
 
 console.log("Data utility tests passed");

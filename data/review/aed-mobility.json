@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "decisions": [
+    {
+      "sourceId": "079-250713-195302",
+      "mobility": "MOBILE",
+      "note": "설치 위치가 순찰차 내부로 명시됨"
+    },
+    {
+      "sourceId": "080-201222-049117",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    },
+    {
+      "sourceId": "080-201222-049119",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    },
+    {
+      "sourceId": "080-201223-049593",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    },
+    {
+      "sourceId": "080-210120-051391",
+      "mobility": "MOBILE",
+      "note": "기동대 유니버스 탑재 위치"
+    },
+    {
+      "sourceId": "080-210120-051392",
+      "mobility": "MOBILE",
+      "note": "기동대 유니버스 탑재 위치"
+    },
+    {
+      "sourceId": "080-210820-065311",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    },
+    {
+      "sourceId": "080-210826-065941",
+      "mobility": "MOBILE",
+      "note": "기동대 유니버스 탑재 위치"
+    },
+    {
+      "sourceId": "080-211006-066641",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    },
+    {
+      "sourceId": "080-220909-089306",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    },
+    {
+      "sourceId": "080-230203-111549",
+      "mobility": "MOBILE",
+      "note": "설치 위치에 이동형으로 명시됨"
+    },
+    {
+      "sourceId": "080-231005-139640",
+      "mobility": "FIXED",
+      "note": "설치 위치가 차량이 아닌 사무실로 명시됨"
+    },
+    {
+      "sourceId": "080-240410-159062",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    },
+    {
+      "sourceId": "080-250814-197339",
+      "mobility": "MOBILE",
+      "note": "환자이송단 차량번호 형태의 설치 위치"
+    }
+  ]
+}

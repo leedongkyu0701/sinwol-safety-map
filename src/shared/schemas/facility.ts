@@ -3,7 +3,6 @@ import { z } from "zod";
 import {
   DAYS_OF_WEEK,
   FACILITY_CATEGORIES,
-  FACILITY_MOBILITIES,
   FIRE_WATER_SUBTYPES,
   type AedFacility,
   type Facility,
@@ -11,6 +10,7 @@ import {
   type OtherFacility,
   type ShelterFacility,
 } from "@/shared/types/facility";
+import { isValidAedTime } from "@/shared/lib/operating-hours";
 import {
   hasNamespacedId,
   type FacilityIdNamespace,
@@ -98,8 +98,14 @@ export const shelterFacilitySchema: z.ZodType<ShelterFacility> = z
 
 const dailyHoursSchema = z
   .object({
-    start: nonEmptyStringSchema.optional(),
-    end: nonEmptyStringSchema.optional(),
+    start: nonEmptyStringSchema.refine(
+      (value) => isValidAedTime(value, "start"),
+      "Invalid AED start time",
+    ),
+    end: nonEmptyStringSchema.refine(
+      (value) => isValidAedTime(value, "end"),
+      "Invalid AED end time",
+    ),
   })
   .strict();
 
@@ -111,13 +117,13 @@ export const aedFacilitySchema: z.ZodType<AedFacility> = z
   .object({
     ...baseFacilityShape,
     category: z.literal("AED"),
-    subtype: nonEmptyStringSchema,
+    subtype: z.literal("AED"),
     details: z
       .object({
         phone: nonEmptyStringSchema.optional(),
         manufacturer: nonEmptyStringSchema.optional(),
         model: nonEmptyStringSchema.optional(),
-        mobility: z.enum(FACILITY_MOBILITIES),
+        mobility: z.literal("FIXED"),
         operatingHours: z.object(operatingHoursShape).strict().optional(),
       })
       .strict(),
@@ -153,3 +159,7 @@ export const fireWaterFacilitiesSchema = z
 export const shelterFacilitiesSchema = z
   .array(shelterFacilitySchema)
   .min(1, "Shelter dataset must not be empty");
+
+export const aedFacilitiesSchema = z
+  .array(aedFacilitySchema)
+  .min(1, "AED dataset must not be empty");

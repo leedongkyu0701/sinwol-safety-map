@@ -80,19 +80,20 @@ export const DAYS_OF_WEEK = [
 export type DayOfWeek = (typeof DAYS_OF_WEEK)[number];
 
 export interface DailyHours {
-  start?: string;
-  end?: string;
+  start: string;
+  end: string;
 }
 
 export type OperatingHours = Partial<Record<DayOfWeek, DailyHours>>;
 
 export interface AedFacility extends BaseFacility {
   category: "AED";
+  subtype: "AED";
   details: {
     phone?: string;
     manufacturer?: string;
     model?: string;
-    mobility: FacilityMobility;
+    mobility: "FIXED";
     operatingHours?: OperatingHours;
   };
 }
