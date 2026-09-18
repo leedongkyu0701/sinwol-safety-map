@@ -39,6 +39,7 @@ npm run dev
 - `npm run lint`: ESLint 검사
 - `npm run typecheck`: TypeScript 검사
 - `npm run data:test-utils`: 공통 Normalize/Validation Utility 단위 검증
+- `npm run data:audit`: Commit된 Published JSON과 Review Registry의 read-only 전체 감사
 - `npm run data:verify`: Published JSON Schema, ID, Metadata, Source SHA 검증
 - `npm run data:fire-water`: Fire Water XLSX ETL 및 Published JSON 생성
 - `npm run data:shelters`: 서울 Open Data API에서 Shelter Snapshot 생성
