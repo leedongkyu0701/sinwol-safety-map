@@ -1,6 +1,6 @@
 # 신월동 안전지도
 
-서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. 현재 Fire Water, Shelter, AED, OTHER 정적 데이터 Pipeline을 구축하고 있으며 지도 UI는 아직 구현하지 않았습니다.
+서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. Fire Water, Shelter, AED, OTHER 정적 데이터 Pipeline과 NAVER Dynamic Map 기반 화면을 단계적으로 구축하고 있습니다.
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@
 - SheetJS 0.20.3
 - fast-xml-parser 5
 - proj4 2 (ETL 전용)
-- NAVER Maps JavaScript API v3 예정
+- NAVER Maps JavaScript API v3
 - GitHub Actions
 - Vercel 예정
 
@@ -30,6 +30,8 @@ npm run dev
 ## Environment Variables
 
 필요한 변수명은 `.env.example`을 참고합니다. 실제 Key는 `.env.local`에만 저장하며 Git에 커밋하지 않습니다.
+
+NAVER Dynamic Map은 `NEXT_PUBLIC_NAVER_MAP_NCP_KEY_ID`를 사용합니다. 로컬 실행 전에 NAVER Cloud Application의 Web Service URL에 개발 Origin(기본값 `http://localhost:3000`)을 등록해야 합니다. Public Data API Key는 지도 Client Runtime에서 사용하지 않습니다.
 
 ## Scripts
 
