@@ -12,7 +12,8 @@
     "data:verify": "tsx scripts/data/shared/verify.ts",
     "data:fire-water": "tsx scripts/data/fire-water/index.ts",
     "data:shelters": "tsx scripts/data/shelters/index.ts",
-    "data:aeds": "tsx scripts/data/aed/index.ts"
+    "data:aeds": "tsx scripts/data/aed/index.ts",
+    "data:other:fire-org": "tsx scripts/data/other/fire-org/index.ts"
   },
   "dependencies": {
     "next": "16.3.5",
@@ -28,6 +29,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "fast-xml-parser": "^5.11.1",
+    "proj4": "^2.22.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.13",
     "typescript": "^5",

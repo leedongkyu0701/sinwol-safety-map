@@ -16,11 +16,16 @@ import {
   createNamespacedId,
   hasNamespacedId,
 } from "../../../src/shared/lib/validation";
-import type { DataMetadata } from "../../../src/shared/schemas/metadata";
+import {
+  metadataSchema,
+  type DataMetadata,
+} from "../../../src/shared/schemas/metadata";
 import {
   aedFacilitiesSchema,
   aedFacilitySchema,
+  fireOrganizationFacilitySchema,
   fireWaterFacilitiesSchema,
+  otherFacilitiesSchema,
   otherFacilitySchema,
   shelterFacilitiesSchema,
   shelterFacilitySchema,
@@ -41,7 +46,13 @@ import { normalizeAedOperatingHours } from "../aed/operating-hours";
 import { aedSourceRowSchema } from "../aed/schema";
 import { transformAedRows } from "../aed/transform";
 import { transformShelterRows } from "../shelters/transform";
-import { updateSourceMetadata } from "./metadata";
+import { convertEpsg5186ToWgs84 } from "../other/fire-org/coordinates";
+import { classifyFireOrganizationSubtype } from "../other/fire-org/transform";
+import { mergeOtherFacilitiesByIdPrefix } from "../other/shared/merge";
+import {
+  updateOtherDatasetMetadata,
+  updateSourceMetadata,
+} from "./metadata";
 
 assert.equal(normalizeOptionalString("nan"), undefined);
 assert.equal(normalizeOptionalString("NaN"), undefined);
@@ -99,6 +110,7 @@ assert.throws(() => mapFireWaterSubtype("99"));
 assert.equal(fireWaterFacilitiesSchema.safeParse([]).success, false);
 assert.equal(shelterFacilitiesSchema.safeParse([]).success, false);
 assert.equal(aedFacilitiesSchema.safeParse([]).success, false);
+assert.equal(otherFacilitiesSchema.safeParse([]).success, true);
 
 const baseFacility = {
   name: "검증용 시설",
@@ -162,22 +174,100 @@ assert.equal(
 assert.equal(
   otherFacilitySchema.safeParse({
     ...baseFacility,
-    id: "other:source-1",
+    id: "fire-org:source-1",
     category: "OTHER",
-    subtype: "FUTURE_TYPE",
-    details: { arbitrary: true },
+    subtype: "UNKNOWN",
+    details: {},
   }).success,
   false,
 );
 assert.equal(
-  otherFacilitySchema.safeParse({
+  fireOrganizationFacilitySchema.safeParse({
     ...baseFacility,
-    id: "other:source-1",
+    id: "fire-org:source-1",
     category: "OTHER",
-    subtype: "FUTURE_TYPE",
+    subtype: "FIRE_SAFETY_CENTER",
     details: {},
   }).success,
   true,
+);
+for (const subtype of [
+  "FIRE_STATION",
+  "FIRE_SAFETY_CENTER",
+  "FIRE_RESCUE_UNIT",
+] as const) {
+  assert.equal(
+    fireOrganizationFacilitySchema.safeParse({
+      ...baseFacility,
+      id: "fire-org:source-1",
+      category: "OTHER",
+      subtype,
+      details: {},
+    }).success,
+    true,
+  );
+}
+assert.equal(
+  fireOrganizationFacilitySchema.safeParse({
+    ...baseFacility,
+    id: "other:source-1",
+    category: "OTHER",
+    subtype: "FIRE_SAFETY_CENTER",
+    details: {},
+  }).success,
+  false,
+);
+
+assert.equal(
+  classifyFireOrganizationSubtype("소방서", "양천소방서"),
+  "FIRE_STATION",
+);
+assert.equal(
+  classifyFireOrganizationSubtype("안전센터/구조대", "신월119안전센터"),
+  "FIRE_SAFETY_CENTER",
+);
+assert.equal(
+  classifyFireOrganizationSubtype("안전센터/구조대", "양천119구조대"),
+  "FIRE_RESCUE_UNIT",
+);
+assert.throws(() =>
+  classifyFireOrganizationSubtype("안전센터/구조대", "알 수 없는 조직"),
+);
+
+const convertedFireOrgCoordinate = convertEpsg5186ToWgs84(
+  185258.326,
+  547617.617,
+);
+assert.ok(
+  Math.abs(convertedFireOrgCoordinate.longitude - 126.833225) < 0.000001,
+);
+assert.ok(
+  Math.abs(convertedFireOrgCoordinate.latitude - 37.527935) < 0.000001,
+);
+
+const otherMergeFixture = (id: string) => ({ id });
+assert.deepEqual(
+  mergeOtherFacilitiesByIdPrefix(
+    [
+      otherMergeFixture("heat-shelter:2"),
+      otherMergeFixture("fire-org:old"),
+      otherMergeFixture("heat-shelter:1"),
+    ],
+    [otherMergeFixture("fire-org:new")],
+    "fire-org:",
+  ),
+  [
+    otherMergeFixture("fire-org:new"),
+    otherMergeFixture("heat-shelter:1"),
+    otherMergeFixture("heat-shelter:2"),
+  ],
+);
+assert.throws(() =>
+  mergeOtherFacilitiesByIdPrefix(
+    [],
+    [otherMergeFixture("wrong:new")],
+    "fire-org:",
+  ),
 );
 
 const shelterTransform = transformShelterRows([
@@ -274,6 +364,61 @@ const unchangedMetadata = updateSourceMetadata(
 );
 
 assert.equal(unchangedMetadata.generatedAt, existingMetadata.generatedAt);
+
+const existingCompositeMetadata: DataMetadata = {
+  ...existingMetadata,
+  sources: {
+    ...existingMetadata.sources,
+    other: {
+      count: 2,
+      datasets: {
+        fireOrg: {
+          count: 1,
+          source: "old fire source",
+          fetchedAt: "2026-09-16T03:00:00.000Z",
+        },
+        futureSource: {
+          count: 1,
+          source: "future source",
+          fetchedAt: "2026-09-16T04:00:00.000Z",
+        },
+      },
+    },
+  },
+};
+const updatedOtherMetadata = updateOtherDatasetMetadata(
+  existingCompositeMetadata,
+  "fireOrg",
+  {
+    count: 2,
+    source: "new fire source",
+    fetchedAt: "2026-09-18T03:00:00.000Z",
+  },
+  {
+    totalCount: 3,
+    publishedDataChanged: true,
+    generatedAt: "2026-09-18T05:00:00.000Z",
+  },
+);
+assert.equal(updatedOtherMetadata.sources.other.count, 3);
+assert.equal(
+  updatedOtherMetadata.sources.other.datasets?.futureSource?.count,
+  1,
+);
+assert.equal(updatedOtherMetadata.sources.other.datasets?.fireOrg?.count, 2);
+assert.equal(
+  metadataSchema.safeParse({
+    ...existingCompositeMetadata,
+    sources: {
+      ...existingCompositeMetadata.sources,
+      other: {
+        count: 3,
+        datasets: existingCompositeMetadata.sources.other.datasets,
+      },
+    },
+  }).success,
+  false,
+);
 
 assert.equal(normalizeAedTime("0000", "start"), "0000");
 assert.equal(normalizeAedTime("2500", "end"), "2500");

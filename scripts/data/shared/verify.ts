@@ -5,6 +5,7 @@ import { assertUniqueValues } from "../../../src/shared/lib/validation";
 import {
   aedFacilitiesSchema,
   fireWaterFacilitiesSchema,
+  otherFacilitiesSchema,
   shelterFacilitiesSchema,
 } from "../../../src/shared/schemas/facility";
 import {
@@ -33,6 +34,12 @@ import {
   SHELTER_OUTPUT_PATH,
   SHELTER_SOURCE_NAME,
 } from "../shelters/constants";
+import {
+  FIRE_ORG_ID_PREFIX,
+  FIRE_ORG_METADATA_KEY,
+  FIRE_ORG_SOURCE_NAME,
+  OTHER_OUTPUT_PATH,
+} from "../other/fire-org/constants";
 import { calculateFileSha256 } from "./file-hash";
 import { readJsonFileIfExists } from "./write-json";
 
@@ -276,15 +283,92 @@ function verifyAeds(metadata: DataMetadata): number {
   return facilities.length;
 }
 
+function verifyOther(metadata: DataMetadata): number {
+  const rawFacilities = readRequiredJson(OTHER_OUTPUT_PATH);
+  const facilities = otherFacilitiesSchema.parse(rawFacilities);
+  const fireOrgFacilities = facilities.filter((facility) =>
+    facility.id.startsWith(FIRE_ORG_ID_PREFIX),
+  );
+  const fireOrgMetadata =
+    metadata.sources.other.datasets?.[FIRE_ORG_METADATA_KEY];
+
+  assertUniqueValues(
+    facilities.map((facility) => facility.id),
+    "OTHER facility id",
+  );
+  assertUniqueValues(
+    fireOrgFacilities.map((facility) => facility.sourceId),
+    "fire organization sourceId",
+  );
+  assert.equal(
+    facilities.every((facility) => facility.category === "OTHER"),
+    true,
+    "All published OTHER facilities must use the OTHER category",
+  );
+  assert.equal(
+    metadata.sources.other.count,
+    facilities.length,
+    "OTHER metadata count must match the published dataset",
+  );
+  assert.equal(
+    containsForbiddenMissingString(rawFacilities),
+    false,
+    "Published OTHER data contains a forbidden missing-value string",
+  );
+
+  if (metadata.sources.other.datasets !== undefined) {
+    const datasetCount = Object.values(
+      metadata.sources.other.datasets,
+    ).reduce((total, dataset) => total + dataset.count, 0);
+
+    assert.equal(
+      datasetCount,
+      metadata.sources.other.count,
+      "OTHER dataset metadata counts must sum to the OTHER count",
+    );
+  }
+
+  if (fireOrgFacilities.length > 0 || fireOrgMetadata !== undefined) {
+    assert.notEqual(
+      fireOrgMetadata,
+      undefined,
+      "Fire organization metadata is required when fire-org rows exist",
+    );
+    assert.equal(
+      fireOrgMetadata?.count,
+      fireOrgFacilities.length,
+      "Fire organization metadata count must match fire-org rows",
+    );
+    assert.equal(
+      fireOrgMetadata?.source,
+      FIRE_ORG_SOURCE_NAME,
+      "Fire organization metadata source must match the configured source",
+    );
+    assert.equal(
+      typeof fireOrgMetadata?.fetchedAt,
+      "string",
+      "Fire organization metadata must contain fetchedAt",
+    );
+  }
+
+  console.log(`OTHER rows: ${facilities.length.toLocaleString("en-US")}`);
+  console.log(
+    `Fire organization rows: ${fireOrgFacilities.length.toLocaleString("en-US")}`,
+  );
+
+  return facilities.length;
+}
+
 function run(): void {
   const metadata = metadataSchema.parse(readRequiredJson(METADATA_OUTPUT_PATH));
   const fireWaterCount = verifyFireWater(metadata);
   const shelterCount = verifyShelters(metadata);
   const aedCount = verifyAeds(metadata);
+  const otherCount = verifyOther(metadata);
 
   console.log("\nPublished data verification passed");
   console.log(
-    `Total published rows: ${fireWaterCount + shelterCount + aedCount}`,
+    `Total published rows: ${fireWaterCount + shelterCount + aedCount + otherCount}`,
   );
 }
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-18T02:07:34.054Z",
+  "generatedAt": "2026-09-18T06:26:23.392Z",
   "sources": {
     "fireWater": {
       "count": 936,
@@ -19,7 +19,14 @@
       "fetchedAt": "2026-09-18T02:07:34.022Z"
     },
     "other": {
-      "count": 0
+      "count": 1,
+      "datasets": {
+        "fireOrg": {
+          "count": 1,
+          "source": "서울시 소방서 안전센터 구조대 위치정보",
+          "fetchedAt": "2026-09-18T06:26:23.379Z"
+        }
+      }
     }
   }
 }

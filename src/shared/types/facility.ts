@@ -98,10 +98,22 @@ export interface AedFacility extends BaseFacility {
   };
 }
 
-export interface OtherFacility extends BaseFacility {
+export const FIRE_ORGANIZATION_SUBTYPES = [
+  "FIRE_STATION",
+  "FIRE_SAFETY_CENTER",
+  "FIRE_RESCUE_UNIT",
+] as const;
+
+export type FireOrganizationSubtype =
+  (typeof FIRE_ORGANIZATION_SUBTYPES)[number];
+
+export interface FireOrganizationFacility extends BaseFacility {
   category: "OTHER";
+  subtype: FireOrganizationSubtype;
   details: Record<string, never>;
 }
+
+export type OtherFacility = FireOrganizationFacility;
 
 export type Facility =
   | FireWaterFacility

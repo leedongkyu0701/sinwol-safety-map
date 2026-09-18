@@ -45,7 +45,17 @@ Published AED의 `subtype`은 `AED`, `mobility`는 `FIXED`로 제한한다. `MOB
 
 ## OTHER
 
-현재 Published Data는 0건이지만 Category와 UI Contract는 유지한다. 향후 119안전센터나 기타 공공 안전시설을 Source 정책 검토 후 추가할 수 있다.
+현재 Published Data는 신월119안전센터 1건이다. 상위 Category는 `OTHER`로 유지하고 소방 조직 내부 유형은 다음 subtype으로 제한한다.
+
+- `FIRE_STATION`
+- `FIRE_SAFETY_CENTER`
+- `FIRE_RESCUE_UNIT`
+
+119 조직 Source는 서울 열린데이터광장 `TbGiWardP`의 `서울시 소방서 안전센터 구조대 위치정보`다. Source에 주소나 직접적인 행정동 필드가 없으므로 이름으로 지역을 추론하지 않는다. 실제 신월동 위치와 공식 주소를 사람이 확인한 Source ID만 `data/reference/fire-org.json`에 등록해 포함한다. 관할 구역에 신월동이 들어간다는 이유만으로 신월동 밖의 시설을 추가하지 않는다.
+
+Source의 X/Y는 ITRF2000_MTM 중부원점(EPSG:5186) 좌표이며 ETL에서 WGS84(EPSG:4326)로 변환한다. Published ID는 `fire-org:<sourceId>` 형식이다. 공식 주소는 별도 서울 열린데이터광장 Source인 `서울소방서 119안전센터 현황`으로 검증한다.
+
+`public/data/other.json`은 여러 OTHER Source를 담는 Category 파일이다. 각 Source ETL은 자신의 ID prefix 행만 교체하고 다른 Variant는 보존한다. 119 조직은 MVP에서 수동 API Snapshot으로 갱신하며 Shelter/AED Daily Sync에는 포함하지 않는다. 향후 다른 Source는 typed Variant와 별도 namespace, 독립 ETL 및 Metadata dataset을 추가한다.
 
 ## Identity and Deduplication
 
@@ -67,4 +77,4 @@ Raw 데이터에는 Published에 불필요한 개인정보성 필드가 포함�
 
 각 ETL은 기존 Metadata에서 자신의 Source 항목만 갱신하며 다른 Source 항목을 초기화하지 않는다. Source summary는 필요에 따라 `sourceUpdatedAt`, API 수집 시각인 `fetchedAt`, File Source의 `sourceFileSha256`을 포함한다.
 
-Published Dataset은 0건일 경우 항상 거부한다. Fire Water는 기존 정상 Snapshot보다 count가 20%를 초과해 감소하면 자동 Publish를 중단하고 사람이 Source와 Filter 결과를 검토한다. 현재 936건과 subtype 분포는 Snapshot Audit 기준이며 영구 Business Rule로 강제하지 않는다.
+Source별 ETL에서 대상 Dataset 0건은 거부한다. 단, OTHER Category 전체의 빈 배열은 아직 Source가 없거나 모두 제거된 상태를 표현할 수 있으므로 Domain상 유효하다. Fire Water는 기존 정상 Snapshot보다 count가 20%를 초과해 감소하면 자동 Publish를 중단하고 사람이 Source와 Filter 결과를 검토한다. 현재 936건과 subtype 분포는 Snapshot Audit 기준이며 영구 Business Rule로 강제하지 않는다.
