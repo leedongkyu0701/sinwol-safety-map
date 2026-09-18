@@ -3,9 +3,11 @@ import { z } from "zod";
 import {
   DAYS_OF_WEEK,
   FACILITY_CATEGORIES,
+  FIRE_ORGANIZATION_SUBTYPES,
   FIRE_WATER_SUBTYPES,
   type AedFacility,
   type Facility,
+  type FireOrganizationFacility,
   type FireWaterFacility,
   type OtherFacility,
   type ShelterFacility,
@@ -63,6 +65,9 @@ function validateNamespacedId(
 
 export const facilityCategorySchema = z.enum(FACILITY_CATEGORIES);
 export const fireWaterSubtypeSchema = z.enum(FIRE_WATER_SUBTYPES);
+export const fireOrganizationSubtypeSchema = z.enum(
+  FIRE_ORGANIZATION_SUBTYPES,
+);
 
 export const fireWaterFacilitySchema: z.ZodType<FireWaterFacility> = z
   .object({
@@ -133,17 +138,21 @@ export const aedFacilitySchema: z.ZodType<AedFacility> = z
     validateNamespacedId("aed", facility, context);
   });
 
-export const otherFacilitySchema: z.ZodType<OtherFacility> = z
-  .object({
-    ...baseFacilityShape,
-    category: z.literal("OTHER"),
-    subtype: nonEmptyStringSchema,
-    details: z.object({}).strict(),
-  })
-  .strict()
-  .superRefine((facility, context) => {
-    validateNamespacedId("other", facility, context);
-  });
+export const fireOrganizationFacilitySchema: z.ZodType<FireOrganizationFacility> =
+  z
+    .object({
+      ...baseFacilityShape,
+      category: z.literal("OTHER"),
+      subtype: fireOrganizationSubtypeSchema,
+      details: z.object({}).strict(),
+    })
+    .strict()
+    .superRefine((facility, context) => {
+      validateNamespacedId("fire-org", facility, context);
+    });
+
+export const otherFacilitySchema: z.ZodType<OtherFacility> =
+  fireOrganizationFacilitySchema;
 
 export const facilitySchema: z.ZodType<Facility> = z.union([
   fireWaterFacilitySchema,
@@ -163,3 +172,9 @@ export const shelterFacilitiesSchema = z
 export const aedFacilitiesSchema = z
   .array(aedFacilitySchema)
   .min(1, "AED dataset must not be empty");
+
+export const fireOrganizationFacilitiesSchema = z
+  .array(fireOrganizationFacilitySchema)
+  .min(1, "Fire organization dataset must not be empty");
+
+export const otherFacilitiesSchema = z.array(otherFacilitySchema);

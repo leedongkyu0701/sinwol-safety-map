@@ -1,0 +1,14 @@
+[
+  {
+    "id": "fire-org:1121104",
+    "name": "신월119안전센터",
+    "latitude": 37.527935,
+    "longitude": 126.833225,
+    "address": "양천구 남부순환로 448 (신월동)",
+    "source": "서울시 소방서 안전센터 구조대 위치정보",
+    "sourceId": "1121104",
+    "category": "OTHER",
+    "subtype": "FIRE_SAFETY_CENTER",
+    "details": {}
+  }
+]

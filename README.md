@@ -1,6 +1,6 @@
 # 신월동 안전지도
 
-서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. 현재 Fire Water, Shelter, AED 정적 데이터 Pipeline을 구축하고 있으며 지도 UI는 아직 구현하지 않았습니다.
+서울특별시 양천구 신월동의 공공 안전시설을 하나의 모바일 우선 지도에서 확인하기 위한 웹서비스입니다. 현재 Fire Water, Shelter, AED, OTHER 정적 데이터 Pipeline을 구축하고 있으며 지도 UI는 아직 구현하지 않았습니다.
 
 ## Tech Stack
 
@@ -11,6 +11,7 @@
 - Zod 4
 - SheetJS 0.20.3
 - fast-xml-parser 5
+- proj4 2 (ETL 전용)
 - NAVER Maps JavaScript API v3 예정
 - GitHub Actions
 - Vercel 예정
@@ -42,6 +43,7 @@ npm run dev
 - `npm run data:fire-water`: Fire Water XLSX ETL 및 Published JSON 생성
 - `npm run data:shelters`: 서울 Open Data API에서 Shelter Snapshot 생성
 - `npm run data:aeds`: data.go.kr API에서 AED Snapshot 생성
+- `npm run data:other:fire-org`: 서울 Open Data API에서 119 조직 OTHER Snapshot 생성
 
 ## Fire Water Data
 
@@ -88,9 +90,19 @@ npm run data:aeds
 
 검토자는 Pending 목록을 확인하고 `data/review/aed-mobility.json`에 `FIXED` 또는 `MOBILE` 결정을 기록한 뒤 ETL을 다시 실행합니다. 결정된 시설은 다음 실행에서 Pending 목록에서 자동 제거됩니다. 최종 `public/data/aeds.json`에는 자동 또는 검토로 확정된 `FIXED` 시설만 포함됩니다. 동일한 Published 결과로 재실행하면 기존 `fetchedAt`과 `generatedAt`을 유지합니다.
 
+## OTHER Data
+
+119 조직 ETL은 서울 열린데이터광장의 `TbGiWardP` API를 사용합니다. `SEOUL_OPEN_DATA_KEY`가 필요하며, 사람이 실제 신월동 위치와 공식 주소를 검증해 `data/reference/fire-org.json`에 등록한 Source ID만 처리합니다.
+
+```bash
+npm run data:other:fire-org
+```
+
+API의 EPSG:5186 좌표를 WGS84로 변환하고 `fire-org:` 소유 행만 `public/data/other.json`에서 교체합니다. 따라서 향후 다른 OTHER Source가 추가되어도 해당 행과 Metadata를 보존할 수 있습니다. 119 조직은 시설 배치 변경 빈도가 낮은 MVP Source이므로 Daily Sync에 넣지 않고 필요할 때 수동으로 Snapshot을 갱신합니다.
+
 ## Data Automation
 
-Pull Request와 `main` Push에서는 외부 API를 호출하지 않고 코드와 Commit된 Published Snapshot을 검증합니다. Shelter와 AED는 매일 03:17 UTC(12:17 KST)에 GitHub Actions로 동기화하며, Fire Water XLSX Snapshot은 수동으로 갱신합니다.
+Pull Request와 `main` Push에서는 외부 API를 호출하지 않고 코드와 Commit된 Published Snapshot을 검증합니다. Shelter와 AED는 매일 03:17 UTC(12:17 KST)에 GitHub Actions로 동기화하며, Fire Water XLSX와 119 조직 Snapshot은 수동으로 갱신합니다.
 
 정기 동기화에는 Repository Secrets `SEOUL_OPEN_DATA_KEY`, `DATA_GO_KR_SERVICE_KEY`가 필요합니다. 새 AED 이동형 후보는 Published에서 제외한 뒤 Pending Review File에 기록하고 나머지 데이터는 계속 갱신합니다. 데이터가 동일하면 Commit하지 않으며, API 또는 검증 실패 시 기존 정상 Snapshot을 유지합니다.
 

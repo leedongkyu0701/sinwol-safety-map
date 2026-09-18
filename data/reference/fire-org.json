@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "addressSource": "서울소방서 119안전센터 현황",
+  "facilities": [
+    {
+      "sourceId": "1121104",
+      "expectedName": "신월119안전센터",
+      "address": "양천구 남부순환로 448 (신월동)"
+    }
+  ]
+}
