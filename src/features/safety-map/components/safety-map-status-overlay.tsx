@@ -1,11 +1,16 @@
-import type { NaverMapStatus } from "@/features/safety-map/hooks/use-naver-map";
 import { Spinner } from "@/shared/ui/spinner";
 
-interface MapStatusOverlayProps {
-  status: NaverMapStatus;
+export type SafetyMapStatus = "loading" | "ready" | "error";
+
+interface SafetyMapStatusOverlayProps {
+  status: SafetyMapStatus;
+  message: string;
 }
 
-export function MapStatusOverlay({ status }: MapStatusOverlayProps) {
+export function SafetyMapStatusOverlay({
+  status,
+  message,
+}: SafetyMapStatusOverlayProps) {
   if (status === "ready") {
     return null;
   }
@@ -20,11 +25,7 @@ export function MapStatusOverlay({ status }: MapStatusOverlayProps) {
     >
       <div>
         {isError ? null : <Spinner className="mx-auto mb-4" />}
-        <p className="text-sm font-medium text-zinc-800">
-          {isError
-            ? "지도를 불러오지 못했습니다."
-            : "지도를 불러오는 중입니다."}
-        </p>
+        <p className="text-sm font-medium text-zinc-800">{message}</p>
       </div>
     </div>
   );
