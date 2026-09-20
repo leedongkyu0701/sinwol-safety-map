@@ -48,7 +48,7 @@ Inspect → Plan → Modify → Validate → Report
 - MOBILE AED는 Raw/Normalized 단계에 보존하고 기본 Published JSON과 Nearby 대상에서 제외한다.
 - `.env.local`과 `data/raw`의 원본 파일을 Commit하지 않는다.
 - `SEOUL_OPEN_DATA_KEY`, `DATA_GO_KR_SERVICE_KEY`에 `NEXT_PUBLIC_`을 붙이지 않는다.
-- 사용자 위치는 브라우저 React State에만 두고 저장하거나 전송하지 않는다.
+- 사용자 위치는 브라우저 React State에서 관리하며, 신월동 안전지도의 자체 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스에 저장하거나 전송하지 않는다. NAVER Maps SDK 등 외부 서비스 제공자의 처리까지 단정하지 않는다.
 
 ## Validation
 

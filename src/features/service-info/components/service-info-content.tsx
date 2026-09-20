@@ -38,8 +38,7 @@ export function ServiceInfoContent() {
                 서비스 정보
               </h1>
               <p className="mt-4 break-words text-sm leading-7 text-zinc-600 sm:text-base">
-                신월동의 소방용수, 민방위 대피시설, AED, 119안전센터 위치를 한
-                지도에서 확인할 수 있습니다.
+                공공데이터로 정리한 신월동 안전시설을 지도에서 확인할 수 있습니다.
               </p>
             </section>
 
@@ -47,7 +46,7 @@ export function ServiceInfoContent() {
               <div className="min-w-0 space-y-6">
                 <InfoSection
                   title="데이터 현황"
-                  description="현재 서비스에 반영된 데이터 기준입니다."
+                  description="현재 지도에 반영된 시설 현황입니다."
                 >
                   <div className="grid w-full min-w-0 gap-3 sm:grid-cols-2">
                     <SummaryCard
@@ -93,7 +92,7 @@ export function ServiceInfoContent() {
 
                 <InfoSection
                   title="데이터 출처 및 갱신 기준"
-                  description="각 데이터는 원천기관의 공개 자료를 기준으로 수집·정리합니다. 출처별 날짜의 의미가 다를 수 있습니다."
+                  description="출처별 공개 자료와 갱신일을 표시합니다."
                 >
                   <div className="min-w-0 w-full max-w-full divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
                     {info.sources.map((source) => (
@@ -129,55 +128,63 @@ export function ServiceInfoContent() {
               <div className="min-w-0 space-y-6">
                 <InfoSection
                   title="이용 안내"
-                  description="공공데이터의 성격과 서비스 이용 시 확인할 사항을 안내합니다."
+                  description="시설 정보를 확인할 때 참고할 사항입니다."
                 >
                   <div className="min-w-0 w-full max-w-full divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
                     <PolicyRow title="데이터 최신성">
-                      공공데이터의 갱신 시점에 따라 시설 위치, 명칭 또는 운영 상태가
+                      원천 데이터의 갱신 시점에 따라 시설 위치, 명칭 또는 운영 상태가
                       실제와 다를 수 있습니다.
                     </PolicyRow>
                     <PolicyRow title="시설 기준">
-                      대피시설은 원천 데이터에서 사용중으로 확인된 시설을 기준으로
-                      표시하며, AED의 위치와 운영시간은 참고용으로 제공합니다.
+                      대피시설은 사용중으로 확인된 시설만 표시합니다. AED 위치와
+                      운영시간은 원천 자료 기준의 참고 정보입니다.
                     </PolicyRow>
                     <PolicyRow title="긴급 상황">
-                      이 서비스는 신고·출동 접수를 제공하지 않습니다. 긴급 상황에서는
-                      119와 관계기관의 최신 안내를 이용하세요.
+                      긴급 신고와 출동 접수는 119 등 관계기관에 요청해 주세요.
                     </PolicyRow>
                   </div>
                 </InfoSection>
 
                 <InfoSection
                   title="위치정보 이용 안내"
-                  description="현재 위치 기능은 선택 사항이며, 권한을 허용하지 않아도 지도와 시설 검색을 이용할 수 있습니다."
+                  description="현재 위치 기능은 선택 사항입니다."
                 >
                   <div className="min-w-0 w-full max-w-full divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
                     <PolicyRow title="사용 시점">
-                      사용자가 현재 위치 버튼을 누르고 브라우저의 위치 권한을 허용한
-                      경우에만 위치 좌표를 가져옵니다.
+                      현재 위치 버튼을 누르고 브라우저 권한을 허용한 경우에만
+                      위치를 확인합니다.
                     </PolicyRow>
                     <PolicyRow title="이용 목적">
-                      확인된 위치는 지도 중심을 이동하고 시설까지의 직선거리를
-                      계산하는 데 사용합니다.
+                      지도 중심을 이동하고 시설까지의 직선거리를 계산하는 데
+                      사용합니다.
                     </PolicyRow>
                     <PolicyRow title="앱 내 처리">
-                      이 서비스 애플리케이션은 위치 좌표를 자체 서버나 브라우저
-                      저장소에 보관하지 않고, 현재 페이지의 기능 수행을 위해
-                      메모리에서만 사용합니다.
+                      서비스 자체 서버나 브라우저 저장소에 위치를 보관하지 않습니다.
+                      현재 페이지 기능에 필요한 동안만 메모리에서 사용합니다.
                     </PolicyRow>
                     <PolicyRow title="권한 관리">
-                      위치 권한과 정확도는 브라우저 및 운영체제 설정에 따라 달라질 수
-                      있으며, 권한은 기기 또는 브라우저 설정에서 변경할 수 있습니다.
+                      위치 권한과 정확도는 브라우저와 운영체제 설정에 따라 달라집니다.
                     </PolicyRow>
                   </div>
                   <p className="mt-3 text-xs leading-5 text-zinc-500">
-                    위 안내는 이 서비스 애플리케이션의 현재 기능을 기준으로 합니다.
-                    브라우저, 지도 SDK, 호스팅 등 외부 서비스의 처리에는 각 제공자의
-                    정책이 적용될 수 있습니다.
+                    브라우저, 지도 SDK, 호스팅 제공자의 처리에는 각 제공자의 정책이
+                    적용될 수 있습니다.
                   </p>
                 </InfoSection>
               </div>
             </div>
+
+            <nav
+              aria-label="서비스 문서"
+              className="mt-10 border-t border-zinc-200 pt-5 text-sm text-zinc-500"
+            >
+              <Link
+                href="/privacy"
+                className="underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-zinc-950 hover:decoration-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2"
+              >
+                개인정보 처리방침
+              </Link>
+            </nav>
           </div>
         </div>
       </main>
@@ -185,19 +192,27 @@ export function ServiceInfoContent() {
   );
 }
 
-function ServiceInfoHeader() {
+export function ServiceInfoHeader({
+  mobileTitle = "서비스 정보",
+  backHref = "/",
+  backLabel = "지도로 돌아가기",
+}: {
+  mobileTitle?: string;
+  backHref?: string;
+  backLabel?: string;
+}) {
   return (
     <header className="min-h-16 border-b border-zinc-200 px-5 sm:px-8">
       <div className="flex min-h-16 items-center justify-between sm:hidden">
         <Link
-          href="/"
-          aria-label="지도로 돌아가기"
+          href={backHref}
+          aria-label={backLabel}
           className="inline-flex size-11 items-center justify-start text-zinc-950 transition-colors hover:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2"
         >
           <BackIcon />
         </Link>
         <span className="text-base font-extrabold tracking-tight text-zinc-950">
-          서비스 정보
+          {mobileTitle}
         </span>
         <span aria-hidden="true" className="size-11" />
       </div>
@@ -209,11 +224,11 @@ function ServiceInfoHeader() {
           신월동 안전지도
         </Link>
         <Link
-          href="/"
+          href={backHref}
           className="inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-zinc-950 transition-colors hover:text-zinc-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2"
         >
           <BackIcon />
-          지도로 돌아가기
+          {backLabel}
         </Link>
       </div>
     </header>

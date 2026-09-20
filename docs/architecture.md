@@ -70,7 +70,7 @@ Safety Map Header는 Desktop과 Mobile 레이아웃을 같은 Feature Component�
 
 지도에서 결과에 포함된 시설 Marker는 `FacilityMarkerManager`가 생성한 Registry를 재사용하고, `FacilityClusterController`가 현재 Map viewport 안의 결과 Marker만 격자 기반으로 클러스터링해 지도에 붙인다. 중간 줌에서 밀도 요약이 유지되도록 줌 단계별 격자 정책을 적용하며, Cluster HTML icon과 크기 정책은 별도 Factory가 담당한다. Filter와 Search는 Facility Marker를 재생성하지 않고 Cluster presentation만 갱신한다. User Location Overlay는 시설 Cluster와 독립적인 z-index 계층을 사용한다. 긴 Facility List는 `@tanstack/react-virtual`로 보이는 행만 렌더링하고 Facility ID를 stable key로 사용하며, 결과 집합이 바뀌면 목록을 상단으로 되돌린다.
 
-`/info`는 외부 API를 호출하지 않는 Server Component Route다. `public/data/metadata.json`을 기존 Metadata Schema로 검증하고, `FACILITY_CATEGORY_CONFIG`와 Source 링크 설정을 이용해 동적 count/date와 데이터·위치정보 이용 안내를 정적 HTML로 렌더링한다.
+`/info`와 `/privacy`는 외부 API를 호출하지 않는 Server Component Route다. `/info`는 `public/data/metadata.json`을 기존 Metadata Schema로 검증하고, `FACILITY_CATEGORY_CONFIG`와 Source 링크 설정을 이용해 동적 count/date와 데이터·위치정보 이용 안내를 정적 HTML로 렌더링한다. `/privacy`는 현재 코드에서 확인되는 회원 기능 부재, 현재 위치 처리, 외부 서비스 및 분석 도구 사용 여부만 정적 안내로 제공한다.
 
 ## Frontend Structure
 
@@ -82,7 +82,7 @@ Safety Map Header는 Desktop과 Mobile 레이아웃을 같은 Feature Component�
 
 ## User Location
 
-`navigator.geolocation.getCurrentPosition()`으로 사용자가 버튼을 누른 경우에만 브라우저 위치를 얻는다. GPS는 페이지 세션의 React State에만 두고 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스로 전송하거나 저장하지 않는다. 위치가 있으면 Haversine 직선거리를 derived result에 계산해 목록을 거리순으로 정렬한다. NAVER 사용자 Marker와 accuracy Circle은 Safety Map Hook이 소유하며 React/Zustand State에는 넣지 않는다.
+`navigator.geolocation.getCurrentPosition()`으로 사용자가 버튼을 누른 경우에만 브라우저 위치를 얻는다. 사용자 위치는 애플리케이션의 React State에서 관리하며, 신월동 안전지도의 자체 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스에 저장하거나 전송하지 않는다. NAVER Maps SDK 등 외부 서비스 제공자의 처리까지 단정하지 않는다. 위치가 있으면 Haversine 직선거리를 derived result에 계산해 목록을 거리순으로 정렬한다. NAVER 사용자 Marker와 accuracy Circle은 Safety Map Hook이 소유하며 React/Zustand State에는 넣지 않는다.
 
 ## Update Architecture
 
