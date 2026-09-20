@@ -18,8 +18,7 @@
 Inspect → Plan → Modify → Validate → Report
 ```
 
-- 사용자가 지정한 Phase 범위만 구현한다.
-- 다음 Phase를 승인 없이 시작하지 않는다.
+- 사용자가 지정한 범위만 구현한다.
 - 기존 파일과 변경사항을 먼저 확인하고 필요한 부분만 수정한다.
 - 라이브러리, Framework, SDK, API 또는 CLI 사용법은 현재 공식 문서를 확인한다.
 - 새 Dependency는 명확한 필요성이 있을 때만 추가한다.
@@ -28,27 +27,22 @@ Inspect → Plan → Modify → Validate → Report
 ## Architecture Boundaries
 
 - Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4를 사용한다.
-- Runtime Client는 `public/data/*.json`만 읽는다.
-- 사용자 요청 중 공공데이터 API를 호출하는 Backend를 만들지 않는다.
-- 초기 범위에서 Database, Express, NestJS, Redis, TanStack Query, Axios 또는 지도 Wrapper를 추가하지 않는다.
-- Zustand는 여러 UI Component가 공유하는 최소 Interaction State에만 사용한다. Published Facility Data, NAVER Map/Marker 객체, Server Data Cache를 Store에 넣지 않으며 persist middleware를 사용하지 않는다.
-- Motion은 드래그와 전환 같은 UI 표현에만 사용한다. Domain/Data State를 Motion 값에 저장하지 않고 prefers-reduced-motion을 존중한다.
-- Facility Marker clustering은 `features/safety-map`의 imperative presentation layer가 소유하며, 결과 Facility ID와 기존 Marker Registry를 재사용한다. User Location Overlay는 Facility Cluster에 포함하지 않는다.
-- `@tanstack/react-virtual`은 Facility 결과를 제한하지 않는 DOM rendering 최적화로만 사용한다. Virtualizer에 검색 결과나 UI 상태를 저장하지 않는다.
-- `/info`의 시설 수와 날짜는 `public/data/metadata.json`을 기존 Schema로 검증해 derive하며 JSX에 Snapshot 값을 hard-code하지 않는다.
-- ETL은 `scripts/data`에서 실행하고, 검증을 통과한 최소 필드만 `public/data`에 Publish한다.
-- 검증 실패 시 기존 정상 Snapshot을 유지한다.
+- `app`은 Route composition과 Next.js boundary를 담당하고, 사용자 기능은 `features`, 여러 기능에서 재사용되는 계약과 최소 UI는 `shared`에 둔다.
+- Runtime Client는 검증되어 배포된 `public/data/*.json`만 읽는다. 공공데이터 API를 Browser에서 직접 호출하지 않는다.
+- Zustand에는 여러 UI가 공유하는 최소 Interaction State만 저장한다. Facility Data, derived result, User Location, NAVER Map·Marker 객체와 Runtime Cache는 Store에 넣지 않는다.
+- Motion은 드래그와 전환 같은 UI 표현에만 사용하고 Domain/Data State를 저장하지 않으며 reduced-motion을 존중한다.
+- Facility Marker Registry와 clustering presentation은 `features/safety-map`이 소유한다. User Location Overlay는 Facility Cluster와 독립적으로 관리한다.
+- `@tanstack/react-virtual`은 Facility Result의 DOM rendering 최적화에만 사용하며 결과 집합이나 UI 상태를 저장하지 않는다.
+- `/info`의 시설 수와 날짜는 `public/data/metadata.json`을 Schema로 검증해 derive한다. Snapshot 값을 JSX에 hard-code하지 않는다.
+- ETL은 `scripts/data`에서 실행하고, 검증을 통과한 최소 필드만 `public/data`에 Publish한다. 검증에 실패하면 기존 정상 Snapshot을 유지한다.
 
 ## Data and Security
 
-- 상위 Category는 `FIRE_WATER`, `SHELTER`, `AED`, `OTHER` 네 개다.
-- 소방용수 936건은 subtype과 관계없이 모두 `FIRE_WATER`다.
-- 시설은 좌표가 같다는 이유로 Deduplicate하지 않는다.
-- AED의 `manager`, `managerTel`은 Published JSON에 포함하지 않는다.
-- MOBILE AED는 Raw/Normalized 단계에 보존하고 기본 Published JSON과 Nearby 대상에서 제외한다.
-- `.env.local`과 `data/raw`의 원본 파일을 Commit하지 않는다.
+- 상위 Category는 `FIRE_WATER`, `SHELTER`, `AED`, `OTHER` 네 개다. Category와 Source별 Domain Rule은 `docs/data-policy.md`를 따른다.
+- Raw Source 파일과 `.env.local`은 Commit하지 않는다.
 - `SEOUL_OPEN_DATA_KEY`, `DATA_GO_KR_SERVICE_KEY`에 `NEXT_PUBLIC_`을 붙이지 않는다.
-- 사용자 위치는 브라우저 React State에서 관리하며, 신월동 안전지도의 자체 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스에 저장하거나 전송하지 않는다. NAVER Maps SDK 등 외부 서비스 제공자의 처리까지 단정하지 않는다.
+- Published JSON에는 서비스에 필요한 최소 필드만 포함하고, 공개 대상이 아닌 Source 필드는 Publish하지 않는다.
+- 사용자 위치는 애플리케이션의 React State에서 관리하며, 자체 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스에 저장하거나 전송하지 않는다. NAVER Maps SDK와 브라우저 등 외부 서비스 제공자의 처리까지 단정하지 않는다.
 
 ## Validation
 
@@ -59,12 +53,12 @@ npm run lint
 npm run build
 ```
 
-기능 개발 시 관련 실행 검증을 추가하고, 결과와 남은 제약을 최종 보고에 기록한다.
+기능 또는 데이터 변경 시 관련 검증을 추가하고, 결과와 남은 제약을 최종 보고에 기록한다.
 
 ## Pull Requests
 
 - PR을 생성하기 전에 `.github/pull_request_template.md`를 읽는다.
-- PR 본문은 저장소 템플릿의 제목과 섹션 순서를 그대로 사용하며, 임의의 형식으로 대체하거나 우회하지 않는다.
+- PR 본문은 저장소 템플릿의 제목과 섹션 순서를 그대로 사용한다.
 - 해당 사항이 없는 섹션은 삭제하지 말고 `해당 없음`이라고 명시한다.
 - 템플릿이 변경되면 가장 최신 버전을 기준으로 PR 본문을 작성한다.
 

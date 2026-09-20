@@ -68,6 +68,8 @@ npm run lint
 npm run build
 ```
 
+`data:audit`는 로컬에서 Published Snapshot을 추가 점검하는 명령이다. CI는 `data:test-utils`, `data:verify`, `typecheck`, `lint`, `build`를 실행하며 외부 Source API를 호출하지 않는다.
+
 검증에는 다음 항목이 포함됩니다.
 
 - Published Schema와 필수 필드

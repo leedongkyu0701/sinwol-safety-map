@@ -1,5 +1,7 @@
 # Data Policy
 
+이 문서는 Published Facility Data의 의미와 Source별 Domain Rule을 정의한다. 아래에 적힌 건수와 분포는 문서 작성 시점의 Snapshot Audit 결과이며, 영구적인 수량 기준이 아니다. 최신 수량은 `public/data/metadata.json`과 검증 명령 결과를 기준으로 확인한다.
+
 ## Categories
 
 상위 Category는 `FIRE_WATER`, `SHELTER`, `AED`, `OTHER` 네 개로 고정한다. UI에서는 전체, 소방용수, 대피시설, AED, 기타로 표시한다. 상위 Category와 세부 시설 종류인 `subtype`을 분리한다.

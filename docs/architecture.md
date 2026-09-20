@@ -1,109 +1,98 @@
 # Architecture
 
-## Project Goal
+## Overview
 
-서울특별시 양천구 신월동의 공공 안전시설 데이터를 모바일 우선 지도에서 제공한다.
+신월동 안전지도는 별도 애플리케이션 서버 없이, 검증된 공공데이터 Snapshot을 Browser에서 읽어 지도와 목록으로 제공한다.
 
-## Runtime Architecture
+```text
+Official Source
+→ ETL and validation
+→ Published JSON
+→ GitHub
+→ Vercel
+→ Browser
+```
+
+검증되지 않은 데이터는 기존 Published Snapshot을 대체하지 않는다.
+
+## Runtime
 
 ```text
 Browser
-→ Vercel
-→ Next.js Static Assets
+→ Next.js static assets
 → public/data/*.json
-→ Runtime Zod Validation
+→ Runtime Zod validation
 → Facility[]
-→ NAVER Marker Layer
-→ NAVER Dynamic Map
+→ Facility features and NAVER Maps
 ```
 
-사용자 요청 시 공공데이터 API를 직접 호출하지 않는다. Runtime Client는 저장소에서 검증되어 배포된 정적 JSON만 읽는다.
+Runtime Client는 `public/data/*.json`만 읽고, 원천 공공데이터 API를 직접 호출하지 않는다. 검색, 필터, Haversine 직선거리 계산과 결과 정렬은 Browser에서 수행한다.
 
-## Data Pipeline
+현재 데이터 규모는 정적 Read-only Dataset에 적합하므로 별도 Backend Server, Database, Spatial Query Layer를 두지 않는다.
+
+## Data Flow
+
+각 Source ETL은 `scripts/data`에서 원천 데이터를 읽거나 가져와 정규화, Domain Rule 적용, Schema 검증과 Audit을 거쳐 `public/data`와 `metadata.json`을 만든다. Runtime은 이 Published 결과만 사용한다.
+
+Source별 필터, Identity, Published 필드와 Snapshot 기준은 [Data Policy](data-policy.md), 실행 명령과 배포 전 절차는 [Operations](operations.md)에서 관리한다.
+
+## Frontend Boundaries
+
+- `src/app`: Route composition, metadata와 Next.js error boundary
+- `src/features/facilities`: Facility Data, 검색·필터·목록·상세·Interaction
+- `src/features/current-location`: Browser Geolocation 요청과 상태
+- `src/features/safety-map`: NAVER Map lifecycle, Facility Marker와 Cluster, User Location Overlay
+- `src/features/service-info`: `/info`와 `/privacy`의 정적 정보 화면
+- `src/shared`: 여러 Feature에서 실제로 재사용되는 Schema, Type, 상수, Utility와 최소 UI
+
+Feature 전용 UI와 상태를 `shared`로 미리 올리지 않는다. Route는 조합만 담당하고, 실제 사용자 기능은 해당 Feature가 소유한다.
+
+## State Ownership
+
+Zustand에는 여러 UI가 공유하는 최소 Interaction State만 저장한다.
+
+- `selectedCategory`
+- `searchQuery`
+- `selectedFacilityId`
+
+`Facility[]`, 검색·필터 결과, 거리 정렬 결과와 visible ID는 원본 데이터와 Interaction State에서 derive한다. User Location은 `useCurrentLocation`의 React State에 두며 Zustand에 persist하지 않는다. NAVER Map, Marker, Cluster instance와 Runtime Data Cache도 Store에 넣지 않는다.
+
+## Map and Marker Lifecycle
 
 ```text
-Official Public Data
-→ Read/Fetch
-→ Raw Response Validation
-→ Source Field Normalization
-→ Region/Status Filter
-→ Domain Normalization
-→ Published Schema Validation
-→ Domain Rules and Audit
-→ Static JSON
-→ Git
-→ Vercel
+useNaverMap
+→ NAVER Map lifecycle
+
+FacilityMarkerManager
+→ Facility Marker Registry and click listener
+
+FacilityClusterController
+→ visible Result Marker presentation
+
+useUserLocationOverlay
+→ current location Marker and accuracy Circle
 ```
 
-검증이 실패하면 신규 JSON을 Publish하지 않고 기존 정상 Snapshot을 유지한다. 프로덕션 빌드는 ETL이나 외부 공공데이터 API 호출을 실행하지 않는다.
+Facility Marker는 `facility.id`를 Registry identity로 사용하고 Filter·Search 때 재생성하지 않는다. Cluster Controller는 기존 Marker Registry에서 결과에 해당하는 Marker만 지도에 표현한다. User Location Overlay는 Facility Cluster와 별도 생명주기와 z-index를 가진다.
 
-## Backend Policy
-
-별도 Backend Server를 두지 않는다. NestJS, Express, Database, Redis를 사용하지 않는다.
-
-## Database Policy
-
-현재 Dataset은 약 1천 건의 Read Only 데이터다. Filter, Search, Haversine 거리 계산은 브라우저에서 처리하므로 Database를 사용하지 않는다.
-
-사용자 데이터, 관리자 CRUD, 시설 제보, 전국 단위 대규모 데이터, 복잡한 Spatial Query 또는 History 저장이 필요해지면 재검토한다.
-
-## Map
-
-NAVER Maps JavaScript API v3 Dynamic Map을 직접 사용한다. `app/page.tsx`는 Server Component로 Route composition만 담당하고, `SafetyMap`에서 Client Component boundary를 시작한다.
-
-```text
-SafetyMap Feature
-→ singleton NAVER SDK Loader
-→ useNaverMap lifecycle
-→ NAVER Map instance
-```
-
-SDK script는 Application Runtime에서 재사용하고 Map instance, ResizeObserver, Component listener는 mount 단위로 정리한다. 초기 범위에서는 Geocoding, Reverse Geocoding, Directions, Static Map을 사용하지 않는다.
-
-`features/facilities`는 네 Published JSON을 병렬로 읽고 기존 Shared Zod Schema와 전역 Facility ID를 검증한다. Dataset 하나라도 실패하면 전체 Runtime load를 실패시킨다. `features/safety-map`은 검증된 `Facility[]`만 받아 NAVER Marker lifecycle을 관리하며 JSON Source 구조를 알지 않는다. Marker는 `facility.id`를 Registry identity로 사용하고 cleanup 시 `setMap(null)`로 모두 제거한다.
-
-Facility Interaction State는 작은 Zustand Store에서 `selectedCategory`, `searchQuery`, `selectedFacilityId`만 관리한다. Published `Facility[]`, 검색 결과, 사용자 위치, NAVER Map/Marker 객체와 Runtime load 상태는 Store에 넣지 않는다. Category와 검색어는 하나의 derived Facility Result pipeline에서 목록과 visible Facility ID Set으로 변환된다. Marker Registry는 이 ID Set에 따라 기존 Marker의 `setMap()`만 갱신하므로 JSON을 다시 요청하거나 Marker를 재생성하지 않는다. Marker와 목록 선택은 동일한 Facility ID를 React 영역으로 전달하고, 기존 `Facility[]`에서 선택 시설을 derive해 Desktop Sidebar 또는 Mobile Sheet에서 표시한다.
-
-Desktop은 고정 Header 아래 Sidebar와 Map을 나란히 배치한다. Mobile은 지도 위에 항상 peek 상태가 남는 persistent Bottom Sheet를 두며, Sheet snap은 전역 Store가 아닌 presentation-local React State다. Motion은 handle drag와 snap 전환에만 사용하고, 목록 스크롤과 drag 영역을 분리하며 reduced-motion 설정을 존중한다.
-
-Safety Map Header는 Desktop과 Mobile 레이아웃을 같은 Feature Component에서 분기한다. Desktop은 제목과 `/info` 서비스 정보 링크를 상단에 두고, Mobile은 지도 위 floating card 안에 제목·compact 검색·서비스 정보 링크를 배치한다. 정보 페이지는 Commit된 `metadata.json`을 서버에서 검증해 제공 시설 수와 Source별 갱신일을 표시한다.
-
-지도에서 결과에 포함된 시설 Marker는 `FacilityMarkerManager`가 생성한 Registry를 재사용하고, `FacilityClusterController`가 현재 Map viewport 안의 결과 Marker만 격자 기반으로 클러스터링해 지도에 붙인다. 중간 줌에서 밀도 요약이 유지되도록 줌 단계별 격자 정책을 적용하며, Cluster HTML icon과 크기 정책은 별도 Factory가 담당한다. Filter와 Search는 Facility Marker를 재생성하지 않고 Cluster presentation만 갱신한다. User Location Overlay는 시설 Cluster와 독립적인 z-index 계층을 사용한다. 긴 Facility List는 `@tanstack/react-virtual`로 보이는 행만 렌더링하고 Facility ID를 stable key로 사용하며, 결과 집합이 바뀌면 목록을 상단으로 되돌린다.
-
-`/info`와 `/privacy`는 외부 API를 호출하지 않는 Server Component Route다. `/info`는 `public/data/metadata.json`을 기존 Metadata Schema로 검증하고, `FACILITY_CATEGORY_CONFIG`와 Source 링크 설정을 이용해 동적 count/date와 데이터·위치정보 이용 안내를 정적 HTML로 렌더링한다. `/privacy`는 현재 코드에서 확인되는 회원 기능 부재, 현재 위치 처리, 외부 서비스 및 분석 도구 사용 여부만 정적 안내로 제공한다.
-
-## Frontend Structure
-
-- `app`: Route composition과 Next.js의 `not-found`, route error, global error boundary를 담당한다.
-- `features`: 사용자 기능에 종속된 Component, Hook, Config와 Library를 함께 둔다.
-- `shared`: 둘 이상의 화면이나 Feature에서 재사용되는 Domain Contract, Utility와 최소 공용 UI만 둔다.
-
-공용 UI의 조건부 class 조합은 `cn()`으로 통일한다. `clsx`가 조건을 조합하고 `tailwind-merge`가 Tailwind utility 충돌을 정리한다. Feature 전용 UI는 재사용 가능성을 예상해 미리 `shared`로 올리지 않는다.
+목록과 지도 선택은 같은 Facility ID를 사용한다. 긴 목록은 `@tanstack/react-virtual`로 화면에 필요한 행만 렌더링한다.
 
 ## User Location
 
-`navigator.geolocation.getCurrentPosition()`으로 사용자가 버튼을 누른 경우에만 브라우저 위치를 얻는다. 사용자 위치는 애플리케이션의 React State에서 관리하며, 신월동 안전지도의 자체 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스에 저장하거나 전송하지 않는다. NAVER Maps SDK 등 외부 서비스 제공자의 처리까지 단정하지 않는다. 위치가 있으면 Haversine 직선거리를 derived result에 계산해 목록을 거리순으로 정렬한다. NAVER 사용자 Marker와 accuracy Circle은 Safety Map Hook이 소유하며 React/Zustand State에는 넣지 않는다.
+사용자가 현재 위치 버튼을 누르고 Browser 권한을 허용한 경우에만 `navigator.geolocation.getCurrentPosition()`을 호출한다. `latitude`, `longitude`, `accuracy`는 현재 페이지의 React State에서 지도 이동, User Location Overlay와 시설까지의 직선거리 계산에 사용한다.
 
-## Update Architecture
+애플리케이션은 위치를 자체 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스에 저장하거나 전송하지 않는다. Browser, NAVER Maps SDK와 Hosting provider의 처리까지 이 Repository가 보장하는 것으로 표현하지 않는다.
 
-Hybrid Snapshot Strategy를 사용한다.
+## Service Information Routes
 
-- Fire Water: 공식 최신 XLSX Snapshot을 명시적으로 갱신
-- Shelter: 서울 Open Data API Snapshot, GitHub Actions Daily Sync
-- AED: 국립중앙의료원 API Snapshot. 미검토 이동형 후보만 Tracked Pending 목록에 보류하고 나머지는 GitHub Actions Daily Sync로 Publish
-- Other: Source별 독립 ETL 결과를 하나의 `other.json`으로 병합. 현재 119 조직은 공식 API를 사용하는 수동 Snapshot
+`/info`는 Commit된 `public/data/metadata.json`을 기존 Schema로 검증해 시설 수와 Source별 날짜를 정적 Server Component로 표시한다. `/privacy`는 현재 코드에서 확인되는 위치 처리, 외부 서비스와 분석 도구 사용 여부만 안내하며 Runtime Data를 추가로 요청하지 않는다.
 
-시설 데이터가 바뀌지 않으면 Published JSON과 Metadata를 갱신하거나 Commit하지 않는다. Metadata의 `fetchedAt`과 `generatedAt`은 현재 Published Snapshot을 만든 시점을 의미하며, 변경 없는 동기화 시도는 GitHub Actions 실행 기록으로 남긴다.
-
-각 Source ETL은 기존 `metadata.json`을 읽고 자신의 Source 항목만 갱신한다. 다른 Source의 count와 시각 정보는 그대로 보존한다. File 기반 Source는 가능한 경우 SHA-256을 기록해 Published Snapshot과 원본의 연관성을 확인할 수 있게 한다.
-
-OTHER는 상위 Category 하나를 유지하면서 내부 Variant를 subtype과 Source별 ID namespace로 구분한다. Source ETL은 자신이 소유한 prefix의 행만 교체하고 다른 OTHER 행을 보존한다. Source별 요약은 `metadata.sources.other.datasets`에 두며, 전체 count는 병합된 `other.json`과 일치시킨다.
-
-일반 CI는 외부 API Key 없이 Commit된 Published Snapshot, TypeScript, Lint와 Build를 검증한다. 정기 동기화는 GitHub Repository Secrets로 Shelter와 AED만 갱신하고, 검증을 통과한 허용 목록의 Data File에 실제 변경이 있을 때만 `GITHUB_TOKEN`으로 Commit한다. 동기화 실패 시 기존 정상 Snapshot은 Repository에 그대로 유지된다.
-
-## Deployment
+## Deployment and Automation
 
 - Frontend: Vercel
-- Automation: GitHub Actions
 - Repository: GitHub
-- Branches: `main`과 `feature/*`; `develop`은 사용하지 않음
+- Branches: `main`, `feature/*`
+- CI: `.github/workflows/ci.yml`에서 Published Data Test, Verify, TypeScript, Lint, Build 실행
+- Scheduled Sync: `.github/workflows/sync-public-data.yml`에서 Shelter와 AED Snapshot 갱신
+
+정기 동기화가 실패하면 기존 Repository Snapshot을 유지한다. Fire Water와 Fire Organization Snapshot은 수동 갱신 대상이다.
