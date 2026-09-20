@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import type { CurrentLocationStatus } from "@/features/current-location/types/user-location";
 
 interface CurrentLocationFeedbackProps {
@@ -15,8 +17,21 @@ export function CurrentLocationFeedback({
   status,
 }: CurrentLocationFeedbackProps) {
   const message = FEEDBACK[status];
+  const [isVisible, setIsVisible] = useState(true);
 
-  if (message === undefined) {
+  useEffect(() => {
+    if (message === undefined) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setIsVisible(false);
+    }, 5_000);
+
+    return () => window.clearTimeout(timeout);
+  }, [message]);
+
+  if (message === undefined || !isVisible) {
     return null;
   }
 

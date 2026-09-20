@@ -174,7 +174,10 @@ export function SafetyMap() {
         locationControl={
           interactionsReady ? (
             <div className="flex flex-col items-end gap-2">
-              <CurrentLocationFeedback status={currentLocation.status} />
+              <CurrentLocationFeedback
+                key={currentLocation.status}
+                status={currentLocation.status}
+              />
               <CurrentLocationButton
                 status={currentLocation.status}
                 onRequest={currentLocation.requestLocation}

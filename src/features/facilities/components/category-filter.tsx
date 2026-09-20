@@ -102,7 +102,7 @@ export function CategoryFilter({ className }: CategoryFilterProps) {
       {canScrollRight ? (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-8 bg-gradient-to-l from-white/95 via-white/55 to-transparent lg:hidden"
+          className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-white/95 via-white/55 to-transparent lg:hidden"
         />
       ) : null}
       <span id="category-filter-hint" className="sr-only">
