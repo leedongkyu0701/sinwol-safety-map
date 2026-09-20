@@ -11,6 +11,9 @@ Browser
 → Vercel
 → Next.js Static Assets
 → public/data/*.json
+→ Runtime Zod Validation
+→ Facility[]
+→ NAVER Marker Layer
 → NAVER Dynamic Map
 ```
 
@@ -56,6 +59,8 @@ SafetyMap Feature
 ```
 
 SDK script는 Application Runtime에서 재사용하고 Map instance, ResizeObserver, Component listener는 mount 단위로 정리한다. 초기 범위에서는 Geocoding, Reverse Geocoding, Directions, Static Map을 사용하지 않는다.
+
+`features/facilities`는 네 Published JSON을 병렬로 읽고 기존 Shared Zod Schema와 전역 Facility ID를 검증한다. Dataset 하나라도 실패하면 전체 Runtime load를 실패시킨다. `features/safety-map`은 검증된 `Facility[]`만 받아 NAVER Marker lifecycle을 관리하며 JSON Source 구조를 알지 않는다. Marker는 `facility.id`를 Registry identity로 사용하고 cleanup 시 `setMap(null)`로 모두 제거한다.
 
 ## Frontend Structure
 

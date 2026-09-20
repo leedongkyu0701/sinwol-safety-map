@@ -1,3 +1,5 @@
+/// <reference types="navermaps" />
+
 export {};
 
 declare global {
