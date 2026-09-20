@@ -17,7 +17,7 @@ export function SafetyMapHeader({
         <h1 className="text-xl font-extrabold tracking-tight text-zinc-950">
           신월동 안전지도
         </h1>
-        <InfoIcon />
+        <InfoIcon className="size-10 rounded-md border-0 bg-transparent text-zinc-700 shadow-none hover:bg-zinc-100 hover:text-zinc-950" />
       </header>
     );
   }

@@ -65,8 +65,8 @@ export function ServiceInfoContent() {
                       const category = FACILITY_CATEGORY_CONFIG[source.category];
 
                       return (
-                    <div
-                      key={source.category}
+                        <div
+                          key={source.category}
                           className="grid min-h-16 min-w-0 w-full max-w-full grid-cols-[2.25rem_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3"
                         >
                           <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-zinc-100">
@@ -127,56 +127,55 @@ export function ServiceInfoContent() {
               </div>
 
               <div className="min-w-0 space-y-6">
-                <InfoSection title="이용 시 참고사항">
-                  <ul className="min-w-0 w-full max-w-full space-y-3 rounded-xl border border-zinc-200 p-4 text-sm leading-6 text-zinc-600">
-                    <li className="flex gap-2.5">
-                      <Bullet />
-                      <span>
-                        공공데이터의 갱신 시점에 따라 시설 위치, 명칭 또는 운영
-                        상태가 실제와 다를 수 있습니다.
-                      </span>
-                    </li>
-                    <li className="flex gap-2.5">
-                      <Bullet />
-                      <span>
-                        대피시설은 원천 데이터에서 사용중으로 확인된 시설을
-                        기준으로 표시합니다.
-                      </span>
-                    </li>
-                    <li className="flex gap-2.5">
-                      <Bullet />
-                      <span>
-                        AED의 위치와 운영시간은 참고용이며, 실제 이용 가능
-                        여부는 현장 또는 관리기관의 안내를 확인해야 합니다.
-                      </span>
-                    </li>
-                    <li className="flex gap-2.5">
-                      <Bullet />
-                      <span>
-                        이 서비스는 신고·출동 접수를 제공하지 않습니다. 긴급
-                        상황에서는 119와 관계기관의 최신 안내를 이용하세요.
-                      </span>
-                    </li>
-                  </ul>
-                </InfoSection>
-
                 <InfoSection
-                  title="현재 위치 기능"
-                  description="현재 위치 기능은 선택 사항이며, 권한을 허용하지 않아도 지도와 시설 검색을 이용할 수 있습니다."
+                  title="이용 안내"
+                  description="공공데이터의 성격과 서비스 이용 시 확인할 사항을 안내합니다."
                 >
-                  <div className="min-w-0 w-full max-w-full rounded-xl border border-zinc-200 p-4 text-sm leading-6 text-zinc-600">
-                    <p>
-                      현재 위치 버튼을 눌러 브라우저의 위치 권한을 허용한 경우에만
-                      위치 기능이 실행됩니다.
-                    </p>
-                    <p className="mt-3">
-                      확인된 위치는 현재 지도 중심을 이동하고 시설까지의 직선거리를
-                      계산하는 데 사용됩니다. 위치 권한과 정확도는 브라우저 및
-                      운영체제 설정에 따라 달라질 수 있습니다.
-                    </p>
+                  <div className="min-w-0 w-full max-w-full divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
+                    <PolicyRow title="데이터 최신성">
+                      공공데이터의 갱신 시점에 따라 시설 위치, 명칭 또는 운영 상태가
+                      실제와 다를 수 있습니다.
+                    </PolicyRow>
+                    <PolicyRow title="시설 기준">
+                      대피시설은 원천 데이터에서 사용중으로 확인된 시설을 기준으로
+                      표시하며, AED의 위치와 운영시간은 참고용으로 제공합니다.
+                    </PolicyRow>
+                    <PolicyRow title="긴급 상황">
+                      이 서비스는 신고·출동 접수를 제공하지 않습니다. 긴급 상황에서는
+                      119와 관계기관의 최신 안내를 이용하세요.
+                    </PolicyRow>
                   </div>
                 </InfoSection>
 
+                <InfoSection
+                  title="위치정보 이용 안내"
+                  description="현재 위치 기능은 선택 사항이며, 권한을 허용하지 않아도 지도와 시설 검색을 이용할 수 있습니다."
+                >
+                  <div className="min-w-0 w-full max-w-full divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
+                    <PolicyRow title="사용 시점">
+                      사용자가 현재 위치 버튼을 누르고 브라우저의 위치 권한을 허용한
+                      경우에만 위치 좌표를 가져옵니다.
+                    </PolicyRow>
+                    <PolicyRow title="이용 목적">
+                      확인된 위치는 지도 중심을 이동하고 시설까지의 직선거리를
+                      계산하는 데 사용합니다.
+                    </PolicyRow>
+                    <PolicyRow title="앱 내 처리">
+                      이 서비스 애플리케이션은 위치 좌표를 자체 서버나 브라우저
+                      저장소에 보관하지 않고, 현재 페이지의 기능 수행을 위해
+                      메모리에서만 사용합니다.
+                    </PolicyRow>
+                    <PolicyRow title="권한 관리">
+                      위치 권한과 정확도는 브라우저 및 운영체제 설정에 따라 달라질 수
+                      있으며, 권한은 기기 또는 브라우저 설정에서 변경할 수 있습니다.
+                    </PolicyRow>
+                  </div>
+                  <p className="mt-3 text-xs leading-5 text-zinc-500">
+                    위 안내는 이 서비스 애플리케이션의 현재 기능을 기준으로 합니다.
+                    브라우저, 지도 SDK, 호스팅 등 외부 서비스의 처리에는 각 제공자의
+                    정책이 적용될 수 있습니다.
+                  </p>
+                </InfoSection>
               </div>
             </div>
           </div>
@@ -263,12 +262,18 @@ function SummaryCard({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Bullet() {
+function PolicyRow({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
   return (
-    <span
-      aria-hidden="true"
-      className="mt-2 size-1.5 shrink-0 rounded-full bg-zinc-950"
-    />
+    <div className="grid gap-2 px-4 py-4 sm:grid-cols-[7rem_minmax(0,1fr)] sm:items-start sm:gap-5">
+      <h3 className="text-sm font-bold text-zinc-900">{title}</h3>
+      <p className="min-w-0 text-sm leading-6 text-zinc-600">{children}</p>
+    </div>
   );
 }
 
