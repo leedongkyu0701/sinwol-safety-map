@@ -1,6 +1,7 @@
 import { useEffect, type RefObject } from "react";
 
 import type { UserLocation } from "@/features/current-location/types/user-location";
+import { MAP_OVERLAY_Z_INDEX } from "@/features/safety-map/config/map-overlay-config";
 
 interface UseUserLocationOverlayOptions {
   mapRef: RefObject<naver.maps.Map | null>;
@@ -40,13 +41,13 @@ export function useUserLocationOverlay({
       fillColor: "#1683ff",
       fillOpacity: 0.14,
       clickable: false,
-      zIndex: 50,
+      zIndex: MAP_OVERLAY_Z_INDEX.accuracyCircle,
     });
     const locationMarker = new naver.maps.Marker({
       map,
       position,
       clickable: false,
-      zIndex: 100,
+      zIndex: MAP_OVERLAY_Z_INDEX.currentLocationMarker,
       icon: {
         url: "/icons/map/current-location.svg",
         size: new naver.maps.Size(

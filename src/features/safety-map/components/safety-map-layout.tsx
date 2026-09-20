@@ -34,7 +34,7 @@ export function SafetyMapLayout({
             {mapCanvas}
           </div>
           <div className="pointer-events-none absolute inset-x-0 top-[5.5rem] z-20 px-3 pt-3 lg:top-0">
-            <div className="pointer-events-auto max-w-[calc(100%-3.5rem)]">
+            <div className="pointer-events-auto max-w-[calc(100%-1rem)] lg:max-w-full">
               {categoryFilter}
             </div>
           </div>

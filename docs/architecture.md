@@ -68,7 +68,7 @@ Desktop은 고정 Header 아래 Sidebar와 Map을 나란히 배치한다. Mobile
 
 Safety Map Header는 Desktop과 Mobile 레이아웃을 같은 Feature Component에서 분기한다. Desktop은 제목과 `/info` 서비스 정보 링크를 상단에 두고, Mobile은 지도 위 floating card 안에 제목·compact 검색·서비스 정보 링크를 배치한다. 정보 페이지는 Commit된 `metadata.json`을 서버에서 검증해 제공 시설 수와 Source별 갱신일을 표시한다.
 
-지도에서 결과에 포함된 시설 Marker는 `FacilityMarkerManager`가 생성한 Registry를 재사용하고, `FacilityClusterController`가 현재 결과 Marker만 격자 기반으로 클러스터링해 지도에 붙인다. Filter와 Search는 Facility Marker를 재생성하지 않고 Cluster presentation만 갱신한다. User Location Overlay는 시설 Cluster와 독립적이다. 긴 Facility List는 `@tanstack/react-virtual`로 보이는 행만 렌더링하며 결과 데이터 자체를 제한하지 않는다.
+지도에서 결과에 포함된 시설 Marker는 `FacilityMarkerManager`가 생성한 Registry를 재사용하고, `FacilityClusterController`가 현재 Map viewport 안의 결과 Marker만 격자 기반으로 클러스터링해 지도에 붙인다. 중간 줌에서 밀도 요약이 유지되도록 줌 단계별 격자 정책을 적용하며, Cluster HTML icon과 크기 정책은 별도 Factory가 담당한다. Filter와 Search는 Facility Marker를 재생성하지 않고 Cluster presentation만 갱신한다. User Location Overlay는 시설 Cluster와 독립적인 z-index 계층을 사용한다. 긴 Facility List는 `@tanstack/react-virtual`로 보이는 행만 렌더링하고 Facility ID를 stable key로 사용하며, 결과 집합이 바뀌면 목록을 상단으로 되돌린다.
 
 `/info`는 외부 API를 호출하지 않는 Server Component Route다. `public/data/metadata.json`을 기존 Metadata Schema로 검증하고, `FACILITY_CATEGORY_CONFIG`와 Source 링크 설정을 이용해 동적 count/date와 데이터·위치정보 이용 안내를 정적 HTML로 렌더링한다.
 

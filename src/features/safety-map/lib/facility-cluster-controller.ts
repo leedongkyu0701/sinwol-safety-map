@@ -1,4 +1,9 @@
-import { FACILITY_CLUSTER_CONFIG } from "@/features/safety-map/config/cluster-config";
+import {
+  FACILITY_CLUSTER_CONFIG,
+  getFacilityClusterGridSize,
+} from "@/features/safety-map/config/cluster-config";
+import { MAP_OVERLAY_Z_INDEX } from "@/features/safety-map/config/map-overlay-config";
+import { createFacilityClusterIcon } from "@/features/safety-map/lib/create-facility-cluster-icon";
 
 /**
  * This controller follows the grid-based presentation approach from
@@ -40,23 +45,26 @@ export class FacilityClusterController {
   private redraw(): void {
     this.clearPresentation();
 
-    if (this.markers.length === 0) {
+    const viewportMarkers = this.getViewportMarkers();
+
+    if (viewportMarkers.length === 0) {
       return;
     }
 
     if (this.map.getZoom() >= this.config.maxZoom) {
-      this.markers.forEach((marker) => marker.setMap(this.map));
+      viewportMarkers.forEach((marker) => marker.setMap(this.map));
       return;
     }
 
     const projection = this.map.getProjection();
     const buckets = new Map<string, naver.maps.Marker[]>();
+    const gridSize = getFacilityClusterGridSize(this.map.getZoom());
 
-    for (const marker of this.markers) {
+    for (const marker of viewportMarkers) {
       const position = marker.getPosition() as naver.maps.LatLng;
       const offset = projection.fromCoordToOffset(position);
-      const bucketX = Math.floor(offset.x / this.config.gridSize);
-      const bucketY = Math.floor(offset.y / this.config.gridSize);
+      const bucketX = Math.floor(offset.x / gridSize);
+      const bucketY = Math.floor(offset.y / gridSize);
       const key = `${bucketX}:${bucketY}`;
       const bucket = buckets.get(key);
 
@@ -78,14 +86,10 @@ export class FacilityClusterController {
       const clusterMarker = new naver.maps.Marker({
         map: this.map,
         position: center,
-        icon: {
-          content: this.createClusterContent(bucket.length),
-          size: this.getClusterSize(bucket.length),
-          anchor: this.getClusterAnchor(bucket.length),
-        },
+        icon: createFacilityClusterIcon(bucket.length),
         clickable: true,
         title: `${bucket.length}개 시설 확대`,
-        zIndex: 200,
+        zIndex: MAP_OVERLAY_Z_INDEX.facilityCluster,
       });
       const listener = naver.maps.Event.addListener(
         clusterMarker,
@@ -119,7 +123,17 @@ export class FacilityClusterController {
     }
   }
 
-  private getClusterCenter(markers: readonly naver.maps.Marker[]): naver.maps.LatLng {
+  private getViewportMarkers(): naver.maps.Marker[] {
+    const bounds = this.map.getBounds() as naver.maps.LatLngBounds;
+
+    return this.markers.filter((marker) =>
+      bounds.hasLatLng(marker.getPosition()),
+    );
+  }
+
+  private getClusterCenter(
+    markers: readonly naver.maps.Marker[],
+  ): naver.maps.LatLng {
     let latitude = 0;
     let longitude = 0;
 
@@ -133,33 +147,5 @@ export class FacilityClusterController {
       latitude / markers.length,
       longitude / markers.length,
     );
-  }
-
-  private getClusterSize(count: number): naver.maps.Size {
-    const size = count >= 100 ? 50 : count >= 10 ? 46 : 42;
-    return new naver.maps.Size(size, size);
-  }
-
-  private getClusterAnchor(count: number): naver.maps.Point {
-    const size = count >= 100 ? 50 : count >= 10 ? 46 : 42;
-    return new naver.maps.Point(size / 2, size / 2);
-  }
-
-  private createClusterContent(count: number): HTMLDivElement {
-    const content = document.createElement("div");
-    content.textContent = String(count);
-    content.style.alignItems = "center";
-    content.style.background = "#172554";
-    content.style.border = "3px solid #ffffff";
-    content.style.borderRadius = "9999px";
-    content.style.boxShadow = "0 3px 10px rgba(15, 23, 42, 0.28)";
-    content.style.color = "#ffffff";
-    content.style.display = "flex";
-    content.style.fontSize = count >= 100 ? "15px" : "14px";
-    content.style.fontWeight = "700";
-    content.style.height = "100%";
-    content.style.justifyContent = "center";
-    content.style.width = "100%";
-    return content;
   }
 }
