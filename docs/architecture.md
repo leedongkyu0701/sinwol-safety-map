@@ -66,6 +66,8 @@ Facility Interaction State는 작은 Zustand Store에서 `selectedCategory`, `se
 
 Desktop은 고정 Header 아래 Sidebar와 Map을 나란히 배치한다. Mobile은 지도 위에 항상 peek 상태가 남는 persistent Bottom Sheet를 두며, Sheet snap은 전역 Store가 아닌 presentation-local React State다. Motion은 handle drag와 snap 전환에만 사용하고, 목록 스크롤과 drag 영역을 분리하며 reduced-motion 설정을 존중한다.
 
+Safety Map Header는 Desktop과 Mobile 레이아웃을 같은 Feature Component에서 분기한다. Desktop은 제목과 향후 정보 화면을 위한 시각적 정보 아이콘을 상단에 두고, Mobile은 지도 위 floating card 안에 제목·compact 검색·정보 아이콘을 배치한다. 정보 아이콘은 정보 화면이 실제로 추가될 때 연결할 수 있도록 UI 자산만 먼저 분리하며 현재는 동작하지 않는다.
+
 ## Frontend Structure
 
 - `app`: Route composition과 Next.js의 `not-found`, route error, global error boundary를 담당한다.

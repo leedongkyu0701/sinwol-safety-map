@@ -14,6 +14,7 @@ import { CurrentLocationFeedback } from "@/features/current-location/components/
 import { useCurrentLocation } from "@/features/current-location/hooks/use-current-location";
 import { MapCanvas } from "@/features/safety-map/components/map-canvas";
 import { SafetyMapLayout } from "@/features/safety-map/components/safety-map-layout";
+import { SafetyMapHeader } from "@/features/safety-map/components/safety-map-header";
 import {
   SafetyMapStatusOverlay,
   type SafetyMapStatus,
@@ -139,11 +140,18 @@ export function SafetyMap() {
       className="relative h-full w-full overflow-hidden bg-zinc-100"
     >
       <SafetyMapLayout
-        mobileSearch={
+        desktopHeader={<SafetyMapHeader variant="desktop" />}
+        mobileHeader={
           interactionsReady && !isDesktop ? (
-            <FacilitySearch
-              inputId="facility-search-mobile"
-              onSearchStart={() => setMobileSheetSnap("expanded")}
+            <SafetyMapHeader
+              mobileSearch={
+                <FacilitySearch
+                  inputId="facility-search-mobile"
+                  variant="compact"
+                  onSearchStart={() => setMobileSheetSnap("expanded")}
+                />
+              }
+              variant="mobile"
             />
           ) : null
         }
