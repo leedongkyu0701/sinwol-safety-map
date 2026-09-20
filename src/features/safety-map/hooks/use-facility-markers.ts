@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 
 import { FacilityMarkerManager } from "@/features/safety-map/lib/facility-marker-manager";
-import type { Facility } from "@/shared/types/facility";
+import type { Facility, FacilityCategory } from "@/shared/types/facility";
 
 export type FacilityMarkerStatus =
   | "idle"
@@ -13,11 +13,14 @@ interface FacilityMarkerState {
   status: Exclude<FacilityMarkerStatus, "idle">;
   error: Error | null;
   markerCount: number;
+  visibleMarkerCount: number;
 }
 
 interface UseFacilityMarkersOptions {
   mapRef: RefObject<naver.maps.Map | null>;
   facilities: readonly Facility[];
+  visibleCategories: ReadonlySet<FacilityCategory>;
+  onMarkerClick: (facilityId: string) => void;
   enabled: boolean;
 }
 
@@ -25,21 +28,35 @@ interface UseFacilityMarkersResult {
   status: FacilityMarkerStatus;
   error: Error | null;
   markerCount: number;
+  visibleMarkerCount: number;
 }
 
 const INITIAL_STATE: FacilityMarkerState = {
   status: "loading",
   error: null,
   markerCount: 0,
+  visibleMarkerCount: 0,
 };
 
 export function useFacilityMarkers({
   mapRef,
   facilities,
+  visibleCategories,
+  onMarkerClick,
   enabled,
 }: UseFacilityMarkersOptions): UseFacilityMarkersResult {
   const managerRef = useRef<FacilityMarkerManager | null>(null);
+  const onMarkerClickRef = useRef(onMarkerClick);
+  const visibleCategoriesRef = useRef(visibleCategories);
   const [state, setState] = useState<FacilityMarkerState>(INITIAL_STATE);
+
+  useEffect(() => {
+    onMarkerClickRef.current = onMarkerClick;
+  }, [onMarkerClick]);
+
+  useEffect(() => {
+    visibleCategoriesRef.current = visibleCategories;
+  }, [visibleCategories]);
 
   useEffect(() => {
     if (!enabled) {
@@ -57,15 +74,18 @@ export function useFacilityMarkers({
           throw new Error("NAVER Map instance is not available.");
         }
 
-        manager = new FacilityMarkerManager(map);
+        manager = new FacilityMarkerManager(map, (facilityId) => {
+          onMarkerClickRef.current(facilityId);
+        });
         managerRef.current = manager;
-        manager.mount(facilities);
+        manager.mount(facilities, visibleCategoriesRef.current);
 
         if (active) {
           setState({
             status: "ready",
             error: null,
             markerCount: manager.size,
+            visibleMarkerCount: manager.visibleSize,
           });
         }
       } catch (error) {
@@ -83,7 +103,12 @@ export function useFacilityMarkers({
         );
 
         if (active) {
-          setState({ status: "error", error: markerError, markerCount: 0 });
+          setState({
+            status: "error",
+            error: markerError,
+            markerCount: 0,
+            visibleMarkerCount: 0,
+          });
         }
       }
     });
@@ -99,8 +124,56 @@ export function useFacilityMarkers({
     };
   }, [enabled, facilities, mapRef]);
 
+  useEffect(() => {
+    if (!enabled || state.status !== "ready") {
+      return;
+    }
+
+    const manager = managerRef.current;
+
+    if (manager === null) {
+      return;
+    }
+
+    try {
+      const visibleMarkerCount = manager.setVisibleCategories(
+        visibleCategories,
+      );
+
+      setState((current) =>
+        current.visibleMarkerCount === visibleMarkerCount
+          ? current
+          : { ...current, visibleMarkerCount },
+      );
+    } catch (error) {
+      manager.destroy();
+      managerRef.current = null;
+
+      const markerError =
+        error instanceof Error
+          ? error
+          : new Error("Unknown facility marker visibility error.");
+
+      console.error(
+        "[SafetyMap] Facility marker visibility update failed.",
+        markerError,
+      );
+      setState({
+        status: "error",
+        error: markerError,
+        markerCount: 0,
+        visibleMarkerCount: 0,
+      });
+    }
+  }, [enabled, state.status, visibleCategories]);
+
   if (!enabled) {
-    return { status: "idle", error: null, markerCount: 0 };
+    return {
+      status: "idle",
+      error: null,
+      markerCount: 0,
+      visibleMarkerCount: 0,
+    };
   }
 
   return state;

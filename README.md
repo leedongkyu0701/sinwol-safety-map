@@ -9,6 +9,7 @@
 - TypeScript 5
 - Tailwind CSS 4
 - Zod 4
+- Zustand 5
 - SheetJS 0.20.3
 - fast-xml-parser 5
 - proj4 2 (ETL 전용)
