@@ -66,7 +66,11 @@ Facility Interaction State는 작은 Zustand Store에서 `selectedCategory`, `se
 
 Desktop은 고정 Header 아래 Sidebar와 Map을 나란히 배치한다. Mobile은 지도 위에 항상 peek 상태가 남는 persistent Bottom Sheet를 두며, Sheet snap은 전역 Store가 아닌 presentation-local React State다. Motion은 handle drag와 snap 전환에만 사용하고, 목록 스크롤과 drag 영역을 분리하며 reduced-motion 설정을 존중한다.
 
-Safety Map Header는 Desktop과 Mobile 레이아웃을 같은 Feature Component에서 분기한다. Desktop은 제목과 향후 정보 화면을 위한 시각적 정보 아이콘을 상단에 두고, Mobile은 지도 위 floating card 안에 제목·compact 검색·정보 아이콘을 배치한다. 정보 아이콘은 정보 화면이 실제로 추가될 때 연결할 수 있도록 UI 자산만 먼저 분리하며 현재는 동작하지 않는다.
+Safety Map Header는 Desktop과 Mobile 레이아웃을 같은 Feature Component에서 분기한다. Desktop은 제목과 `/info` 서비스 정보 링크를 상단에 두고, Mobile은 지도 위 floating card 안에 제목·compact 검색·서비스 정보 링크를 배치한다. 정보 페이지는 Commit된 `metadata.json`을 서버에서 검증해 제공 시설 수와 Source별 갱신일을 표시한다.
+
+지도에서 결과에 포함된 시설 Marker는 `FacilityMarkerManager`가 생성한 Registry를 재사용하고, `FacilityClusterController`가 현재 결과 Marker만 격자 기반으로 클러스터링해 지도에 붙인다. Filter와 Search는 Facility Marker를 재생성하지 않고 Cluster presentation만 갱신한다. User Location Overlay는 시설 Cluster와 독립적이다. 긴 Facility List는 `@tanstack/react-virtual`로 보이는 행만 렌더링하며 결과 데이터 자체를 제한하지 않는다.
+
+`/info`는 외부 API를 호출하지 않는 Server Component Route다. `public/data/metadata.json`을 기존 Metadata Schema로 검증하고, `FACILITY_CATEGORY_CONFIG`와 Source 링크 설정을 이용해 동적 count/date와 데이터·위치정보 이용 안내를 정적 HTML로 렌더링한다.
 
 ## Frontend Structure
 

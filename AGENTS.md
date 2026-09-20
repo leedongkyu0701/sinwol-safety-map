@@ -32,6 +32,9 @@ Inspect → Plan → Modify → Validate → Report
 - 초기 범위에서 Database, Express, NestJS, Redis, TanStack Query, Axios 또는 지도 Wrapper를 추가하지 않는다.
 - Zustand는 여러 UI Component가 공유하는 최소 Interaction State에만 사용한다. Published Facility Data, NAVER Map/Marker 객체, Server Data Cache를 Store에 넣지 않으며 persist middleware를 사용하지 않는다.
 - Motion은 드래그와 전환 같은 UI 표현에만 사용한다. Domain/Data State를 Motion 값에 저장하지 않고 prefers-reduced-motion을 존중한다.
+- Facility Marker clustering은 `features/safety-map`의 imperative presentation layer가 소유하며, 결과 Facility ID와 기존 Marker Registry를 재사용한다. User Location Overlay는 Facility Cluster에 포함하지 않는다.
+- `@tanstack/react-virtual`은 Facility 결과를 제한하지 않는 DOM rendering 최적화로만 사용한다. Virtualizer에 검색 결과나 UI 상태를 저장하지 않는다.
+- `/info`의 시설 수와 날짜는 `public/data/metadata.json`을 기존 Schema로 검증해 derive하며 JSX에 Snapshot 값을 hard-code하지 않는다.
 - ETL은 `scripts/data`에서 실행하고, 검증을 통과한 최소 필드만 `public/data`에 Publish한다.
 - 검증 실패 시 기존 정상 Snapshot을 유지한다.
 
