@@ -62,7 +62,9 @@ SDK script는 Application Runtime에서 재사용하고 Map instance, ResizeObse
 
 `features/facilities`는 네 Published JSON을 병렬로 읽고 기존 Shared Zod Schema와 전역 Facility ID를 검증한다. Dataset 하나라도 실패하면 전체 Runtime load를 실패시킨다. `features/safety-map`은 검증된 `Facility[]`만 받아 NAVER Marker lifecycle을 관리하며 JSON Source 구조를 알지 않는다. Marker는 `facility.id`를 Registry identity로 사용하고 cleanup 시 `setMap(null)`로 모두 제거한다.
 
-Facility Interaction State는 작은 Zustand Store에서 `selectedCategory`와 `selectedFacilityId`만 관리한다. Published `Facility[]`, NAVER Map/Marker 객체와 Runtime load 상태는 Store에 넣지 않는다. Category Filter는 기존 Marker Registry의 `setMap()`만 갱신하므로 JSON을 다시 요청하거나 Marker를 재생성하지 않는다. Marker click은 Facility ID만 React 영역으로 전달하고, 기존 `Facility[]`에서 선택 시설을 derive해 React Detail Panel로 표시한다.
+Facility Interaction State는 작은 Zustand Store에서 `selectedCategory`, `searchQuery`, `selectedFacilityId`만 관리한다. Published `Facility[]`, 검색 결과, 사용자 위치, NAVER Map/Marker 객체와 Runtime load 상태는 Store에 넣지 않는다. Category와 검색어는 하나의 derived Facility Result pipeline에서 목록과 visible Facility ID Set으로 변환된다. Marker Registry는 이 ID Set에 따라 기존 Marker의 `setMap()`만 갱신하므로 JSON을 다시 요청하거나 Marker를 재생성하지 않는다. Marker와 목록 선택은 동일한 Facility ID를 React 영역으로 전달하고, 기존 `Facility[]`에서 선택 시설을 derive해 Desktop Sidebar 또는 Mobile Sheet에서 표시한다.
+
+Desktop은 고정 Header 아래 Sidebar와 Map을 나란히 배치한다. Mobile은 지도 위에 항상 peek 상태가 남는 persistent Bottom Sheet를 두며, Sheet snap은 전역 Store가 아닌 presentation-local React State다. Motion은 handle drag와 snap 전환에만 사용하고, 목록 스크롤과 drag 영역을 분리하며 reduced-motion 설정을 존중한다.
 
 ## Frontend Structure
 
@@ -74,7 +76,7 @@ Facility Interaction State는 작은 Zustand Store에서 `selectedCategory`와 `
 
 ## User Location
 
-`navigator.geolocation`으로 브라우저에서만 위치를 얻는다. GPS는 페이지 세션의 React State에만 두고 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스로 전송하거나 저장하지 않는다.
+`navigator.geolocation.getCurrentPosition()`으로 사용자가 버튼을 누른 경우에만 브라우저 위치를 얻는다. GPS는 페이지 세션의 React State에만 두고 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스로 전송하거나 저장하지 않는다. 위치가 있으면 Haversine 직선거리를 derived result에 계산해 목록을 거리순으로 정렬한다. NAVER 사용자 Marker와 accuracy Circle은 Safety Map Hook이 소유하며 React/Zustand State에는 넣지 않는다.
 
 ## Update Architecture
 

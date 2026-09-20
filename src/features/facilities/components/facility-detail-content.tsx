@@ -14,7 +14,7 @@ export function FacilityDetailContent({
 
   return (
     <div className="space-y-5">
-      <header className="flex items-start gap-3 pr-10">
+      <header className="flex items-start gap-3">
         <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-zinc-100">
           <Image
             src={detail.iconPath}
