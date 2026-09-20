@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
 import { FacilityListItem } from "@/features/facilities/components/facility-list-item";
@@ -20,14 +20,22 @@ export function FacilityList({
   onSelect,
 }: FacilityListProps) {
   const scrollElementRef = useRef<HTMLDivElement>(null);
+  const getItemKey = useCallback(
+    (index: number) => results[index]?.facility.id ?? index,
+    [results],
+  );
   // TanStack Virtual exposes an imperative virtualizer API by design.
   // eslint-disable-next-line react-hooks/incompatible-library
   const rowVirtualizer = useVirtualizer({
     count: results.length,
     getScrollElement: () => scrollElementRef.current,
     estimateSize: () => 116,
+    getItemKey,
     overscan: 6,
   });
+  useEffect(() => {
+    rowVirtualizer.scrollToOffset(0);
+  }, [results, rowVirtualizer]);
   const hasSearchQuery = searchQuery.trim() !== "";
   const title = hasSearchQuery
     ? `검색 결과 ${results.length.toLocaleString("ko-KR")}곳`
