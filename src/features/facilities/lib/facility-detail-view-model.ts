@@ -22,7 +22,7 @@ export interface FacilityDetailViewModel {
   title: string;
   categoryLabel: string;
   iconPath: string;
-  subtypeLabel: string;
+  subtypeLabel?: string;
   address: string;
   rows: FacilityDetailRow[];
   operatingHours: FacilityOperatingHourRow[];
@@ -62,12 +62,17 @@ export function createFacilityDetailViewModel(
   facility: Facility,
 ): FacilityDetailViewModel {
   const rows: FacilityDetailRow[] = [];
-  let subtypeLabel: string;
+  let subtypeLabel: string | undefined;
   let operatingHours: FacilityOperatingHourRow[] = [];
 
   switch (facility.category) {
     case "FIRE_WATER":
       subtypeLabel = FIRE_WATER_SUBTYPE_LABELS[facility.subtype];
+
+      if (subtypeLabel === facility.name) {
+        subtypeLabel = undefined;
+      }
+
       addOptionalRow(rows, "상세 위치", facility.detailLocation);
       addOptionalRow(rows, "설치연도", facility.details.installedYear);
       addOptionalRow(rows, "출수압력", facility.details.pressure);

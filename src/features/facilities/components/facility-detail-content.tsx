@@ -31,7 +31,11 @@ export function FacilityDetailContent({
           <h2 className="mt-1 break-keep text-lg font-bold leading-snug text-zinc-950">
             {detail.title}
           </h2>
-          <p className="mt-1 text-sm text-zinc-600">{detail.subtypeLabel}</p>
+          {detail.subtypeLabel === undefined ? null : (
+            <p className="mt-1 text-sm text-zinc-600">
+              {detail.subtypeLabel}
+            </p>
+          )}
         </div>
       </header>
 
