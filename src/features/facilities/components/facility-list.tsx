@@ -1,0 +1,55 @@
+import { FacilityListItem } from "@/features/facilities/components/facility-list-item";
+import type { FacilityResult } from "@/features/facilities/types/facility-result";
+
+interface FacilityListProps {
+  results: readonly FacilityResult[];
+  searchQuery: string;
+  hasLocation: boolean;
+  onSelect: (facilityId: string) => void;
+}
+
+export function FacilityList({
+  results,
+  searchQuery,
+  hasLocation,
+  onSelect,
+}: FacilityListProps) {
+  const hasSearchQuery = searchQuery.trim() !== "";
+  const title = hasSearchQuery
+    ? `검색 결과 ${results.length.toLocaleString("ko-KR")}곳`
+    : hasLocation
+      ? `주변 안전시설 ${results.length.toLocaleString("ko-KR")}곳`
+      : `안전시설 ${results.length.toLocaleString("ko-KR")}곳`;
+
+  return (
+    <section className="flex min-h-0 flex-1 flex-col" aria-label={title}>
+      <header className="flex h-14 shrink-0 items-center justify-between border-b border-zinc-200 px-4">
+        <h2 className="text-base font-bold text-zinc-950">{title}</h2>
+        {hasLocation ? (
+          <span className="text-xs font-medium text-zinc-500">
+            거리순 · 직선거리
+          </span>
+        ) : null}
+      </header>
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+        {results.length === 0 ? (
+          <div className="grid min-h-40 place-items-center px-6 text-center">
+            <p className="text-sm leading-6 text-zinc-600">
+              조건에 맞는 안전시설이 없습니다.
+            </p>
+          </div>
+        ) : (
+          <ul className="divide-y divide-zinc-100">
+            {results.map((result) => (
+              <FacilityListItem
+                key={result.facility.id}
+                result={result}
+                onSelect={onSelect}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  );
+}

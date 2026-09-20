@@ -17,13 +17,26 @@ const INITIAL_STATE: FacilityDataState = {
   error: null,
 };
 
+let facilityRequest: Promise<Facility[]> | null = null;
+
+function getFacilityRequest(): Promise<Facility[]> {
+  if (facilityRequest === null) {
+    facilityRequest = loadFacilities().catch((error: unknown) => {
+      facilityRequest = null;
+      throw error;
+    });
+  }
+
+  return facilityRequest;
+}
+
 export function useFacilities(): FacilityDataState {
   const [state, setState] = useState<FacilityDataState>(INITIAL_STATE);
 
   useEffect(() => {
     const controller = new AbortController();
 
-    void loadFacilities(controller.signal)
+    void getFacilityRequest()
       .then((facilities) => {
         if (!controller.signal.aborted) {
           setState({ facilities, status: "ready", error: null });

@@ -99,7 +99,7 @@ export function useNaverMap(
           zoom: DEFAULT_MAP_ZOOM,
           zoomControl: true,
           zoomControlOptions: {
-            position: naver.maps.Position.TOP_RIGHT,
+            position: naver.maps.Position.RIGHT_CENTER,
           },
         });
 

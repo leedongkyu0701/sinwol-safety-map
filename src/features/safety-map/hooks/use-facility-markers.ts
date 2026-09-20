@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 
 import { FacilityMarkerManager } from "@/features/safety-map/lib/facility-marker-manager";
-import type { Facility, FacilityCategory } from "@/shared/types/facility";
+import type { Facility } from "@/shared/types/facility";
 
 export type FacilityMarkerStatus =
   | "idle"
@@ -19,7 +19,7 @@ interface FacilityMarkerState {
 interface UseFacilityMarkersOptions {
   mapRef: RefObject<naver.maps.Map | null>;
   facilities: readonly Facility[];
-  visibleCategories: ReadonlySet<FacilityCategory>;
+  visibleFacilityIds: ReadonlySet<string>;
   onMarkerClick: (facilityId: string) => void;
   enabled: boolean;
 }
@@ -41,13 +41,13 @@ const INITIAL_STATE: FacilityMarkerState = {
 export function useFacilityMarkers({
   mapRef,
   facilities,
-  visibleCategories,
+  visibleFacilityIds,
   onMarkerClick,
   enabled,
 }: UseFacilityMarkersOptions): UseFacilityMarkersResult {
   const managerRef = useRef<FacilityMarkerManager | null>(null);
   const onMarkerClickRef = useRef(onMarkerClick);
-  const visibleCategoriesRef = useRef(visibleCategories);
+  const visibleFacilityIdsRef = useRef(visibleFacilityIds);
   const [state, setState] = useState<FacilityMarkerState>(INITIAL_STATE);
 
   useEffect(() => {
@@ -55,8 +55,8 @@ export function useFacilityMarkers({
   }, [onMarkerClick]);
 
   useEffect(() => {
-    visibleCategoriesRef.current = visibleCategories;
-  }, [visibleCategories]);
+    visibleFacilityIdsRef.current = visibleFacilityIds;
+  }, [visibleFacilityIds]);
 
   useEffect(() => {
     if (!enabled) {
@@ -78,7 +78,7 @@ export function useFacilityMarkers({
           onMarkerClickRef.current(facilityId);
         });
         managerRef.current = manager;
-        manager.mount(facilities, visibleCategoriesRef.current);
+        manager.mount(facilities, visibleFacilityIdsRef.current);
 
         if (active) {
           setState({
@@ -136,8 +136,8 @@ export function useFacilityMarkers({
     }
 
     try {
-      const visibleMarkerCount = manager.setVisibleCategories(
-        visibleCategories,
+      const visibleMarkerCount = manager.setVisibleFacilityIds(
+        visibleFacilityIds,
       );
 
       setState((current) =>
@@ -165,7 +165,7 @@ export function useFacilityMarkers({
         visibleMarkerCount: 0,
       });
     }
-  }, [enabled, state.status, visibleCategories]);
+  }, [enabled, state.status, visibleFacilityIds]);
 
   if (!enabled) {
     return {

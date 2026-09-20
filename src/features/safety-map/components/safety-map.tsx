@@ -1,19 +1,28 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { CategoryFilter } from "@/features/facilities/components/category-filter";
-import { FacilityDetailPanel } from "@/features/facilities/components/facility-detail-panel";
+import { FacilitySearch } from "@/features/facilities/components/facility-search";
+import { FacilitySidebar } from "@/features/facilities/components/facility-sidebar";
+import { MobileFacilitySheet } from "@/features/facilities/components/mobile-facility-sheet";
 import { useFacilities } from "@/features/facilities/hooks/use-facilities";
+import { useFacilityResults } from "@/features/facilities/hooks/use-facility-results";
 import { useFacilityExplorerStore } from "@/features/facilities/store/use-facility-explorer-store";
-import { getVisibleFacilityCategories } from "@/features/facilities/types/facility-filter";
+import { CurrentLocationButton } from "@/features/current-location/components/current-location-button";
+import { CurrentLocationFeedback } from "@/features/current-location/components/current-location-feedback";
+import { useCurrentLocation } from "@/features/current-location/hooks/use-current-location";
 import { MapCanvas } from "@/features/safety-map/components/map-canvas";
+import { SafetyMapLayout } from "@/features/safety-map/components/safety-map-layout";
 import {
   SafetyMapStatusOverlay,
   type SafetyMapStatus,
 } from "@/features/safety-map/components/safety-map-status-overlay";
 import { useFacilityMarkers } from "@/features/safety-map/hooks/use-facility-markers";
 import { useNaverMap } from "@/features/safety-map/hooks/use-naver-map";
+import { useUserLocationOverlay } from "@/features/safety-map/hooks/use-user-location-overlay";
+import { useMediaQuery } from "@/shared/hooks/use-media-query";
+import type { BottomSheetSnap } from "@/shared/ui/bottom-sheet";
 
 interface SafetyMapDisplayState {
   status: SafetyMapStatus;
@@ -30,13 +39,27 @@ export function SafetyMap() {
   const selectedFacilityId = useFacilityExplorerStore(
     (state) => state.selectedFacilityId,
   );
+  const searchQuery = useFacilityExplorerStore((state) => state.searchQuery);
   const selectFacility = useFacilityExplorerStore(
     (state) => state.selectFacility,
   );
   const clearSelectedFacility = useFacilityExplorerStore(
     (state) => state.clearSelectedFacility,
   );
-  const visibleCategories = getVisibleFacilityCategories(selectedCategory);
+  const currentLocation = useCurrentLocation();
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const [mobileSheetSnap, setMobileSheetSnap] =
+    useState<BottomSheetSnap>("peek");
+  const handleSelectFacility = (facilityId: string) => {
+    selectFacility(facilityId);
+    setMobileSheetSnap("expanded");
+  };
+  const facilityResults = useFacilityResults({
+    facilities: facilityState.facilities,
+    selectedCategory,
+    searchQuery,
+    userLocation: currentLocation.location,
+  });
   const facilityById = useMemo(
     () =>
       new Map(
@@ -54,10 +77,15 @@ export function SafetyMap() {
   const markerState = useFacilityMarkers({
     mapRef: mapState.mapRef,
     facilities: facilityState.facilities,
-    visibleCategories,
-    onMarkerClick: selectFacility,
+    visibleFacilityIds: facilityResults.visibleFacilityIds,
+    onMarkerClick: handleSelectFacility,
     enabled:
       mapState.status === "ready" && facilityState.status === "ready",
+  });
+  useUserLocationOverlay({
+    mapRef: mapState.mapRef,
+    userLocation: currentLocation.location,
+    enabled: mapState.status === "ready",
   });
 
   let displayState: SafetyMapDisplayState;
@@ -106,17 +134,60 @@ export function SafetyMap() {
       data-marker-count={markerState.markerCount}
       data-visible-marker-count={markerState.visibleMarkerCount}
       data-selected-category={selectedCategory}
+      data-search-result-count={facilityResults.results.length}
+      data-current-location-status={currentLocation.status}
       className="relative h-full w-full overflow-hidden bg-zinc-100"
     >
-      <MapCanvas containerRef={containerRef} />
-      {interactionsReady ? <CategoryFilter /> : null}
-      {interactionsReady && selectedFacility !== null ? (
-        <FacilityDetailPanel
-          facility={selectedFacility}
-          onClose={clearSelectedFacility}
-        />
-      ) : null}
-      <SafetyMapStatusOverlay {...displayState} />
+      <SafetyMapLayout
+        mobileSearch={
+          interactionsReady && !isDesktop ? (
+            <FacilitySearch
+              inputId="facility-search-mobile"
+              onSearchStart={() => setMobileSheetSnap("expanded")}
+            />
+          ) : null
+        }
+        sidebar={
+          interactionsReady && isDesktop ? (
+            <FacilitySidebar
+              results={facilityResults.results}
+              searchQuery={searchQuery}
+              hasLocation={facilityResults.hasLocation}
+              selectedFacility={selectedFacility}
+              onSelect={handleSelectFacility}
+              onBack={clearSelectedFacility}
+            />
+          ) : null
+        }
+        mapCanvas={<MapCanvas containerRef={containerRef} />}
+        categoryFilter={interactionsReady ? <CategoryFilter /> : null}
+        locationControl={
+          interactionsReady ? (
+            <div className="flex flex-col items-end gap-2">
+              <CurrentLocationFeedback status={currentLocation.status} />
+              <CurrentLocationButton
+                status={currentLocation.status}
+                onRequest={currentLocation.requestLocation}
+              />
+            </div>
+          ) : null
+        }
+        mobileSheet={
+          interactionsReady && !isDesktop ? (
+            <MobileFacilitySheet
+              results={facilityResults.results}
+              searchQuery={searchQuery}
+              hasLocation={facilityResults.hasLocation}
+              selectedFacility={selectedFacility}
+              onSelect={handleSelectFacility}
+              onBack={clearSelectedFacility}
+              snap={mobileSheetSnap}
+              onSnapChange={setMobileSheetSnap}
+            />
+          ) : null
+        }
+        statusOverlay={<SafetyMapStatusOverlay {...displayState} />}
+      />
     </section>
   );
 }

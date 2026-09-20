@@ -1,5 +1,5 @@
 import { createFacilityMarkerIcons } from "@/features/safety-map/config/marker-config";
-import type { Facility, FacilityCategory } from "@/shared/types/facility";
+import type { Facility } from "@/shared/types/facility";
 
 interface MarkerEntry {
   facility: Facility;
@@ -19,7 +19,7 @@ export class FacilityMarkerManager {
 
   mount(
     facilities: readonly Facility[],
-    visibleCategories: ReadonlySet<FacilityCategory>,
+    visibleFacilityIds: ReadonlySet<string>,
   ): void {
     this.clear();
 
@@ -29,7 +29,7 @@ export class FacilityMarkerManager {
           throw new Error(`Duplicate marker id: ${facility.id}`);
         }
 
-        const visible = visibleCategories.has(facility.category);
+        const visible = visibleFacilityIds.has(facility.id);
         const marker = new naver.maps.Marker({
           map: visible ? this.map : undefined,
           position: new naver.maps.LatLng(
@@ -72,13 +72,11 @@ export class FacilityMarkerManager {
     }
   }
 
-  setVisibleCategories(
-    categories: ReadonlySet<FacilityCategory>,
-  ): number {
+  setVisibleFacilityIds(visibleFacilityIds: ReadonlySet<string>): number {
     let visibleCount = 0;
 
     for (const entry of this.entries.values()) {
-      const shouldBeVisible = categories.has(entry.facility.category);
+      const shouldBeVisible = visibleFacilityIds.has(entry.facility.id);
 
       if (entry.visible !== shouldBeVisible) {
         entry.marker.setMap(shouldBeVisible ? this.map : null);
