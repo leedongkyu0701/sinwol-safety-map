@@ -45,9 +45,20 @@ export function FacilitySidebar({
             variant="secondary"
             size="sm"
             onClick={onBack}
-            className="mb-5 gap-2"
+            className="mb-5 gap-1.5"
           >
-            <span aria-hidden="true">←</span>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="size-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
             목록으로
           </Button>
           <FacilityDetailContent facility={selectedFacility} />

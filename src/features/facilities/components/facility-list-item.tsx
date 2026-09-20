@@ -15,6 +15,8 @@ export function FacilityListItem({
 }: FacilityListItemProps) {
   const { facility, distanceMeters } = result;
   const category = FACILITY_CATEGORY_CONFIG[facility.category];
+  const detailLocationLabel =
+    facility.category === "AED" ? "설치 위치" : "상세 위치";
 
   return (
     <li>
@@ -49,6 +51,15 @@ export function FacilityListItem({
           <span className="mt-1 block break-keep text-sm leading-5 text-zinc-500">
             {facility.address}
           </span>
+          {facility.detailLocation === undefined ? null : (
+            <span className="mt-1 block break-keep text-sm leading-5 text-zinc-500">
+              <span className="font-medium text-zinc-600">
+                {detailLocationLabel}
+              </span>
+              {" · "}
+              {facility.detailLocation}
+            </span>
+          )}
         </span>
       </button>
     </li>
