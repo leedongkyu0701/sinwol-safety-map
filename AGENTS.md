@@ -8,6 +8,7 @@
 
 - `docs/architecture.md`
 - `docs/data-policy.md`
+- `docs/operations.md` (데이터 갱신·검증 작업인 경우)
 
 ## Working Method
 
