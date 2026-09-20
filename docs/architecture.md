@@ -62,6 +62,8 @@ SDK script는 Application Runtime에서 재사용하고 Map instance, ResizeObse
 
 `features/facilities`는 네 Published JSON을 병렬로 읽고 기존 Shared Zod Schema와 전역 Facility ID를 검증한다. Dataset 하나라도 실패하면 전체 Runtime load를 실패시킨다. `features/safety-map`은 검증된 `Facility[]`만 받아 NAVER Marker lifecycle을 관리하며 JSON Source 구조를 알지 않는다. Marker는 `facility.id`를 Registry identity로 사용하고 cleanup 시 `setMap(null)`로 모두 제거한다.
 
+Facility Interaction State는 작은 Zustand Store에서 `selectedCategory`와 `selectedFacilityId`만 관리한다. Published `Facility[]`, NAVER Map/Marker 객체와 Runtime load 상태는 Store에 넣지 않는다. Category Filter는 기존 Marker Registry의 `setMap()`만 갱신하므로 JSON을 다시 요청하거나 Marker를 재생성하지 않는다. Marker click은 Facility ID만 React 영역으로 전달하고, 기존 `Facility[]`에서 선택 시설을 derive해 React Detail Panel로 표시한다.
+
 ## Frontend Structure
 
 - `app`: Route composition과 Next.js의 `not-found`, route error, global error boundary를 담당한다.

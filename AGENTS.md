@@ -29,7 +29,8 @@ Inspect → Plan → Modify → Validate → Report
 - Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4를 사용한다.
 - Runtime Client는 `public/data/*.json`만 읽는다.
 - 사용자 요청 중 공공데이터 API를 호출하는 Backend를 만들지 않는다.
-- 초기 범위에서 Database, Express, NestJS, Redis, Zustand, TanStack Query, Axios 또는 지도 Wrapper를 추가하지 않는다.
+- 초기 범위에서 Database, Express, NestJS, Redis, TanStack Query, Axios 또는 지도 Wrapper를 추가하지 않는다.
+- Zustand는 여러 UI Component가 공유하는 최소 Interaction State에만 사용한다. Published Facility Data, NAVER Map/Marker 객체, Server Data Cache를 Store에 넣지 않으며 persist middleware를 사용하지 않는다.
 - ETL은 `scripts/data`에서 실행하고, 검증을 통과한 최소 필드만 `public/data`에 Publish한다.
 - 검증 실패 시 기존 정상 Snapshot을 유지한다.
 
