@@ -13,7 +13,6 @@ export class FacilityMarkerManager {
   private readonly entries = new Map<string, MarkerEntry>();
 
   constructor(
-    private readonly map: naver.maps.Map,
     private readonly onMarkerClick: (facilityId: string) => void,
   ) {}
 
@@ -31,7 +30,6 @@ export class FacilityMarkerManager {
 
         const visible = visibleFacilityIds.has(facility.id);
         const marker = new naver.maps.Marker({
-          map: visible ? this.map : undefined,
           position: new naver.maps.LatLng(
             facility.latitude,
             facility.longitude,
@@ -78,10 +76,7 @@ export class FacilityMarkerManager {
     for (const entry of this.entries.values()) {
       const shouldBeVisible = visibleFacilityIds.has(entry.facility.id);
 
-      if (entry.visible !== shouldBeVisible) {
-        entry.marker.setMap(shouldBeVisible ? this.map : null);
-        entry.visible = shouldBeVisible;
-      }
+      entry.visible = shouldBeVisible;
 
       if (shouldBeVisible) {
         visibleCount += 1;
@@ -89,6 +84,12 @@ export class FacilityMarkerManager {
     }
 
     return visibleCount;
+  }
+
+  getVisibleMarkers(): naver.maps.Marker[] {
+    return [...this.entries.values()]
+      .filter((entry) => entry.visible)
+      .map((entry) => entry.marker);
   }
 
   clear(): void {

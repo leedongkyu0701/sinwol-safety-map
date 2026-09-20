@@ -1,3 +1,8 @@
+"use client";
+
+import { useRef } from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
+
 import { FacilityListItem } from "@/features/facilities/components/facility-list-item";
 import type { FacilityResult } from "@/features/facilities/types/facility-result";
 
@@ -14,6 +19,15 @@ export function FacilityList({
   hasLocation,
   onSelect,
 }: FacilityListProps) {
+  const scrollElementRef = useRef<HTMLDivElement>(null);
+  // TanStack Virtual exposes an imperative virtualizer API by design.
+  // eslint-disable-next-line react-hooks/incompatible-library
+  const rowVirtualizer = useVirtualizer({
+    count: results.length,
+    getScrollElement: () => scrollElementRef.current,
+    estimateSize: () => 116,
+    overscan: 6,
+  });
   const hasSearchQuery = searchQuery.trim() !== "";
   const title = hasSearchQuery
     ? `검색 결과 ${results.length.toLocaleString("ko-KR")}곳`
@@ -31,7 +45,10 @@ export function FacilityList({
           </span>
         ) : null}
       </header>
-      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+      <div
+        ref={scrollElementRef}
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+      >
         {results.length === 0 ? (
           <div className="grid min-h-40 place-items-center px-6 text-center">
             <p className="text-sm leading-6 text-zinc-600">
@@ -39,14 +56,28 @@ export function FacilityList({
             </p>
           </div>
         ) : (
-          <ul className="divide-y divide-zinc-100">
-            {results.map((result) => (
-              <FacilityListItem
-                key={result.facility.id}
-                result={result}
-                onSelect={onSelect}
-              />
-            ))}
+          <ul
+            className="relative divide-y divide-zinc-100"
+            style={{ height: rowVirtualizer.getTotalSize() }}
+          >
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const result = results[virtualRow.index];
+
+              return (
+                <li
+                  key={virtualRow.key}
+                  ref={rowVirtualizer.measureElement}
+                  data-index={virtualRow.index}
+                  className="absolute left-0 top-0 w-full"
+                  style={{ transform: `translateY(${virtualRow.start}px)` }}
+                >
+                  <FacilityListItem
+                    result={result}
+                    onSelect={onSelect}
+                  />
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>

@@ -3,15 +3,18 @@ import Image from "next/image";
 import { formatDistance } from "@/features/facilities/lib/facility-distance";
 import type { FacilityResult } from "@/features/facilities/types/facility-result";
 import { FACILITY_CATEGORY_CONFIG } from "@/shared/constants/facility-category";
+import { cn } from "@/shared/lib/cn";
 
 interface FacilityListItemProps {
   result: FacilityResult;
   onSelect: (facilityId: string) => void;
+  className?: string;
 }
 
 export function FacilityListItem({
   result,
   onSelect,
+  className,
 }: FacilityListItemProps) {
   const { facility, distanceMeters } = result;
   const category = FACILITY_CATEGORY_CONFIG[facility.category];
@@ -19,11 +22,13 @@ export function FacilityListItem({
     facility.category === "AED" ? "설치 위치" : "상세 위치";
 
   return (
-    <li>
-      <button
-        type="button"
-        onClick={() => onSelect(facility.id)}
-        className="flex w-full items-start gap-3 px-4 py-4 text-left transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600"
+    <button
+      type="button"
+      onClick={() => onSelect(facility.id)}
+      className={cn(
+        "flex w-full items-start gap-3 px-4 py-4 text-left transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600",
+        className,
+      )}
       >
         <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-zinc-100">
           <Image
@@ -61,7 +66,6 @@ export function FacilityListItem({
             </span>
           )}
         </span>
-      </button>
-    </li>
+    </button>
   );
 }

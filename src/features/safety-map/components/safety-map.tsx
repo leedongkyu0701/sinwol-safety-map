@@ -134,6 +134,8 @@ export function SafetyMap() {
       data-facility-count={facilityState.facilities.length}
       data-marker-count={markerState.markerCount}
       data-visible-marker-count={markerState.visibleMarkerCount}
+      data-marker-registry-count={markerState.markerCount}
+      data-result-marker-count={markerState.visibleMarkerCount}
       data-selected-category={selectedCategory}
       data-search-result-count={facilityResults.results.length}
       data-current-location-status={currentLocation.status}

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 
+import { FacilityClusterController } from "@/features/safety-map/lib/facility-cluster-controller";
 import { FacilityMarkerManager } from "@/features/safety-map/lib/facility-marker-manager";
 import type { Facility } from "@/shared/types/facility";
 
@@ -46,6 +47,7 @@ export function useFacilityMarkers({
   enabled,
 }: UseFacilityMarkersOptions): UseFacilityMarkersResult {
   const managerRef = useRef<FacilityMarkerManager | null>(null);
+  const clusterControllerRef = useRef<FacilityClusterController | null>(null);
   const onMarkerClickRef = useRef(onMarkerClick);
   const visibleFacilityIdsRef = useRef(visibleFacilityIds);
   const [state, setState] = useState<FacilityMarkerState>(INITIAL_STATE);
@@ -65,6 +67,7 @@ export function useFacilityMarkers({
 
     let active = true;
     let manager: FacilityMarkerManager | null = null;
+    let clusterController: FacilityClusterController | null = null;
 
     const frame = requestAnimationFrame(() => {
       try {
@@ -74,11 +77,14 @@ export function useFacilityMarkers({
           throw new Error("NAVER Map instance is not available.");
         }
 
-        manager = new FacilityMarkerManager(map, (facilityId) => {
+        manager = new FacilityMarkerManager((facilityId) => {
           onMarkerClickRef.current(facilityId);
         });
         managerRef.current = manager;
         manager.mount(facilities, visibleFacilityIdsRef.current);
+        clusterController = new FacilityClusterController(map);
+        clusterControllerRef.current = clusterController;
+        clusterController.setMarkers(manager.getVisibleMarkers());
 
         if (active) {
           setState({
@@ -89,7 +95,9 @@ export function useFacilityMarkers({
           });
         }
       } catch (error) {
+        clusterController?.destroy();
         manager?.destroy();
+        clusterControllerRef.current = null;
         managerRef.current = null;
 
         const markerError =
@@ -116,10 +124,14 @@ export function useFacilityMarkers({
     return () => {
       active = false;
       cancelAnimationFrame(frame);
+      clusterController?.destroy();
       manager?.destroy();
 
       if (managerRef.current === manager) {
         managerRef.current = null;
+      }
+      if (clusterControllerRef.current === clusterController) {
+        clusterControllerRef.current = null;
       }
     };
   }, [enabled, facilities, mapRef]);
@@ -139,6 +151,7 @@ export function useFacilityMarkers({
       const visibleMarkerCount = manager.setVisibleFacilityIds(
         visibleFacilityIds,
       );
+      clusterControllerRef.current?.setMarkers(manager.getVisibleMarkers());
 
       setState((current) =>
         current.visibleMarkerCount === visibleMarkerCount
@@ -146,6 +159,8 @@ export function useFacilityMarkers({
           : { ...current, visibleMarkerCount },
       );
     } catch (error) {
+      clusterControllerRef.current?.destroy();
+      clusterControllerRef.current = null;
       manager.destroy();
       managerRef.current = null;
 
