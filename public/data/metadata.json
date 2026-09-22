@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-18T06:26:23.392Z",
+  "generatedAt": "2026-09-22T08:33:20.904Z",
   "sources": {
     "fireWater": {
       "count": 936,
@@ -16,7 +16,7 @@
     "aed": {
       "count": 99,
       "source": "국립중앙의료원 전국 자동심장충격기(AED) 정보 조회 서비스",
-      "fetchedAt": "2026-09-18T02:07:34.022Z"
+      "fetchedAt": "2026-09-22T08:33:20.882Z"
     },
     "other": {
       "count": 1,
