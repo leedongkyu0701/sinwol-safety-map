@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
 import { FacilityListItem } from "@/features/facilities/components/facility-list-item";
@@ -11,6 +11,7 @@ interface FacilityListProps {
   searchQuery: string;
   hasLocation: boolean;
   onSelect: (facilityId: string) => void;
+  headerAction?: ReactNode;
 }
 
 export function FacilityList({
@@ -18,6 +19,7 @@ export function FacilityList({
   searchQuery,
   hasLocation,
   onSelect,
+  headerAction,
 }: FacilityListProps) {
   const scrollElementRef = useRef<HTMLDivElement>(null);
   const getItemKey = useCallback(
@@ -46,12 +48,17 @@ export function FacilityList({
   return (
     <section className="flex min-h-0 flex-1 flex-col" aria-label={title}>
       <header className="flex h-14 shrink-0 items-center justify-between border-b border-zinc-200 px-4">
-        <h2 className="text-base font-bold text-zinc-950">{title}</h2>
-        {hasLocation ? (
+        <div className="min-w-0">
+          <h2 className="truncate text-base font-bold text-zinc-950">{title}</h2>
+          {hasLocation && headerAction ? (
+            <p className="text-xs font-medium text-zinc-500">거리순 · 직선거리</p>
+          ) : null}
+        </div>
+        {headerAction ?? (hasLocation ? (
           <span className="text-xs font-medium text-zinc-500">
             거리순 · 직선거리
           </span>
-        ) : null}
+        ) : null)}
       </header>
       <div
         ref={scrollElementRef}

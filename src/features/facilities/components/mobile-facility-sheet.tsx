@@ -1,6 +1,7 @@
 import { FacilityListBackButton } from "@/features/facilities/components/facility-list-back-button";
 import { FacilityDetailContent } from "@/features/facilities/components/facility-detail-content";
 import { FacilityList } from "@/features/facilities/components/facility-list";
+import { EmergencyModeLink } from "@/features/emergency-mode/components/emergency-mode-link";
 import type { FacilityResult } from "@/features/facilities/types/facility-result";
 import type { Facility } from "@/shared/types/facility";
 import { BottomSheet, type BottomSheetSnap } from "@/shared/ui/bottom-sheet";
@@ -42,6 +43,7 @@ export function MobileFacilitySheet({
             searchQuery={searchQuery}
             hasLocation={hasLocation}
             onSelect={onSelect}
+            headerAction={<EmergencyModeLink />}
           />
         ) : (
           <div className="h-full overflow-y-auto overscroll-contain px-5 pb-8">
