@@ -4,7 +4,7 @@
 
 ## Categories
 
-상위 Category는 `FIRE_WATER`, `SHELTER`, `AED`, `OTHER` 네 개로 고정한다. UI에서는 전체, 소방용수, 대피시설, AED, 기타로 표시한다. 상위 Category와 세부 시설 종류인 `subtype`을 분리한다.
+상위 Category는 `FIRE_WATER`, `SHELTER`, `AED`, `OTHER` 네 개로 고정한다. UI에서는 전체, AED, 소방용수, 대피시설, 기타 순서로 표시한다. 상위 Category와 세부 시설 종류인 `subtype`을 분리한다.
 
 ## FIRE_WATER
 
