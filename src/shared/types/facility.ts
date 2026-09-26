@@ -107,13 +107,46 @@ export const FIRE_ORGANIZATION_SUBTYPES = [
 export type FireOrganizationSubtype =
   (typeof FIRE_ORGANIZATION_SUBTYPES)[number];
 
+export const HEAT_SHELTER_SUBTYPE = "HEAT_SHELTER" as const;
+
+export const HEAT_SHELTER_DAYS = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+] as const;
+
+export type HeatShelterDay = (typeof HEAT_SHELTER_DAYS)[number];
+
+export interface HeatShelterOperatingPeriod {
+  days: HeatShelterDay[];
+  start: string;
+  end: string;
+}
+
 export interface FireOrganizationFacility extends BaseFacility {
   category: "OTHER";
   subtype: FireOrganizationSubtype;
   details: Record<string, never>;
 }
 
-export type OtherFacility = FireOrganizationFacility;
+export interface HeatShelterFacility extends BaseFacility {
+  category: "OTHER";
+  subtype: typeof HEAT_SHELTER_SUBTYPE;
+  details: {
+    facilityType1: string;
+    facilityType2: string;
+    regularHours?: HeatShelterOperatingPeriod;
+    extendedHours?: HeatShelterOperatingPeriod;
+    additionalHours?: HeatShelterOperatingPeriod;
+    remarks?: string;
+  };
+}
+
+export type OtherFacility = FireOrganizationFacility | HeatShelterFacility;
 
 export type Facility =
   | FireWaterFacility

@@ -47,7 +47,7 @@ Published AED의 `subtype`은 `AED`, `mobility`는 `FIXED`로 제한한다. `MOB
 
 ## OTHER
 
-현재 Published Data는 신월119안전센터 1건이다. 상위 Category는 `OTHER`로 유지하고 소방 조직 내부 유형은 다음 subtype으로 제한한다.
+현재 Published Data에는 신월119안전센터가 있으며, 서울 열린데이터광장의 무더위쉼터도 `OTHER` Source로 병합한다. 상위 Category는 `OTHER`로 유지한다. 소방 조직 내부 유형은 다음 subtype으로 제한한다.
 
 - `FIRE_STATION`
 - `FIRE_SAFETY_CENTER`
@@ -58,6 +58,10 @@ Published AED의 `subtype`은 `AED`, `mobility`는 `FIXED`로 제한한다. `MOB
 Source의 X/Y는 ITRF2000_MTM 중부원점(EPSG:5186) 좌표이며 ETL에서 WGS84(EPSG:4326)로 변환한다. Published ID는 `fire-org:<sourceId>` 형식이다. 공식 주소는 별도 서울 열린데이터광장 Source인 `서울소방서 119안전센터 현황`으로 검증한다.
 
 `public/data/other.json`은 여러 OTHER Source를 담는 Category 파일이다. 각 Source ETL은 자신의 ID prefix 행만 교체하고 다른 Variant는 보존한다. 119 조직은 MVP에서 수동 API Snapshot으로 갱신하며 Shelter/AED Daily Sync에는 포함하지 않는다. 향후 다른 Source는 typed Variant와 별도 namespace, 독립 ETL 및 Metadata dataset을 추가한다.
+
+무더위쉼터 Source는 서울 열린데이터광장 `서울시 무더위쉼터(TbGtnHwcwP)`다. `AREA_CD`의 신월1~7동 allowlist와 `LOTNO_ADDR`의 `서울특별시 양천구 신월동` 주소 필터를 교차 검증하고, 두 선택 결과가 다르면 자동 Publish를 중단한다. Identity는 행정동 코드, 정규화한 시설명, 지번주소(없으면 도로명 상세주소)로 만들고 SHA-256 `sourceId` 및 `heat-shelter:` namespace를 사용한다. 좌표와 운영시간은 Identity에 넣지 않는다.
+
+무더위쉼터의 시설 구분, 이용 구분, 기본·연장·추가 운영시간과 존재하는 비고를 보존한다. `EXT_OPR_YN` 또는 `ADD_OPR_YN`이 `N`이면 해당 시간 그룹이 비어 있는 것이 정상이며, `Y`인 그룹의 요일·시작·종료 누락이나 알 수 없는 한국어 요일은 검증 실패다. 동일 Identity와 publishable 값이 완전히 같은 반복 행만 collapse한다. 같은 Identity의 publishable 값이 다르면 수동 확인을 위해 Publish를 중단한다. 좌표가 같아도 서로 다른 시설은 유지하고 audit에 기록한다.
 
 ## Identity and Deduplication
 

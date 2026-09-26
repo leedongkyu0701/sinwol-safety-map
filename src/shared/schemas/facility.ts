@@ -5,10 +5,13 @@ import {
   FACILITY_CATEGORIES,
   FIRE_ORGANIZATION_SUBTYPES,
   FIRE_WATER_SUBTYPES,
+  HEAT_SHELTER_DAYS,
+  HEAT_SHELTER_SUBTYPE,
   type AedFacility,
   type Facility,
   type FireOrganizationFacility,
   type FireWaterFacility,
+  type HeatShelterFacility,
   type OtherFacility,
   type ShelterFacility,
 } from "@/shared/types/facility";
@@ -151,8 +154,39 @@ export const fireOrganizationFacilitySchema: z.ZodType<FireOrganizationFacility>
       validateNamespacedId("fire-org", facility, context);
     });
 
-export const otherFacilitySchema: z.ZodType<OtherFacility> =
-  fireOrganizationFacilitySchema;
+const heatShelterOperatingPeriodSchema = z
+  .object({
+    days: z.array(z.enum(HEAT_SHELTER_DAYS)).min(1),
+    start: nonEmptyStringSchema.regex(/^([01]\d|2[0-3]):[0-5]\d$/),
+    end: nonEmptyStringSchema.regex(/^([01]\d|2[0-3]):[0-5]\d$|^24:00$/),
+  })
+  .strict();
+
+export const heatShelterFacilitySchema: z.ZodType<HeatShelterFacility> = z
+  .object({
+    ...baseFacilityShape,
+    category: z.literal("OTHER"),
+    subtype: z.literal(HEAT_SHELTER_SUBTYPE),
+    details: z
+      .object({
+        facilityType1: nonEmptyStringSchema,
+        facilityType2: nonEmptyStringSchema,
+        regularHours: heatShelterOperatingPeriodSchema.optional(),
+        extendedHours: heatShelterOperatingPeriodSchema.optional(),
+        additionalHours: heatShelterOperatingPeriodSchema.optional(),
+        remarks: nonEmptyStringSchema.optional(),
+      })
+      .strict(),
+  })
+  .strict()
+  .superRefine((facility, context) => {
+    validateNamespacedId("heat-shelter", facility, context);
+  });
+
+export const otherFacilitySchema: z.ZodType<OtherFacility> = z.union([
+  fireOrganizationFacilitySchema,
+  heatShelterFacilitySchema,
+]);
 
 export const facilitySchema: z.ZodType<Facility> = z.union([
   fireWaterFacilitySchema,
@@ -176,5 +210,9 @@ export const aedFacilitiesSchema = z
 export const fireOrganizationFacilitiesSchema = z
   .array(fireOrganizationFacilitySchema)
   .min(1, "Fire organization dataset must not be empty");
+
+export const heatShelterFacilitiesSchema = z
+  .array(heatShelterFacilitySchema)
+  .min(1, "Heat shelter dataset must not be empty");
 
 export const otherFacilitiesSchema = z.array(otherFacilitySchema);

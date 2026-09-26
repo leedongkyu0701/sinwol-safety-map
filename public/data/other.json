@@ -10,5 +10,2850 @@
     "category": "OTHER",
     "subtype": "FIRE_SAFETY_CENTER",
     "details": {}
+  },
+  {
+    "id": "heat-shelter:00dbf29ab796d2d217dd84140801632315fce048730b0a1dcabbc9813c60fa78",
+    "name": "신월약수(구립)경로당",
+    "latitude": 37.522195,
+    "longitude": 126.83098,
+    "address": "서울특별시 양천구 지양로11길 16-16 (구립신월약수노인정)",
+    "roadAddress": "서울특별시 양천구 지양로11길 16-16 (구립신월약수노인정)",
+    "lotAddress": "서울특별시 양천구 신월동 936",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "00dbf29ab796d2d217dd84140801632315fce048730b0a1dcabbc9813c60fa78",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:02d7e1e5da628c07340ec190501c8c1033ae9ed58f2fb07b1fcdfae14791f030",
+    "name": "지양(구립)경로당",
+    "latitude": 37.522652,
+    "longitude": 126.828194,
+    "address": "서울특별시 양천구 지양로17길 15 (지양경로당)",
+    "roadAddress": "서울특별시 양천구 지양로17길 15 (지양경로당)",
+    "lotAddress": "서울특별시 양천구 신월동 331-104",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "02d7e1e5da628c07340ec190501c8c1033ae9ed58f2fb07b1fcdfae14791f030",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:035312547338cca38be3cd6abb80cefcd17df2d5a7936959e535addc087a8eca",
+    "name": "신월음악도서관",
+    "latitude": 37.5247285,
+    "longitude": 126.8401035,
+    "address": "서울특별시 양천구 오목로5길 34",
+    "roadAddress": "서울특별시 양천구 오목로5길 34",
+    "lotAddress": "서울특별시 양천구 신월동 425-2",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "035312547338cca38be3cd6abb80cefcd17df2d5a7936959e535addc087a8eca",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "복지·문화·체육시설",
+      "regularHours": {
+        "days": [
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "22:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:04f1a2ad1cdd77c2b5e510b3882c0c8496c5c61b4bac6d111ed03ca1eb264451",
+    "name": "방아다리문학도서관",
+    "latitude": 37.5385651,
+    "longitude": 126.8271627,
+    "address": "서울특별시 양천구 화곡로4길 10",
+    "roadAddress": "서울특별시 양천구 화곡로4길 10",
+    "lotAddress": "서울특별시 양천구 신월동 52-2",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "04f1a2ad1cdd77c2b5e510b3882c0c8496c5c61b4bac6d111ed03ca1eb264451",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "복지·문화·체육시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "22:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:067c9efc4b8d801b0c9301572c36dc6da0809b837a7fd5ef6ebfca0c07af7d4b",
+    "name": "밝은빛(구립)경로당",
+    "latitude": 37.521453,
+    "longitude": 126.84139,
+    "address": "서울특별시 양천구 오목로 28-9 (밝은빛노인정)",
+    "roadAddress": "서울특별시 양천구 오목로 28-9 (밝은빛노인정)",
+    "lotAddress": "서울특별시 양천구 신월동 518-4",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "067c9efc4b8d801b0c9301572c36dc6da0809b837a7fd5ef6ebfca0c07af7d4b",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:0b6c20f31cc32d8f0245fdb29204021c94ef6e36259a0693e59111bcb447ecf3",
+    "name": "벽산블루밍2단지아파트경로당(사립)",
+    "latitude": 37.513283,
+    "longitude": 126.841903,
+    "address": "서울특별시 양천구 신정로13길 51 (벽산블루밍2단지 관리실,노인정)",
+    "roadAddress": "서울특별시 양천구 신정로13길 51 (벽산블루밍2단지 관리실,노인정)",
+    "lotAddress": "서울특별시 양천구 신월동 1023",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "0b6c20f31cc32d8f0245fdb29204021c94ef6e36259a0693e59111bcb447ecf3",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:0f0626673293fe3cf224291090b9ceb09994ee82301ebee0582628be35849156",
+    "name": "신월4동주민센터",
+    "latitude": 37.5246,
+    "longitude": 126.84,
+    "address": "서울특별시 양천구 신월동 오목로5길  34 ,  신월4동주민센터 (신월동)",
+    "roadAddress": "서울특별시 양천구 신월동 오목로5길  34 ,  신월4동주민센터 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 425-2",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "0f0626673293fe3cf224291090b9ceb09994ee82301ebee0582628be35849156",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "20:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:1222216e7a390690b24807669b267c726990b3dad8b4ee8823325ac13ac1c0ec",
+    "name": "목동센트럴아이파크3단지경로당(사립)",
+    "latitude": 37.517033,
+    "longitude": 126.845029,
+    "address": "서울특별시 양천구 남부순환로83길 48 (목동 센트럴 아이파크 위브 3단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 48 (목동 센트럴 아이파크 위브 3단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1077",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "1222216e7a390690b24807669b267c726990b3dad8b4ee8823325ac13ac1c0ec",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:17bc1a2d1311f957204ba81c24d6ba25900a5b8d9d5c3def22954dea3af66293",
+    "name": "신월3동주민센터",
+    "latitude": 37.5336,
+    "longitude": 126.8291,
+    "address": "서울특별시 양천구 신월동 남부순환로54길  5 ,  신월3동주민센터 (신월동)",
+    "roadAddress": "서울특별시 양천구 신월동 남부순환로54길  5 ,  신월3동주민센터 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 167-5",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "17bc1a2d1311f957204ba81c24d6ba25900a5b8d9d5c3def22954dea3af66293",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "20:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:17d3f8db764b02b0e0b3d6c397d660be16614902c1b2d2368351a3e666c784df",
+    "name": "경복(구립)경로당",
+    "latitude": 37.534774,
+    "longitude": 126.826099,
+    "address": "서울특별시 양천구 가로공원로56길 30 (구립경복경로당)",
+    "roadAddress": "서울특별시 양천구 가로공원로56길 30 (구립경복경로당)",
+    "lotAddress": "서울특별시 양천구 신월동 156",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "17d3f8db764b02b0e0b3d6c397d660be16614902c1b2d2368351a3e666c784df",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:1fdf279415ede7339378e6abcc8320f1ac6649f2f13855ba0f10916c9891676c",
+    "name": "수명산동원데자뷰아파트경로당(사립)",
+    "latitude": 37.543171,
+    "longitude": 126.827894,
+    "address": "서울특별시 양천구 화곡로3길 43 (수명산 동원데쟈뷰 아파트 102동)",
+    "roadAddress": "서울특별시 양천구 화곡로3길 43 (수명산 동원데쟈뷰 아파트 102동)",
+    "lotAddress": "서울특별시 양천구 신월동 1060",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "1fdf279415ede7339378e6abcc8320f1ac6649f2f13855ba0f10916c9891676c",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:204413a8362382025b7ad17e509354dae4904998adab2a08cd3fdcd7704d9fed",
+    "name": "한울(구립)경로당",
+    "latitude": 37.519914,
+    "longitude": 126.83257,
+    "address": "서울특별시 양천구 지양로7길 27-5",
+    "roadAddress": "서울특별시 양천구 지양로7길 27-5",
+    "lotAddress": "서울특별시 양천구 신월동 956",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "204413a8362382025b7ad17e509354dae4904998adab2a08cd3fdcd7704d9fed",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:220d75404617db30fd1fdf207453fc2e05a5c3179bb4612b8690741d39d8dcb4",
+    "name": "대림아파트경로당(사립)",
+    "latitude": 37.523451,
+    "longitude": 126.845315,
+    "address": "서울특별시 양천구 오목로13길 7 (신월대림아파트 노인정)",
+    "roadAddress": "서울특별시 양천구 오목로13길 7 (신월대림아파트 노인정)",
+    "lotAddress": "서울특별시 양천구 신월동 491-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "220d75404617db30fd1fdf207453fc2e05a5c3179bb4612b8690741d39d8dcb4",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:266c6bc534055f05f16bc79446e66ee761083aad7880ed9fac31ae768d802bbc",
+    "name": "밝은내어르신복지센터",
+    "latitude": 37.524237,
+    "longitude": 126.832909,
+    "address": "서울특별시 양천구 지양로14길 17 (신월7동주민센터)",
+    "roadAddress": "서울특별시 양천구 지양로14길 17 (신월7동주민센터)",
+    "lotAddress": "서울특별시 양천구 신월동 915-4",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "266c6bc534055f05f16bc79446e66ee761083aad7880ed9fac31ae768d802bbc",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:2dedaa94cf6e477eddfcc11cc0391a508c0ad4cc2c4b04fcb81f4b03d4577e2b",
+    "name": "신월문화체육센터",
+    "latitude": 37.5199,
+    "longitude": 126.8349,
+    "address": "서울특별시 양천구 지양로 47 (신월동)",
+    "roadAddress": "서울특별시 양천구 지양로 47 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 987",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "2dedaa94cf6e477eddfcc11cc0391a508c0ad4cc2c4b04fcb81f4b03d4577e2b",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "복지·문화·체육시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "06:00",
+        "end": "22:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday"
+        ],
+        "start": "06:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:324250da704e1aecb63fd04367cd7d849da323c8b8295d4aa70c82e1b635886e",
+    "name": "금하뜨라네아파트경로당(사립)",
+    "latitude": 37.533581,
+    "longitude": 126.823917,
+    "address": "서울특별시 양천구 가로공원로56길 10 (금하뜨라네아파트 106동)",
+    "roadAddress": "서울특별시 양천구 가로공원로56길 10 (금하뜨라네아파트 106동)",
+    "lotAddress": "서울특별시 양천구 신월동 142-14",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "324250da704e1aecb63fd04367cd7d849da323c8b8295d4aa70c82e1b635886e",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:334a4e843ce6c88631b328fc46828ce7f0c17c7aaca9443bda9df36bac55fe96",
+    "name": "중앙(구립)경로당",
+    "latitude": 37.5221,
+    "longitude": 126.845,
+    "address": "서울특별시 양천구 오목로 64-27",
+    "roadAddress": "서울특별시 양천구 오목로 64-27",
+    "lotAddress": "서울특별시 양천구 신월동 509-14",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "334a4e843ce6c88631b328fc46828ce7f0c17c7aaca9443bda9df36bac55fe96",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:33e6c227627befc03351cc7ec0e2cf1cd939cf31ddbc5e645fa52f2324406454",
+    "name": "신월7동주민센터",
+    "latitude": 37.524237,
+    "longitude": 126.832909,
+    "address": "서울특별시 양천구 지양로14길 17 (신월7동주민센터)",
+    "roadAddress": "서울특별시 양천구 지양로14길 17 (신월7동주민센터)",
+    "lotAddress": "서울특별시 양천구 신월동 915-4",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "33e6c227627befc03351cc7ec0e2cf1cd939cf31ddbc5e645fa52f2324406454",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "20:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:34f45e2b38757d7a3626a5c8e936e6bf30f8a3f8c1e284e192bbfc1df3ba725f",
+    "name": "목동센트럴아이파크2단지경로당(사립)",
+    "latitude": 37.516131,
+    "longitude": 126.843054,
+    "address": "서울특별시 양천구 남부순환로83길 18 (목동 센트럴 아이파크 위브 2단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 18 (목동 센트럴 아이파크 위브 2단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1076",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "34f45e2b38757d7a3626a5c8e936e6bf30f8a3f8c1e284e192bbfc1df3ba725f",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:35a016452247d7189b5927d10f53e2d5c48c499cbd7008690d3defcaf8bc40e8",
+    "name": "소망(구립)경로당",
+    "latitude": 37.5221,
+    "longitude": 126.8381,
+    "address": "서울특별시 양천구 오목로1길 10",
+    "roadAddress": "서울특별시 양천구 오목로1길 10",
+    "lotAddress": "서울특별시 양천구 신월동 436-6",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "35a016452247d7189b5927d10f53e2d5c48c499cbd7008690d3defcaf8bc40e8",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:35bb4a5d2c75d5bfd15bef2b12dc43b135e2184ae058cd8eeb20eb6e57029abb",
+    "name": "한빛종합사회복지관",
+    "latitude": 37.519,
+    "longitude": 126.8402,
+    "address": "서울특별시 양천구 신월동 신월로11길  16 ,  한빛종합사회복지관 (신월동)",
+    "roadAddress": "서울특별시 양천구 신월동 신월로11길  16 ,  한빛종합사회복지관 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 540-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "35bb4a5d2c75d5bfd15bef2b12dc43b135e2184ae058cd8eeb20eb6e57029abb",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:379006a93f62db4256c842e33bb36a4737ab69214510764eed8aeebfbd5d8cb1",
+    "name": "신월2동주민센터",
+    "latitude": 37.525,
+    "longitude": 126.8446,
+    "address": "서울특별시 양천구 신월동 중앙로53길  47 , 경로당 (신월동)",
+    "roadAddress": "서울특별시 양천구 신월동 중앙로53길  47 , 경로당 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 483-11",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "379006a93f62db4256c842e33bb36a4737ab69214510764eed8aeebfbd5d8cb1",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "20:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:37d0b4ef39d8633545db427f8da67872718bfc6e2dd3f0758ddffeef1399c08a",
+    "name": "서서울어르신복지관",
+    "latitude": 37.534345,
+    "longitude": 126.826611,
+    "address": "서울특별시 양천구 가로공원로60가길 16 (서서울 어르신복지관)",
+    "roadAddress": "서울특별시 양천구 가로공원로60가길 16 (서서울 어르신복지관)",
+    "lotAddress": "서울특별시 양천구 신월동 158-4",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "37d0b4ef39d8633545db427f8da67872718bfc6e2dd3f0758ddffeef1399c08a",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:38b2e2f94c0b5fb5ac2be5851ce22ce1531c0dc30c5613b5801b6940b18c1704",
+    "name": "신월2차보람쉬움아파트경로당",
+    "latitude": 37.524706,
+    "longitude": 126.837159,
+    "address": "서울특별시 양천구 오목로1길 46 (보람쉬움2차아파트 202동)",
+    "roadAddress": "서울특별시 양천구 오목로1길 46 (보람쉬움2차아파트 202동)",
+    "lotAddress": "서울특별시 양천구 신월동 1039",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "38b2e2f94c0b5fb5ac2be5851ce22ce1531c0dc30c5613b5801b6940b18c1704",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:3ba77733c15359a9a51bbae5b8be97c56118c208661055c5abe97e8659cc70dd",
+    "name": "신정뉴타운롯데캐슬경로당",
+    "latitude": 37.519343,
+    "longitude": 126.847456,
+    "address": "서울특별시 양천구 중앙로29길 61 (신정뉴타운롯데캐슬 104동)",
+    "roadAddress": "서울특별시 양천구 중앙로29길 61 (신정뉴타운롯데캐슬 104동)",
+    "lotAddress": "서울특별시 양천구 신월동 1063",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "3ba77733c15359a9a51bbae5b8be97c56118c208661055c5abe97e8659cc70dd",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:402be53542d6f7b1205f8d7a29dd0ac95ed03d5f30e0753f216c41b50e872cb5",
+    "name": "목동센트럴아이파크1단지경로당(사립)",
+    "latitude": 37.51642,
+    "longitude": 126.842038,
+    "address": "서울특별시 양천구 남부순환로83길 17 (목동 센트럴 아이파크 위브 1단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 17 (목동 센트럴 아이파크 위브 1단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1075",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "402be53542d6f7b1205f8d7a29dd0ac95ed03d5f30e0753f216c41b50e872cb5",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:453809eb8b130853792d774bf193873ac607fa969b73369e9d10f7425d5416f6",
+    "name": "대방샤인힐아파트경로당(사립)",
+    "latitude": 37.520337,
+    "longitude": 126.838825,
+    "address": "서울특별시 양천구 신월로9길 37 (신월동 대방 샤인힐 관리동)",
+    "roadAddress": "서울특별시 양천구 신월로9길 37 (신월동 대방 샤인힐 관리동)",
+    "lotAddress": "서울특별시 양천구 신월동 1017",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "453809eb8b130853792d774bf193873ac607fa969b73369e9d10f7425d5416f6",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:4dfae70708a7fc9bb6a5f72ec404dbe95e4297fc9615765d9878eee915228579",
+    "name": "늘푸른(신월7동구립)경로당",
+    "latitude": 37.523106,
+    "longitude": 126.833336,
+    "address": "서울특별시 양천구 지양로10길 5",
+    "roadAddress": "서울특별시 양천구 지양로10길 5",
+    "lotAddress": "서울특별시 양천구 신월동 922-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "4dfae70708a7fc9bb6a5f72ec404dbe95e4297fc9615765d9878eee915228579",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:4e9b416507156c8fce0938f938070ffd4380b6d2bd9ecb846527417c6218bc44",
+    "name": "목동센트럴아이파크4단지경로당(사립)",
+    "latitude": 37.518906,
+    "longitude": 126.844603,
+    "address": "서울특별시 양천구 남부순환로83길 47 (목동 센트럴 아이파크 위브 4단지)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 47 (목동 센트럴 아이파크 위브 4단지)",
+    "lotAddress": "서울특별시 양천구 신월동 1078",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "4e9b416507156c8fce0938f938070ffd4380b6d2bd9ecb846527417c6218bc44",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:539e4cb4a76c31d75804810836d26baf2ea7ddec65ecf98b9f5a34d05a06dc8f",
+    "name": "당곡(구립)경로당",
+    "latitude": 37.524117,
+    "longitude": 126.842894,
+    "address": "서울특별시 양천구 오목로11길 17-18 (구립 당곡경로당)",
+    "roadAddress": "서울특별시 양천구 오목로11길 17-18 (구립 당곡경로당)",
+    "lotAddress": "서울특별시 양천구 신월동 486",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "539e4cb4a76c31d75804810836d26baf2ea7ddec65ecf98b9f5a34d05a06dc8f",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:5401639fd217bbaa6d1479b61e26b04650273b10c6918f1bff4ce31423195765",
+    "name": "신원경로당(구립)",
+    "latitude": 37.534,
+    "longitude": 126.8279,
+    "address": "서울특별시 양천구 남부순환로46길 12",
+    "roadAddress": "서울특별시 양천구 남부순환로46길 12",
+    "lotAddress": "서울특별시 양천구 신월동 161-17",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "5401639fd217bbaa6d1479b61e26b04650273b10c6918f1bff4ce31423195765",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:553a1735d9292087737fd304f51be03f20fab2223fb22da0a8fb4d1c930eb5a6",
+    "name": "신곡(구립)경로당",
+    "latitude": 37.526269,
+    "longitude": 126.845109,
+    "address": "서울특별시 양천구 오목로13길 38 (구립신곡경로당)",
+    "roadAddress": "서울특별시 양천구 오목로13길 38 (구립신곡경로당)",
+    "lotAddress": "서울특별시 양천구 신월동 459",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "553a1735d9292087737fd304f51be03f20fab2223fb22da0a8fb4d1c930eb5a6",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:565c06b3d7f161fe9b2fa564515173011339ed864a7dac8be3cccfcec86f20ff",
+    "name": "해태아파트경로당(사립)",
+    "latitude": 37.521388,
+    "longitude": 126.843039,
+    "address": "서울특별시 양천구 월정로 21 (해태아파트 101동)",
+    "roadAddress": "서울특별시 양천구 월정로 21 (해태아파트 101동)",
+    "lotAddress": "서울특별시 양천구 신월동 514-3",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "565c06b3d7f161fe9b2fa564515173011339ed864a7dac8be3cccfcec86f20ff",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:5ae064561d9f0ac4f558f0cba7a82ed970963263bfdac63536a423ebdb589b06",
+    "name": "해맞이역사도서관",
+    "latitude": 37.519091,
+    "longitude": 126.835615,
+    "address": "서울특별시 양천구 지양로 37 (해맞이도서관)",
+    "roadAddress": "서울특별시 양천구 지양로 37 (해맞이도서관)",
+    "lotAddress": "서울특별시 양천구 신월동 987",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "5ae064561d9f0ac4f558f0cba7a82ed970963263bfdac63536a423ebdb589b06",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "복지·문화·체육시설",
+      "regularHours": {
+        "days": [
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "22:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:5bcb92120177fc659f7eeb79c394d6be49c6f5c0e71058ac67d40f8f7e3137bc",
+    "name": "신월대성유니드아파트경로당(사립)",
+    "latitude": 37.520568,
+    "longitude": 126.840661,
+    "address": "서울특별시 양천구 신월로15길 21 (신월대성유니드아파트 관리노인정)",
+    "roadAddress": "서울특별시 양천구 신월로15길 21 (신월대성유니드아파트 관리노인정)",
+    "lotAddress": "서울특별시 양천구 신월동 1033",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "5bcb92120177fc659f7eeb79c394d6be49c6f5c0e71058ac67d40f8f7e3137bc",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:5d4232ca7e8f3c0adebb010e90e2ed774b2e2c77283b80008a10a3ca6bab520c",
+    "name": "신월시영아파트경로당(사립)",
+    "latitude": 37.518241,
+    "longitude": 126.835459,
+    "address": "서울특별시 양천구 신월로 99 (신월시영아파트)",
+    "roadAddress": "서울특별시 양천구 신월로 99 (신월시영아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 987-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "5d4232ca7e8f3c0adebb010e90e2ed774b2e2c77283b80008a10a3ca6bab520c",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:5ec3cc4195a6afc7dfed18b8d778d939811700bafe4dd366b426452e03af7890",
+    "name": "신대(구립)경로당",
+    "latitude": 37.5327,
+    "longitude": 126.8313,
+    "address": "서울특별시 양천구 곰달래로1길 37",
+    "roadAddress": "서울특별시 양천구 곰달래로1길 37",
+    "lotAddress": "서울특별시 양천구 신월동 136-13",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "5ec3cc4195a6afc7dfed18b8d778d939811700bafe4dd366b426452e03af7890",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:60602c6c58de9fd34162f01c12659383bcde836a5738371ced460cf1772e761a",
+    "name": "신도브래뉴신월2차아파트경로당(사립)",
+    "latitude": 37.541671,
+    "longitude": 126.827815,
+    "address": "서울특별시 양천구 화곡로3길 34 (신도브래뉴신월2차아파트 노인정)",
+    "roadAddress": "서울특별시 양천구 화곡로3길 34 (신도브래뉴신월2차아파트 노인정)",
+    "lotAddress": "서울특별시 양천구 신월동 1031",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "60602c6c58de9fd34162f01c12659383bcde836a5738371ced460cf1772e761a",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:63abfa2c27640b9e292d146ae5d42c243127a3c61cf0054733f58f2f67375859",
+    "name": "동원데자뷰아파트경로당(사립)",
+    "latitude": 37.522045,
+    "longitude": 126.845502,
+    "address": "서울특별시 양천구 오목로 76-2 (장수마을2단지동원데쟈뷰아파트 관리동)",
+    "roadAddress": "서울특별시 양천구 오목로 76-2 (장수마을2단지동원데쟈뷰아파트 관리동)",
+    "lotAddress": "서울특별시 양천구 신월동 1049",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "63abfa2c27640b9e292d146ae5d42c243127a3c61cf0054733f58f2f67375859",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:6834f16b5947077b3af6cb906d3a5e01f6c1d34a23a85be0edf39c9d4ff42628",
+    "name": "신도신월1차아파트경로당(사립)",
+    "latitude": 37.518099,
+    "longitude": 126.846526,
+    "address": "서울특별시 양천구 신월로20길 33 (신도신월1차아파트 노인정, 관리실)",
+    "roadAddress": "서울특별시 양천구 신월로20길 33 (신도신월1차아파트 노인정, 관리실)",
+    "lotAddress": "서울특별시 양천구 신월동 1029",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "6834f16b5947077b3af6cb906d3a5e01f6c1d34a23a85be0edf39c9d4ff42628",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:6d3a904413cbc17ee2e0743a685646e67cd298f9c8206d615de7bdd4442354cf",
+    "name": "신안약수아파트경로당(사립)",
+    "latitude": 37.517387,
+    "longitude": 126.847068,
+    "address": "서울특별시 양천구 중앙로29길 55 (신안약수아파트)",
+    "roadAddress": "서울특별시 양천구 중앙로29길 55 (신안약수아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 591-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "6d3a904413cbc17ee2e0743a685646e67cd298f9c8206d615de7bdd4442354cf",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:7c1a9e83ac6f135a4d6a62c38788c4844d9eb66437b1ee5a105b077d24075dd7",
+    "name": "신정뉴타운두산위브경로당(사립)",
+    "latitude": 37.518592,
+    "longitude": 126.845477,
+    "address": "서울특별시 양천구 신월로20길 7 (신정뉴타운두산위브아파트 상가동)",
+    "roadAddress": "서울특별시 양천구 신월로20길 7 (신정뉴타운두산위브아파트 상가동)",
+    "lotAddress": "서울특별시 양천구 신월동 1055",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "7c1a9e83ac6f135a4d6a62c38788c4844d9eb66437b1ee5a105b077d24075dd7",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:7ddc50e949cb111ada112f688c5e7f3a32352714da0b0ecdbbe2759998368172",
+    "name": "자양(구립)경로당",
+    "latitude": 37.5186,
+    "longitude": 126.8401,
+    "address": "서울특별시 양천구 신월로11길 13",
+    "roadAddress": "서울특별시 양천구 신월로11길 13",
+    "lotAddress": "서울특별시 양천구 신월동 542",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "7ddc50e949cb111ada112f688c5e7f3a32352714da0b0ecdbbe2759998368172",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:82c906403a0213ee575edf76d95816903a745405fa086aff5433c6664380c2ab",
+    "name": "수명산SK뷰아파트경로당(사립)",
+    "latitude": 37.543994,
+    "longitude": 126.829913,
+    "address": "서울특별시 양천구 월정로 306 (수명산 SK VIEW)",
+    "roadAddress": "서울특별시 양천구 월정로 306 (수명산 SK VIEW)",
+    "lotAddress": "서울특별시 양천구 신월동 1053",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "82c906403a0213ee575edf76d95816903a745405fa086aff5433c6664380c2ab",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:8b33b36c3ae3c42b5e2d454ffd642233c1a22b725b18b6b52f178ade58c1be28",
+    "name": "금빛새마을금고",
+    "latitude": 37.5193699,
+    "longitude": 126.8439952,
+    "address": "서울특별시 양천구 신월로 188 (신월동)",
+    "roadAddress": "서울특별시 양천구 신월로 188 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 601-3",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "8b33b36c3ae3c42b5e2d454ffd642233c1a22b725b18b6b52f178ade58c1be28",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "생활밀착민간시설",
+      "facilityType2": "금융기관",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "16:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:9705e49c8552ca07a91b55b536dd2d573d4a7bbafaf8ca79cfd16d553e9d698a",
+    "name": "신월종합사회복지관",
+    "latitude": 37.52,
+    "longitude": 126.8473,
+    "address": "서울특별시 양천구 신월로24길 19",
+    "roadAddress": "서울특별시 양천구 신월로24길 19",
+    "lotAddress": "서울특별시 양천구 신월동 1063-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "9705e49c8552ca07a91b55b536dd2d573d4a7bbafaf8ca79cfd16d553e9d698a",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:9f37b664cef92dc2da5216e239705b098d0df5759ce3a253a80192b7e03efc82",
+    "name": "수명산롯데캐슬아파트경로당(사립)",
+    "latitude": 37.545099,
+    "longitude": 126.828467,
+    "address": "서울특별시 양천구 월정로 303 (수명산 롯데캐슬 103동)",
+    "roadAddress": "서울특별시 양천구 월정로 303 (수명산 롯데캐슬 103동)",
+    "lotAddress": "서울특별시 양천구 신월동 1036",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "9f37b664cef92dc2da5216e239705b098d0df5759ce3a253a80192b7e03efc82",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:a3577473cbe09cf3a1d731a270daab6cfe39a7ac3b8929bd8c6b30799b6efd85",
+    "name": "금실(구립)경로당",
+    "latitude": 37.518137,
+    "longitude": 126.837319,
+    "address": "서울특별시 양천구 지양로 21 (구립금실경로당)",
+    "roadAddress": "서울특별시 양천구 지양로 21 (구립금실경로당)",
+    "lotAddress": "서울특별시 양천구 신월동 985",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "a3577473cbe09cf3a1d731a270daab6cfe39a7ac3b8929bd8c6b30799b6efd85",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:ab8c1244a8ddd6299c0a7b508ccc185162632dfd87468f32a02b3c3e6e96bf76",
+    "name": "대주파크빌경로당(사립)",
+    "latitude": 37.514746,
+    "longitude": 126.842302,
+    "address": "서울특별시 양천구 남부순환로85길 16 (대주파크빌)",
+    "roadAddress": "서울특별시 양천구 남부순환로85길 16 (대주파크빌)",
+    "lotAddress": "서울특별시 양천구 신월동 1028",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "ab8c1244a8ddd6299c0a7b508ccc185162632dfd87468f32a02b3c3e6e96bf76",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:b505b1b6731ee34f60cf29befb1f63614c03090aee9396670beb2d0945ce9197",
+    "name": "태양(신월4동구립)경로당",
+    "latitude": 37.5243,
+    "longitude": 126.8385,
+    "address": "서울특별시 양천구 오목로3길 34",
+    "roadAddress": "서울특별시 양천구 오목로3길 34",
+    "lotAddress": "서울특별시 양천구 신월동 422-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "b505b1b6731ee34f60cf29befb1f63614c03090aee9396670beb2d0945ce9197",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:b526a945b90d785ab45f3c6b9bc3ca1d26b4990260e75ba88574159768f89cdb",
+    "name": "신월5동주민센터",
+    "latitude": 37.5386,
+    "longitude": 126.8272,
+    "address": "서울특별시 양천구 신월동 화곡로4길  10 ,  신월5동주민센터 (신월동)",
+    "roadAddress": "서울특별시 양천구 신월동 화곡로4길  10 ,  신월5동주민센터 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 52-2",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "b526a945b90d785ab45f3c6b9bc3ca1d26b4990260e75ba88574159768f89cdb",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "20:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:b99d8d7f59b73d1520e1bb34ddbc7899a9a86b8447887a85520f38325db8878f",
+    "name": "동방아파트경로당(사립)",
+    "latitude": 37.521453,
+    "longitude": 126.846476,
+    "address": "서울특별시 양천구 신월로 220 (동방아파트)",
+    "roadAddress": "서울특별시 양천구 신월로 220 (동방아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 607-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "b99d8d7f59b73d1520e1bb34ddbc7899a9a86b8447887a85520f38325db8878f",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:c2a9011154cf0028242b6bcf66c70f1ff4f104f0b2af16592d84f43612f47294",
+    "name": "강월경로당",
+    "latitude": 37.515571,
+    "longitude": 126.836308,
+    "address": "서울특별시 양천구 남부순환로82길 29",
+    "roadAddress": "서울특별시 양천구 남부순환로82길 29",
+    "lotAddress": "서울특별시 양천구 신월동 1004",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "c2a9011154cf0028242b6bcf66c70f1ff4f104f0b2af16592d84f43612f47294",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:cdb443a985c699bab08a893333ec440ba3441d836169f76c00c10bf4a7746bab",
+    "name": "신남(구립)경로당",
+    "latitude": 37.5313,
+    "longitude": 126.8302,
+    "address": "서울특별시 양천구 남부순환로56가길 13",
+    "roadAddress": "서울특별시 양천구 남부순환로56가길 13",
+    "lotAddress": "서울특별시 양천구 신월동 198-22",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "cdb443a985c699bab08a893333ec440ba3441d836169f76c00c10bf4a7746bab",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:cdb8a2e05dbeb2f32f72bcb13e1e427938c165d1fce36b7a7e339d27f1eb6864",
+    "name": "신월6동주민센터",
+    "latitude": 37.518004,
+    "longitude": 126.845134,
+    "address": "서울특별시 양천구 남부순환로83길 53 (신월6동행정복합타운)",
+    "roadAddress": "서울특별시 양천구 남부순환로83길 53 (신월6동행정복합타운)",
+    "lotAddress": "서울특별시 양천구 신월동 1078-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "cdb8a2e05dbeb2f32f72bcb13e1e427938c165d1fce36b7a7e339d27f1eb6864",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "20:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:d2b52f34a9af269c533fd498cecc59a230557172e5679c7467d0cf130a296bf3",
+    "name": "롯데캐슬아파트경로당(사립)",
+    "latitude": 37.523349,
+    "longitude": 126.840314,
+    "address": "서울특별시 양천구 오목로5길 19 (양천 롯데캐슬 101동)",
+    "roadAddress": "서울특별시 양천구 오목로5길 19 (양천 롯데캐슬 101동)",
+    "lotAddress": "서울특별시 양천구 신월동 1057",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "d2b52f34a9af269c533fd498cecc59a230557172e5679c7467d0cf130a296bf3",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:d7915fac1a423612f9c8616d92c87045ab63ae55f65ca7b0255ba8def49edf85",
+    "name": "신월1동주민센터",
+    "latitude": 37.5328,
+    "longitude": 126.8315,
+    "address": "서울특별시 양천구 곰달래로1길 38",
+    "roadAddress": "서울특별시 양천구 곰달래로1길 38",
+    "lotAddress": "서울특별시 양천구 신월동 135-18",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "d7915fac1a423612f9c8616d92c87045ab63ae55f65ca7b0255ba8def49edf85",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "20:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "10:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:d977b0418f7281f038c21df0179205b9ee538075c18d4ac2695c78732dd35d0a",
+    "name": "벽산블루밍1단지아파트경로당(사립)",
+    "latitude": 37.51362,
+    "longitude": 126.842419,
+    "address": "서울특별시 양천구 신정로13길 50 (벽산아파트)",
+    "roadAddress": "서울특별시 양천구 신정로13길 50 (벽산아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 1022",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "d977b0418f7281f038c21df0179205b9ee538075c18d4ac2695c78732dd35d0a",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:d9f25329af40af9bde475d2b9dafff1ef2675029018be456147c4d2decae22b6",
+    "name": "월성(구립)경로당",
+    "latitude": 37.532029,
+    "longitude": 126.83579,
+    "address": "서울특별시 양천구 곰달래로11길 24",
+    "roadAddress": "서울특별시 양천구 곰달래로11길 24",
+    "lotAddress": "서울특별시 양천구 신월동 119",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "d9f25329af40af9bde475d2b9dafff1ef2675029018be456147c4d2decae22b6",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:da38b0739e43c097ba95d5ea473e73d37d72092a981528bc65e5fb23ab6f2b50",
+    "name": "금용아파트경로당(사립)",
+    "latitude": 37.520564,
+    "longitude": 126.842435,
+    "address": "서울특별시 양천구 신월로17길 22 (신월동 금용아파트)",
+    "roadAddress": "서울특별시 양천구 신월로17길 22 (신월동 금용아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 533-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "da38b0739e43c097ba95d5ea473e73d37d72092a981528bc65e5fb23ab6f2b50",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:e516d6964dd1cf7e4ead140faef3fd40716a6aff140af1cdd3a0d11724375e5e",
+    "name": "신양(구립)경로당",
+    "latitude": 37.538337,
+    "longitude": 126.83149,
+    "address": "서울특별시 양천구 남부순환로33길 38 (신양구립노인정)",
+    "roadAddress": "서울특별시 양천구 남부순환로33길 38 (신양구립노인정)",
+    "lotAddress": "서울특별시 양천구 신월동 73-2",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "e516d6964dd1cf7e4ead140faef3fd40716a6aff140af1cdd3a0d11724375e5e",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:eaf7fbbbacbacf3307cdee24529bc40fd15c5bee15d320bb3e07bc9047d07fe9",
+    "name": "우당아파트경로당(사립)",
+    "latitude": 37.522858,
+    "longitude": 126.847596,
+    "address": "서울특별시 양천구 오목로 90 (우당아파트)",
+    "roadAddress": "서울특별시 양천구 오목로 90 (우당아파트)",
+    "lotAddress": "서울특별시 양천구 신월동 506-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "eaf7fbbbacbacf3307cdee24529bc40fd15c5bee15d320bb3e07bc9047d07fe9",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:f016ac5cc432bc33fc8ecb31136a9b93288533455b3facd442ab04f8e981a5c2",
+    "name": "수명(신월5동구립)경로당",
+    "latitude": 37.541573,
+    "longitude": 126.828761,
+    "address": "서울특별시 양천구 화곡로5길 23",
+    "roadAddress": "서울특별시 양천구 화곡로5길 23",
+    "lotAddress": "서울특별시 양천구 신월동 13-1",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "f016ac5cc432bc33fc8ecb31136a9b93288533455b3facd442ab04f8e981a5c2",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:f0ef8c2b2b5c7bc8f8919b4dd688d935f213198da9c0c2fa092cdb8a1000ff8a",
+    "name": "양천벽산블루밍아파트경로당(사립)",
+    "latitude": 37.525276,
+    "longitude": 126.83816,
+    "address": "서울특별시 양천구 월정로9길 20 (양천벽산블루밍2단지 관리동)",
+    "roadAddress": "서울특별시 양천구 월정로9길 20 (양천벽산블루밍2단지 관리동)",
+    "lotAddress": "서울특별시 양천구 신월동 1027",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "f0ef8c2b2b5c7bc8f8919b4dd688d935f213198da9c0c2fa092cdb8a1000ff8a",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:faa86495f7c7cb1c477ac36173a5bf0a8ef918c8e491daf276c4a7e3ad6d5805",
+    "name": "신월보건지소",
+    "latitude": 37.5312568,
+    "longitude": 126.831724,
+    "address": "서울특별시 양천구 남부순환로 407 (신월동)",
+    "roadAddress": "서울특별시 양천구 남부순환로 407 (신월동)",
+    "lotAddress": "서울특별시 양천구 신월동 131-4",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "faa86495f7c7cb1c477ac36173a5bf0a8ef918c8e491daf276c4a7e3ad6d5805",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "공공시설",
+      "facilityType2": "공공청사",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      }
+    }
+  },
+  {
+    "id": "heat-shelter:ffaa1c3dda9e9648fe5c733f53f3e974ee36f4250abcfc10cdfef84066269fdd",
+    "name": "곰달래(구립)경로당",
+    "latitude": 37.5286,
+    "longitude": 126.8348,
+    "address": "서울특별시 양천구 남부순환로63길 16-4",
+    "roadAddress": "서울특별시 양천구 남부순환로63길 16-4",
+    "lotAddress": "서울특별시 양천구 신월동 221-22",
+    "source": "서울시 무더위쉼터",
+    "sourceId": "ffaa1c3dda9e9648fe5c733f53f3e974ee36f4250abcfc10cdfef84066269fdd",
+    "category": "OTHER",
+    "subtype": "HEAT_SHELTER",
+    "details": {
+      "facilityType1": "특정계층이용시설",
+      "facilityType2": "회원이용시설",
+      "regularHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "09:00",
+        "end": "18:00"
+      },
+      "extendedHours": {
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "additionalHours": {
+        "days": [
+          "saturday",
+          "sunday"
+        ],
+        "start": "09:00",
+        "end": "21:00"
+      }
+    }
   }
 ]

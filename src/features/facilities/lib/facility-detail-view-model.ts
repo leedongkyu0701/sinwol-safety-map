@@ -3,6 +3,7 @@ import { formatAedTimeRange } from "@/shared/lib/operating-hours";
 import {
   DAYS_OF_WEEK,
   FIRE_WATER_SUBTYPE_LABELS,
+  HEAT_SHELTER_DAYS,
   type DayOfWeek,
   type Facility,
   type FireOrganizationSubtype,
@@ -37,6 +38,16 @@ const DAY_LABELS: Record<DayOfWeek, string> = {
   saturday: "토요일",
   sunday: "일요일",
   holiday: "공휴일",
+};
+
+const HEAT_SHELTER_DAY_LABELS: Record<(typeof HEAT_SHELTER_DAYS)[number], string> = {
+  monday: "월",
+  tuesday: "화",
+  wednesday: "수",
+  thursday: "목",
+  friday: "금",
+  saturday: "토",
+  sunday: "일",
 };
 
 const FIRE_ORGANIZATION_SUBTYPE_LABELS: Record<
@@ -115,7 +126,31 @@ export function createFacilityDetailViewModel(
       break;
 
     case "OTHER":
-      subtypeLabel = FIRE_ORGANIZATION_SUBTYPE_LABELS[facility.subtype];
+      if (facility.subtype === "HEAT_SHELTER") {
+        subtypeLabel = "무더위쉼터";
+        addOptionalRow(rows, "시설 구분", facility.details.facilityType1);
+        addOptionalRow(rows, "이용 구분", facility.details.facilityType2);
+        addOptionalRow(rows, "비고", facility.details.remarks);
+
+        const periods = [
+          ["기본 운영", facility.details.regularHours],
+          ["연장 운영", facility.details.extendedHours],
+          ["추가 운영", facility.details.additionalHours],
+        ] as const;
+
+        operatingHours = periods.flatMap(([label, period]) =>
+          period === undefined
+            ? []
+            : [
+                {
+                  day: `${label} · ${period.days.map((day) => HEAT_SHELTER_DAY_LABELS[day]).join("·")}`,
+                  hours: `${period.start}–${period.end}`,
+                },
+              ],
+        );
+      } else {
+        subtypeLabel = FIRE_ORGANIZATION_SUBTYPE_LABELS[facility.subtype];
+      }
       break;
   }
 

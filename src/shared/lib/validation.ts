@@ -7,7 +7,8 @@ export type FacilityIdNamespace =
   | "fire-water"
   | "shelter"
   | "aed"
-  | "fire-org";
+  | "fire-org"
+  | "heat-shelter";
 
 export interface ReasonableRecordCountOptions {
   label: string;

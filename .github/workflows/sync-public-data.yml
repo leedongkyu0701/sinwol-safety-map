@@ -44,6 +44,11 @@ jobs:
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
 
+      - name: Sync heat shelter data
+        run: npm run data:other:heat-shelter
+        env:
+          SEOUL_OPEN_DATA_KEY: ${{ secrets.SEOUL_OPEN_DATA_KEY }}
+
       - name: Verify published data
         run: npm run data:verify
 
@@ -51,7 +56,7 @@ jobs:
         id: changes
         shell: bash
         run: |
-          allowed_pattern='^(public/data/shelters\.json|public/data/aeds\.json|public/data/metadata\.json|data/review/aed-mobility-pending\.json)$'
+          allowed_pattern='^(public/data/shelters\.json|public/data/aeds\.json|public/data/other\.json|public/data/metadata\.json|data/review/aed-mobility-pending\.json)$'
           changed_files="$({
             git diff --name-only
             git ls-files --others --exclude-standard
@@ -67,6 +72,7 @@ jobs:
           git add -- \
             public/data/shelters.json \
             public/data/aeds.json \
+            public/data/other.json \
             public/data/metadata.json \
             data/review/aed-mobility-pending.json
 

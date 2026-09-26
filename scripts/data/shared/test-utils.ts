@@ -25,6 +25,7 @@ import {
   aedFacilitySchema,
   fireOrganizationFacilitySchema,
   fireWaterFacilitiesSchema,
+  heatShelterFacilitySchema,
   otherFacilitiesSchema,
   otherFacilitySchema,
   shelterFacilitiesSchema,
@@ -49,6 +50,17 @@ import { transformShelterRows } from "../shelters/transform";
 import { convertEpsg5186ToWgs84 } from "../other/fire-org/coordinates";
 import { classifyFireOrganizationSubtype } from "../other/fire-org/transform";
 import { mergeOtherFacilitiesByIdPrefix } from "../other/shared/merge";
+import {
+  normalizeHeatShelterHours,
+  normalizeOptionalHeatShelterHours,
+} from "../other/heat-shelter/operating-hours";
+import {
+  createHeatShelterSourceId,
+  transformHeatShelterRows,
+} from "../other/heat-shelter/transform";
+import { assertHeatShelterAudit, auditHeatShelterFacilities } from "../other/heat-shelter/audit";
+import { heatShelterSourceRowSchema } from "../other/heat-shelter/schema";
+import { createFacilityDetailViewModel } from "../../../src/features/facilities/lib/facility-detail-view-model";
 import {
   updateOtherDatasetMetadata,
   updateSourceMetadata,
@@ -218,6 +230,168 @@ assert.equal(
   false,
 );
 
+const heatShelterFixture = (overrides: Record<string, unknown> = {}) =>
+  heatShelterSourceRowSchema.parse({
+    YEAR: "2026",
+    AREA_CD: "1147056000",
+    FACILITY_TYPE1: "복지시설",
+    FACILITY_TYPE2: "회원이용시설",
+    R_AREA_NM: "신월 테스트 쉼터",
+    R_DETL_ADD: "서울특별시 양천구 신월로 1",
+    LOTNO_ADDR: "서울특별시 양천구 신월동 1-1",
+    RMRK: "확인 후 이용",
+    LAT: "37.52",
+    LON: "126.84",
+    MAP_COORD_X: "0",
+    MAP_COORD_Y: "0",
+    OPR_DAYS: "월,화,수,목,금",
+    OPR_START_TIME: "09:00",
+    OPR_END_TIME: "18:00",
+    EXT_OPR_YN: "N",
+    EXT_OPR_DAYS: "",
+    EXT_OPR_START_TIME: "",
+    EXT_OPR_END_TIME: "",
+    ADD_OPR_YN: "N",
+    ADD_OPR_DAYS: "",
+    ADD_OPR_START_TIME: "",
+    ADD_OPR_END_TIME: "",
+    ...overrides,
+  });
+
+assert.equal(
+  heatShelterFacilitySchema.safeParse({
+    ...baseFacility,
+    id: "heat-shelter:source-1",
+    category: "OTHER",
+    subtype: "HEAT_SHELTER",
+    details: {
+      facilityType1: "복지시설",
+      facilityType2: "회원이용시설",
+      regularHours: { days: ["monday"], start: "09:00", end: "24:00" },
+    },
+  }).success,
+  true,
+);
+assert.equal(
+  heatShelterFacilitySchema.safeParse({
+    ...baseFacility,
+    id: "wrong:source-1",
+    category: "OTHER",
+    subtype: "HEAT_SHELTER",
+    details: { facilityType1: "복지시설", facilityType2: "회원이용시설" },
+  }).success,
+  false,
+);
+
+const heatShelterSourceRow = heatShelterFixture();
+const heatShelterTransform = transformHeatShelterRows([heatShelterSourceRow]);
+assert.equal(heatShelterTransform.facilities.length, 1);
+assert.equal(heatShelterTransform.areaSelectedRows, 1);
+assert.equal(heatShelterTransform.facilities[0].details.facilityType2, "회원이용시설");
+assert.equal(heatShelterTransform.facilities[0].roadAddress, "서울특별시 양천구 신월로 1");
+assert.equal(heatShelterTransform.facilities[0].lotAddress, "서울특별시 양천구 신월동 1-1");
+assert.equal(heatShelterTransform.facilities[0].id.startsWith("heat-shelter:"), true);
+assert.equal(heatShelterTransform.areaAddressMismatchIdentities.length, 0);
+assert.equal(
+  transformHeatShelterRows([
+    heatShelterFixture({ AREA_CD: "1147057000", R_AREA_NM: "신월2동 쉼터", LOTNO_ADDR: "서울특별시 양천구 신월동 2" }),
+    heatShelterFixture({ AREA_CD: "1147055000", R_AREA_NM: "목동 쉼터", LOTNO_ADDR: "서울특별시 양천구 목동 1" }),
+  ]).facilities.length,
+  1,
+);
+const twoHeatShelters = [
+  heatShelterFixture(),
+  heatShelterFixture({ R_AREA_NM: "다른 시설", LOTNO_ADDR: "서울특별시 양천구 신월동 2" }),
+];
+assert.deepEqual(
+  transformHeatShelterRows(twoHeatShelters).facilities.map((facility) => facility.sourceId),
+  transformHeatShelterRows([...twoHeatShelters].reverse()).facilities.map((facility) => facility.sourceId),
+);
+const mismatchTransform = transformHeatShelterRows([
+  heatShelterFixture({ R_AREA_NM: "행정코드만 신월", LOTNO_ADDR: "서울특별시 양천구 목동 99" }),
+  heatShelterFixture({ AREA_CD: "1147055000", R_AREA_NM: "주소만 신월", LOTNO_ADDR: "서울특별시 양천구 신월동 99" }),
+]);
+assert.equal(mismatchTransform.areaAddressMismatchIdentities.length, 2);
+
+const heatShelterIdentity = createHeatShelterSourceId(
+  JSON.stringify(["1147056000", "신월 테스트 쉼터", "서울특별시 양천구 신월동 1-1"]),
+);
+assert.equal(heatShelterIdentity, createHeatShelterSourceId(
+  JSON.stringify(["1147056000", "신월 테스트 쉼터", "서울특별시 양천구 신월동 1-1"]),
+));
+assert.match(heatShelterIdentity, /^[a-f0-9]{64}$/);
+assert.equal(
+  transformHeatShelterRows([heatShelterFixture(), heatShelterFixture({ R_AREA_NM: "다른 시설" })]).facilities.length,
+  2,
+);
+assert.notEqual(
+  transformHeatShelterRows([heatShelterFixture()]).facilities[0].sourceId,
+  transformHeatShelterRows([heatShelterFixture({ R_AREA_NM: "다른 시설" })]).facilities[0].sourceId,
+);
+assert.notEqual(
+  transformHeatShelterRows([heatShelterFixture()]).facilities[0].sourceId,
+  transformHeatShelterRows([heatShelterFixture({ LOTNO_ADDR: "서울특별시 양천구 신월동 1-2" })]).facilities[0].sourceId,
+);
+assert.equal(
+  transformHeatShelterRows([heatShelterFixture(), heatShelterFixture()]).exactDuplicatesCollapsed,
+  1,
+);
+const heatShelterConflict = transformHeatShelterRows([
+  heatShelterFixture(),
+  heatShelterFixture({ LAT: "37.53" }),
+]);
+assert.equal(heatShelterConflict.identityConflicts.length, 1);
+const heatShelterConflictAudit = auditHeatShelterFacilities(
+  2,
+  1,
+  heatShelterConflict,
+  heatShelterConflict.facilities,
+  2,
+);
+assert.throws(() => assertHeatShelterAudit(heatShelterConflictAudit), /manual review/);
+
+assert.equal(
+  normalizeOptionalHeatShelterHours("N", { days: "", start: "", end: "" }, "extended"),
+  undefined,
+);
+assert.deepEqual(
+  normalizeOptionalHeatShelterHours(
+    "Y",
+    { days: "월,화,수,목,금", start: "18:00", end: "20:00" },
+    "extended",
+  ),
+  { days: ["monday", "tuesday", "wednesday", "thursday", "friday"], start: "18:00", end: "20:00" },
+);
+assert.throws(
+  () => normalizeOptionalHeatShelterHours("Y", { days: "월", start: "18:00", end: "" }, "extended"),
+  /incomplete|missing/,
+);
+assert.equal(
+  normalizeOptionalHeatShelterHours("N", { days: "", start: "", end: "" }, "additional"),
+  undefined,
+);
+assert.deepEqual(
+  normalizeOptionalHeatShelterHours("Y", { days: "토,일", start: "10:00", end: "24:00" }, "additional")?.days,
+  ["saturday", "sunday"],
+);
+assert.throws(
+  () => normalizeOptionalHeatShelterHours("Y", { days: "토", start: "10:00", end: "" }, "additional"),
+  /incomplete|missing/,
+);
+assert.equal(
+  normalizeHeatShelterHours({ days: "월", start: "09:00", end: "24:00" }, "regular")?.end,
+  "24:00",
+);
+assert.throws(() => normalizeHeatShelterHours({ days: "월", start: "25:00", end: "24:00" }, "regular"));
+assert.throws(() => normalizeHeatShelterHours({ days: "월,휴일", start: "09:00", end: "18:00" }, "regular"), /unknown weekday/);
+
+const heatShelterDetail = createFacilityDetailViewModel(heatShelterTransform.facilities[0]);
+assert.equal(heatShelterDetail.categoryLabel, "기타");
+assert.equal(heatShelterDetail.subtypeLabel, "무더위쉼터");
+assert.equal(heatShelterDetail.rows.some((row) => row.value === "회원이용시설"), true);
+assert.equal(heatShelterDetail.rows.some((row) => row.label === "비고" && row.value === "확인 후 이용"), true);
+assert.equal(heatShelterDetail.operatingHours[0].day.startsWith("기본 운영"), true);
+
 assert.equal(
   classifyFireOrganizationSubtype("소방서", "양천소방서"),
   "FIRE_STATION",
@@ -268,6 +442,22 @@ assert.throws(() =>
     [otherMergeFixture("wrong:new")],
     "fire-org:",
   ),
+);
+assert.deepEqual(
+  mergeOtherFacilitiesByIdPrefix(
+    [
+      otherMergeFixture("fire-org:kept"),
+      otherMergeFixture("heat-shelter:old"),
+      otherMergeFixture("future:kept"),
+    ],
+    [otherMergeFixture("heat-shelter:new")],
+    "heat-shelter:",
+  ),
+  [
+    otherMergeFixture("fire-org:kept"),
+    otherMergeFixture("future:kept"),
+    otherMergeFixture("heat-shelter:new"),
+  ],
 );
 
 const shelterTransform = transformShelterRows([
@@ -406,6 +596,28 @@ assert.equal(
   1,
 );
 assert.equal(updatedOtherMetadata.sources.other.datasets?.fireOrg?.count, 2);
+const heatShelterMetadata = updateOtherDatasetMetadata(
+  updatedOtherMetadata,
+  "heatShelter",
+  {
+    count: 1,
+    source: "서울시 무더위쉼터",
+    fetchedAt: "2026-09-18T06:00:00.000Z",
+  },
+  {
+    totalCount: 4,
+    publishedDataChanged: true,
+    generatedAt: "2026-09-18T06:30:00.000Z",
+  },
+);
+assert.equal(heatShelterMetadata.sources.other.count, 4);
+assert.equal(
+  Object.values(heatShelterMetadata.sources.other.datasets ?? {}).reduce(
+    (total, dataset) => total + dataset.count,
+    0,
+  ),
+  4,
+);
 assert.equal(
   metadataSchema.safeParse({
     ...existingCompositeMetadata,

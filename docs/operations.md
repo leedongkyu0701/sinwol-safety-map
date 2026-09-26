@@ -55,6 +55,16 @@ npm run data:aeds
 npm run data:other:fire-org
 ```
 
+### Other / Heat Shelter
+
+서울 열린데이터광장 `서울시 무더위쉼터(TbGtnHwcwP)`에서 API 데이터를 가져와 신월1~7동 시설을 `public/data/other.json`에 병합합니다. `.env.local` 또는 process environment에 기존 `SEOUL_OPEN_DATA_KEY`를 설정합니다.
+
+```bash
+npm run data:other:heat-shelter
+```
+
+ETL은 AREA_CD와 신월동 주소 필터가 일치하는지 검사하고, heat-shelter namespace만 교체합니다. 서로 다른 시설의 동일 좌표는 보존합니다.
+
 ## 검증 순서
 
 ETL을 실행하거나 Published Data를 변경한 뒤 다음을 모두 실행합니다.
@@ -82,7 +92,7 @@ npm run build
 
 ## 자동 동기화
 
-`.github/workflows/sync-public-data.yml`은 Shelter와 AED를 정기적으로 갱신합니다.
+`.github/workflows/sync-public-data.yml`은 Shelter, AED와 Heat Shelter를 정기적으로 갱신합니다.
 
 1. ETL과 `data:verify`를 실행합니다.
 2. 허용된 Published Data와 AED pending 파일만 Stage합니다.

@@ -6,6 +6,7 @@ import {
   aedFacilitiesSchema,
   fireWaterFacilitiesSchema,
   otherFacilitiesSchema,
+  heatShelterFacilitiesSchema,
   shelterFacilitiesSchema,
 } from "../../../src/shared/schemas/facility";
 import {
@@ -40,6 +41,11 @@ import {
   FIRE_ORG_SOURCE_NAME,
   OTHER_OUTPUT_PATH,
 } from "../other/fire-org/constants";
+import {
+  HEAT_SHELTER_ID_PREFIX,
+  HEAT_SHELTER_METADATA_KEY,
+  HEAT_SHELTER_SOURCE_NAME,
+} from "../other/heat-shelter/constants";
 import { calculateFileSha256 } from "./file-hash";
 import { readJsonFileIfExists } from "./write-json";
 
@@ -291,6 +297,11 @@ function verifyOther(metadata: DataMetadata): number {
   );
   const fireOrgMetadata =
     metadata.sources.other.datasets?.[FIRE_ORG_METADATA_KEY];
+  const heatShelterFacilities = heatShelterFacilitiesSchema.parse(
+    facilities.filter((facility) => facility.id.startsWith(HEAT_SHELTER_ID_PREFIX)),
+  );
+  const heatShelterMetadata =
+    metadata.sources.other.datasets?.[HEAT_SHELTER_METADATA_KEY];
 
   assertUniqueValues(
     facilities.map((facility) => facility.id),
@@ -299,6 +310,10 @@ function verifyOther(metadata: DataMetadata): number {
   assertUniqueValues(
     fireOrgFacilities.map((facility) => facility.sourceId),
     "fire organization sourceId",
+  );
+  assertUniqueValues(
+    heatShelterFacilities.map((facility) => facility.sourceId),
+    "heat shelter sourceId",
   );
   assert.equal(
     facilities.every((facility) => facility.category === "OTHER"),
@@ -316,17 +331,15 @@ function verifyOther(metadata: DataMetadata): number {
     "Published OTHER data contains a forbidden missing-value string",
   );
 
-  if (metadata.sources.other.datasets !== undefined) {
-    const datasetCount = Object.values(
-      metadata.sources.other.datasets,
-    ).reduce((total, dataset) => total + dataset.count, 0);
-
-    assert.equal(
-      datasetCount,
-      metadata.sources.other.count,
-      "OTHER dataset metadata counts must sum to the OTHER count",
-    );
-  }
+  const datasetCount = Object.values(metadata.sources.other.datasets ?? {}).reduce(
+    (total, dataset) => total + dataset.count,
+    0,
+  );
+  assert.equal(
+    datasetCount,
+    metadata.sources.other.count,
+    "OTHER dataset metadata counts must sum to the OTHER count",
+  );
 
   if (fireOrgFacilities.length > 0 || fireOrgMetadata !== undefined) {
     assert.notEqual(
@@ -351,9 +364,35 @@ function verifyOther(metadata: DataMetadata): number {
     );
   }
 
+  if (heatShelterFacilities.length > 0 || heatShelterMetadata !== undefined) {
+    assert.notEqual(
+      heatShelterMetadata,
+      undefined,
+      "Heat shelter metadata is required when heat shelter rows exist",
+    );
+    assert.equal(
+      heatShelterMetadata?.count,
+      heatShelterFacilities.length,
+      "Heat shelter metadata count must match heat shelter rows",
+    );
+    assert.equal(
+      heatShelterMetadata?.source,
+      HEAT_SHELTER_SOURCE_NAME,
+      "Heat shelter metadata source must match the configured source",
+    );
+    assert.equal(
+      typeof heatShelterMetadata?.fetchedAt,
+      "string",
+      "Heat shelter metadata must contain fetchedAt",
+    );
+  }
+
   console.log(`OTHER rows: ${facilities.length.toLocaleString("en-US")}`);
   console.log(
     `Fire organization rows: ${fireOrgFacilities.length.toLocaleString("en-US")}`,
+  );
+  console.log(
+    `Heat shelter rows: ${heatShelterFacilities.length.toLocaleString("en-US")}`,
   );
 
   return facilities.length;

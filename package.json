@@ -14,7 +14,8 @@
     "data:fire-water": "tsx scripts/data/fire-water/index.ts",
     "data:shelters": "tsx scripts/data/shelters/index.ts",
     "data:aeds": "tsx scripts/data/aed/index.ts",
-    "data:other:fire-org": "tsx scripts/data/other/fire-org/index.ts"
+    "data:other:fire-org": "tsx scripts/data/other/fire-org/index.ts",
+    "data:other:heat-shelter": "tsx scripts/data/other/heat-shelter/index.ts"
   },
   "dependencies": {
     "@tanstack/react-virtual": "^3.14.13",

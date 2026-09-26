@@ -93,6 +93,6 @@ Facility Marker는 `facility.id`를 Registry identity로 사용하고 Filter·Se
 - Repository: GitHub
 - Branches: `main`, `feature/*`
 - CI: `.github/workflows/ci.yml`에서 Published Data Test, Verify, TypeScript, Lint, Build 실행
-- Scheduled Sync: `.github/workflows/sync-public-data.yml`에서 Shelter와 AED Snapshot 갱신
+- Scheduled Sync: `.github/workflows/sync-public-data.yml`에서 Shelter, AED와 Heat Shelter Snapshot 갱신
 
 정기 동기화가 실패하면 기존 Repository Snapshot을 유지한다. Fire Water와 Fire Organization Snapshot은 수동 갱신 대상이다.
