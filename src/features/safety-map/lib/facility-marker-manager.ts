@@ -1,4 +1,8 @@
-import { createFacilityMarkerIcons } from "@/features/safety-map/config/marker-config";
+import {
+  createFacilityMarkerIcons,
+  createSelectedFacilityMarkerIcons,
+} from "@/features/safety-map/config/marker-config";
+import { MAP_OVERLAY_Z_INDEX } from "@/features/safety-map/config/map-overlay-config";
 import type { Facility } from "@/shared/types/facility";
 
 interface MarkerEntry {
@@ -10,7 +14,9 @@ interface MarkerEntry {
 
 export class FacilityMarkerManager {
   private readonly icons = createFacilityMarkerIcons();
+  private readonly selectedIcons = createSelectedFacilityMarkerIcons();
   private readonly entries = new Map<string, MarkerEntry>();
+  private selectedFacilityId: string | null = null;
 
   constructor(
     private readonly onMarkerClick: (facilityId: string) => void,
@@ -37,6 +43,7 @@ export class FacilityMarkerManager {
           icon: this.icons[facility.category],
           clickable: true,
           title: facility.name,
+          zIndex: MAP_OVERLAY_Z_INDEX.facilityMarker,
         });
         let clickListener: naver.maps.MapEventListener | null = null;
 
@@ -70,6 +77,36 @@ export class FacilityMarkerManager {
     }
   }
 
+  setSelectedFacilityId(facilityId: string | null): void {
+    if (this.selectedFacilityId === facilityId) {
+      return;
+    }
+
+    const previousEntry =
+      this.selectedFacilityId === null
+        ? undefined
+        : this.entries.get(this.selectedFacilityId);
+
+    if (previousEntry !== undefined) {
+      previousEntry.marker.setIcon(this.icons[previousEntry.facility.category]);
+      previousEntry.marker.setZIndex(MAP_OVERLAY_Z_INDEX.facilityMarker);
+    }
+
+    this.selectedFacilityId = facilityId;
+
+    const selectedEntry =
+      facilityId === null ? undefined : this.entries.get(facilityId);
+
+    if (selectedEntry !== undefined) {
+      selectedEntry.marker.setIcon(
+        this.selectedIcons[selectedEntry.facility.category],
+      );
+      selectedEntry.marker.setZIndex(
+        MAP_OVERLAY_Z_INDEX.selectedFacilityMarker,
+      );
+    }
+  }
+
   setVisibleFacilityIds(visibleFacilityIds: ReadonlySet<string>): number {
     let visibleCount = 0;
 
@@ -99,6 +136,7 @@ export class FacilityMarkerManager {
     }
 
     this.entries.clear();
+    this.selectedFacilityId = null;
   }
 
   destroy(): void {
