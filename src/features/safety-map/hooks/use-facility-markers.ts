@@ -22,6 +22,7 @@ interface UseFacilityMarkersOptions {
   facilities: readonly Facility[];
   visibleFacilityIds: ReadonlySet<string>;
   onMarkerClick: (facilityId: string) => void;
+  selectedFacilityId: string | null;
   enabled: boolean;
 }
 
@@ -44,12 +45,14 @@ export function useFacilityMarkers({
   facilities,
   visibleFacilityIds,
   onMarkerClick,
+  selectedFacilityId,
   enabled,
 }: UseFacilityMarkersOptions): UseFacilityMarkersResult {
   const managerRef = useRef<FacilityMarkerManager | null>(null);
   const clusterControllerRef = useRef<FacilityClusterController | null>(null);
   const onMarkerClickRef = useRef(onMarkerClick);
   const visibleFacilityIdsRef = useRef(visibleFacilityIds);
+  const selectedFacilityIdRef = useRef(selectedFacilityId);
   const [state, setState] = useState<FacilityMarkerState>(INITIAL_STATE);
 
   useEffect(() => {
@@ -59,6 +62,11 @@ export function useFacilityMarkers({
   useEffect(() => {
     visibleFacilityIdsRef.current = visibleFacilityIds;
   }, [visibleFacilityIds]);
+
+  useEffect(() => {
+    selectedFacilityIdRef.current = selectedFacilityId;
+    managerRef.current?.setSelectedFacilityId(selectedFacilityId);
+  }, [selectedFacilityId]);
 
   useEffect(() => {
     if (!enabled) {
@@ -82,6 +90,7 @@ export function useFacilityMarkers({
         });
         managerRef.current = manager;
         manager.mount(facilities, visibleFacilityIdsRef.current);
+        manager.setSelectedFacilityId(selectedFacilityIdRef.current);
         clusterController = new FacilityClusterController(map);
         clusterControllerRef.current = clusterController;
         clusterController.setMarkers(manager.getVisibleMarkers());

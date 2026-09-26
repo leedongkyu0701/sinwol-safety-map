@@ -80,6 +80,7 @@ export function SafetyMap() {
     facilities: facilityState.facilities,
     visibleFacilityIds: facilityResults.visibleFacilityIds,
     onMarkerClick: handleSelectFacility,
+    selectedFacilityId,
     enabled:
       mapState.status === "ready" && facilityState.status === "ready",
   });

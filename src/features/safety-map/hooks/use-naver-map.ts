@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 
 import {
   DEFAULT_MAP_ZOOM,
+  MIN_MAP_ZOOM,
+  SINWOL_MAP_BOUNDS,
   SINWOL_MAP_CENTER,
 } from "@/features/safety-map/config/map-config";
 import {
@@ -89,12 +91,25 @@ export function useNaverMap(
           throw new Error("NAVER Map container is not available.");
         }
 
+        const maxBounds = new naver.maps.LatLngBounds(
+          new naver.maps.LatLng(
+            SINWOL_MAP_BOUNDS.southWest.latitude,
+            SINWOL_MAP_BOUNDS.southWest.longitude,
+          ),
+          new naver.maps.LatLng(
+            SINWOL_MAP_BOUNDS.northEast.latitude,
+            SINWOL_MAP_BOUNDS.northEast.longitude,
+          ),
+        );
+
         const map = new naver.maps.Map(container, {
           center: new naver.maps.LatLng(
             SINWOL_MAP_CENTER.latitude,
             SINWOL_MAP_CENTER.longitude,
           ),
           mapTypeId: naver.maps.MapTypeId.NORMAL,
+          maxBounds,
+          minZoom: MIN_MAP_ZOOM,
           scaleControl: true,
           zoom: DEFAULT_MAP_ZOOM,
           zoomControl: true,

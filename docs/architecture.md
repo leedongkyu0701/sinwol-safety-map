@@ -64,7 +64,7 @@ useNaverMap
 → NAVER Map lifecycle
 
 FacilityMarkerManager
-→ Facility Marker Registry and click listener
+→ Facility Marker Registry, click listener and selected presentation
 
 FacilityClusterController
 → visible Result Marker presentation
@@ -73,7 +73,7 @@ useUserLocationOverlay
 → current location Marker and accuracy Circle
 ```
 
-Facility Marker는 `facility.id`를 Registry identity로 사용하고 Filter·Search 때 재생성하지 않는다. Cluster Controller는 기존 Marker Registry에서 결과에 해당하는 Marker만 지도에 표현한다. User Location Overlay는 Facility Cluster와 별도 생명주기와 z-index를 가진다.
+Facility Marker는 `facility.id`를 Registry identity로 사용하고 Filter·Search 때 재생성하지 않는다. 선택 상태는 기존 Marker의 아이콘과 z-index만 갱신한다. Cluster Controller는 기존 Marker Registry에서 결과에 해당하는 Marker만 지도에 표현한다. User Location Overlay는 Facility Cluster와 별도 생명주기와 z-index를 가진다.
 
 목록과 지도 선택은 같은 Facility ID를 사용한다. 긴 목록은 `@tanstack/react-virtual`로 화면에 필요한 행만 렌더링한다.
 
