@@ -106,7 +106,7 @@ export function EmergencyMode() {
           </button>
           <button type="button" onClick={() => selectTarget("SHELTER")} disabled={requesting} aria-pressed={target === "SHELTER"} className="flex min-h-22 w-full items-center rounded-xl border border-zinc-200 bg-white px-5 text-lg font-semibold text-zinc-950 transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60">
             <ActionContent icon={<Image src="/icons/facilities/shelter.svg" alt="" aria-hidden="true" width={36} height={36} />}>
-              민방위 대피시설 찾기
+              가까운 민방위 대피시설 찾기
             </ActionContent>
           </button>
         </div>
