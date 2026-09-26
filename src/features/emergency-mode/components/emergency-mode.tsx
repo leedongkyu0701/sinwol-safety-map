@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 
 import { useCurrentLocation } from "@/features/current-location/hooks/use-current-location";
 import { useFacilities } from "@/features/facilities/hooks/use-facilities";
@@ -28,6 +28,21 @@ function PhoneIcon({ className = "size-7" }: { className?: string }) {
     <svg aria-hidden="true" viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
       <path d="M21 16.4v3a2 2 0 0 1-2.2 2A18.5 18.5 0 0 1 2.6 5.2 2 2 0 0 1 4.6 3h3a2 2 0 0 1 2 1.7l.4 2.5a2 2 0 0 1-.6 1.8L7.8 10.6a15 15 0 0 0 5.6 5.6l1.6-1.6a2 2 0 0 1 1.8-.6l2.5.4a2 2 0 0 1 1.7 2Z" />
     </svg>
+  );
+}
+
+function ActionContent({
+  icon,
+  children,
+}: {
+  icon: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <span className="mx-auto grid w-full max-w-72 grid-cols-[2.25rem_minmax(0,1fr)] items-center gap-3 text-left">
+      <span className="grid size-9 place-items-center">{icon}</span>
+      <span>{children}</span>
+    </span>
   );
 }
 
@@ -78,19 +93,21 @@ export function EmergencyMode() {
         <p className="mb-5 text-base font-medium text-zinc-600">필요한 도움을 바로 선택하세요</p>
 
         <div className="space-y-3">
-          <a href="tel:119" className="flex min-h-22 w-full items-center justify-center gap-3 rounded-xl bg-red-500 px-5 text-xl font-bold text-white transition-colors hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
-            <PhoneIcon />119 전화하기
+          <a href="tel:119" className="flex min-h-22 w-full items-center rounded-xl bg-red-500 px-5 text-xl font-bold text-white transition-colors hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
+            <ActionContent icon={<PhoneIcon />}>119 전화하기</ActionContent>
           </a>
-          <a href="tel:112" className="flex min-h-22 w-full items-center justify-center gap-3 rounded-xl bg-blue-900 px-5 text-xl font-bold text-white transition-colors hover:bg-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2">
-            <PhoneIcon />112 전화하기
+          <a href="tel:112" className="flex min-h-22 w-full items-center rounded-xl bg-blue-900 px-5 text-xl font-bold text-white transition-colors hover:bg-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2">
+            <ActionContent icon={<PhoneIcon />}>112 전화하기</ActionContent>
           </a>
-          <button type="button" onClick={() => selectTarget("AED")} disabled={requesting} aria-pressed={target === "AED"} className="flex min-h-22 w-full items-center justify-center gap-3 rounded-xl border border-zinc-200 bg-white px-5 text-lg font-semibold text-zinc-950 transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60">
-            <Image src="/icons/facilities/aed.svg" alt="" aria-hidden="true" width={36} height={36} />
-            가까운 AED 찾기
+          <button type="button" onClick={() => selectTarget("AED")} disabled={requesting} aria-pressed={target === "AED"} className="flex min-h-22 w-full items-center rounded-xl border border-zinc-200 bg-white px-5 text-lg font-semibold text-zinc-950 transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60">
+            <ActionContent icon={<Image src="/icons/facilities/aed.svg" alt="" aria-hidden="true" width={36} height={36} />}>
+              가까운 AED 찾기
+            </ActionContent>
           </button>
-          <button type="button" onClick={() => selectTarget("SHELTER")} disabled={requesting} aria-pressed={target === "SHELTER"} className="flex min-h-22 w-full items-center justify-center gap-3 rounded-xl border border-zinc-200 bg-white px-5 text-lg font-semibold text-zinc-950 transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60">
-            <Image src="/icons/facilities/shelter.svg" alt="" aria-hidden="true" width={36} height={36} />
-            민방위 대피시설 찾기
+          <button type="button" onClick={() => selectTarget("SHELTER")} disabled={requesting} aria-pressed={target === "SHELTER"} className="flex min-h-22 w-full items-center rounded-xl border border-zinc-200 bg-white px-5 text-lg font-semibold text-zinc-950 transition-colors hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-60">
+            <ActionContent icon={<Image src="/icons/facilities/shelter.svg" alt="" aria-hidden="true" width={36} height={36} />}>
+              민방위 대피시설 찾기
+            </ActionContent>
           </button>
         </div>
 
@@ -116,7 +133,6 @@ export function EmergencyMode() {
           </section>
         ) : null}
 
-        <Link href="/" className="mt-8 inline-flex min-h-11 items-center text-sm font-semibold text-blue-700 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">일반 지도 보기</Link>
       </div>
     </main>
   );

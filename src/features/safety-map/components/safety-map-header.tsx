@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { EmergencyModeLink } from "@/features/emergency-mode/components/emergency-mode-link";
 import { InfoIcon } from "@/features/safety-map/components/info-icon";
 
 interface SafetyMapHeaderProps {
@@ -17,7 +18,10 @@ export function SafetyMapHeader({
         <h1 className="text-xl font-extrabold tracking-tight text-zinc-950">
           신월동 안전지도
         </h1>
-        <InfoIcon className="size-10 rounded-md border-0 bg-transparent text-zinc-700 shadow-none hover:bg-zinc-100 hover:text-zinc-950" />
+        <div className="flex items-center gap-3">
+          <EmergencyModeLink />
+          <InfoIcon className="size-10 rounded-md border-0 bg-transparent text-zinc-700 shadow-none hover:bg-zinc-100 hover:text-zinc-950" />
+        </div>
       </header>
     );
   }
