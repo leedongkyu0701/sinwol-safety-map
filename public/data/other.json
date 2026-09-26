@@ -1,5 +1,787 @@
 [
   {
+    "id": "child-safety-house:50014645",
+    "name": "국제안경원",
+    "latitude": 37.52307388,
+    "longitude": 126.8458599,
+    "address": "서울특별시 양천구 오목로 75-0,국제안경원",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50014645",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2603-5773"
+    }
+  },
+  {
+    "id": "child-safety-house:50014658",
+    "name": "거북이 온누리약국",
+    "latitude": 37.52466462,
+    "longitude": 126.8414093,
+    "address": "서울특별시 양천구 월정로 57-0,한약국",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50014658",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2692-7573"
+    }
+  },
+  {
+    "id": "child-safety-house:50014714",
+    "name": "쭈쭈슈퍼",
+    "latitude": 37.53873524,
+    "longitude": 126.8292691,
+    "address": "서울특별시 양천구 화곡로8길 8-0,쭈쭈슈퍼",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50014714",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-2577"
+    }
+  },
+  {
+    "id": "child-safety-house:50014721",
+    "name": "모닝글로리",
+    "latitude": 37.53885508,
+    "longitude": 126.8311126,
+    "address": "서울특별시 양천구 화곡로10길 7-0,모닝글로리",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50014721",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-3231"
+    }
+  },
+  {
+    "id": "child-safety-house:50032972",
+    "name": "건강약국",
+    "latitude": 37.53244735,
+    "longitude": 126.8334263,
+    "address": "서울특별시 양천구 곰달래로5길 30-0,110-1 건강약국",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50032972",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2697-0485"
+    }
+  },
+  {
+    "id": "child-safety-house:50032975",
+    "name": "제민약국",
+    "latitude": 37.52913611,
+    "longitude": 126.8367588,
+    "address": "서울특별시 양천구 곰달래로10길 9-0,229-3 제민약국",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50032975",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2603-3918"
+    }
+  },
+  {
+    "id": "child-safety-house:50032978",
+    "name": "메디팜 성화약국",
+    "latitude": 37.53293944,
+    "longitude": 126.8264935,
+    "address": "서울특별시 양천구 남부순환로40길 63-0,177-10 메디팜 성화약국",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50032978",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2604-6148"
+    }
+  },
+  {
+    "id": "child-safety-house:50032979",
+    "name": "진생약국",
+    "latitude": 37.52962279,
+    "longitude": 126.8347824,
+    "address": "서울특별시 양천구 곰달래로 20-0,225-17 진생약국",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50032979",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2604-5029"
+    }
+  },
+  {
+    "id": "child-safety-house:50034146",
+    "name": "샛별슈퍼",
+    "latitude": 37.52592966,
+    "longitude": 126.8434505,
+    "address": "서울특별시 양천구 중앙로55길 54-0,샛별슈퍼",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50034146",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2698-9444"
+    }
+  },
+  {
+    "id": "child-safety-house:50040500",
+    "name": "경창약국",
+    "latitude": 37.52448258,
+    "longitude": 126.8415455,
+    "address": "서울특별시 양천구 월정로 53-0",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50040500",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50040503",
+    "name": "대성세탁소",
+    "latitude": 37.51952686,
+    "longitude": 126.8403722,
+    "address": "서울특별시 양천구 남부순환로75길 9-0",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50040503",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2697-0112"
+    }
+  },
+  {
+    "id": "child-safety-house:50042293",
+    "name": "건강약국",
+    "latitude": 37.53244797,
+    "longitude": 126.8334259,
+    "address": "서울 양천구 곰달래로5길 30",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042293",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2697-0485"
+    }
+  },
+  {
+    "id": "child-safety-house:50042294",
+    "name": "메디팜 성화약국",
+    "latitude": 37.53293944,
+    "longitude": 126.8264935,
+    "address": "서울 양천구 남부순환로40길 63",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042294",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2604-6148"
+    }
+  },
+  {
+    "id": "child-safety-house:50042295",
+    "name": "하나약국",
+    "latitude": 37.53041216,
+    "longitude": 126.8379017,
+    "address": "서울 양천구 월정로 127",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042295",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2606-3979"
+    }
+  },
+  {
+    "id": "child-safety-house:50042296",
+    "name": "제민약국",
+    "latitude": 37.52913588,
+    "longitude": 126.8367588,
+    "address": "서울 양천구 곰달래로10길 9",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042296",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2603-3918"
+    }
+  },
+  {
+    "id": "child-safety-house:50042297",
+    "name": "진생약국",
+    "latitude": 37.52962275,
+    "longitude": 126.8347824,
+    "address": "서울 양천구 곰달래로 20",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042297",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2604-5029"
+    }
+  },
+  {
+    "id": "child-safety-house:50042298",
+    "name": "코사마트",
+    "latitude": 37.53066654,
+    "longitude": 126.8294741,
+    "address": "서울 양천구 남부순환로60길 11",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042298",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042299",
+    "name": "참조은 할인마트",
+    "latitude": 37.53395075,
+    "longitude": 126.8272916,
+    "address": "서울 양천구 남부순환로 40길 37",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042299",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2691-7656"
+    }
+  },
+  {
+    "id": "child-safety-house:50042300",
+    "name": "동인 프라자 약국",
+    "latitude": 37.53482381,
+    "longitude": 126.8279934,
+    "address": "서울 양천구 남부순환로 40길 13",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042300",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042301",
+    "name": "국제안경원",
+    "latitude": 37.52307419,
+    "longitude": 126.8458598,
+    "address": "서울 양천구 오목로 75",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042301",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2603-5773"
+    }
+  },
+  {
+    "id": "child-safety-house:50042302",
+    "name": "조일약국",
+    "latitude": 37.51807567,
+    "longitude": 126.8422542,
+    "address": "서울 양천구 신월로 168",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042302",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042303",
+    "name": "이마트",
+    "latitude": 37.51587619,
+    "longitude": 126.8407083,
+    "address": "서울 양천구 신월로10길 16",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042303",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042304",
+    "name": "한약국",
+    "latitude": 37.52466462,
+    "longitude": 126.8414093,
+    "address": "서울 양천구 월정로 57",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042304",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042305",
+    "name": "월정부동산",
+    "latitude": 37.52340943,
+    "longitude": 126.8421955,
+    "address": "서울 양천구 월정로 41",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042305",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2602-3483"
+    }
+  },
+  {
+    "id": "child-safety-house:50042306",
+    "name": "경창약국",
+    "latitude": 37.52448258,
+    "longitude": 126.8415455,
+    "address": "서울 양천구 월정로 53",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042306",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042307",
+    "name": "청솔약국",
+    "latitude": 37.5242542,
+    "longitude": 126.8421086,
+    "address": "서울 양천구 월정로 50 121호",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042307",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-2105"
+    }
+  },
+  {
+    "id": "child-safety-house:50042308",
+    "name": "샛별슈퍼",
+    "latitude": 37.52592966,
+    "longitude": 126.8434505,
+    "address": "서울 양천구 중앙로55길 54",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042308",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2698-9444"
+    }
+  },
+  {
+    "id": "child-safety-house:50042309",
+    "name": "대성세탁소",
+    "latitude": 37.51952686,
+    "longitude": 126.8403722,
+    "address": "서울 양천구 남부순환로75길 9",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042309",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2697-0012"
+    }
+  },
+  {
+    "id": "child-safety-house:50042310",
+    "name": "우리동네 부동산",
+    "latitude": 37.51881864,
+    "longitude": 126.8444646,
+    "address": "서울 양천구 남부순환로 83길 47",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042310",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2695-4985"
+    }
+  },
+  {
+    "id": "child-safety-house:50042311",
+    "name": "CU 편의점",
+    "latitude": 37.53883438,
+    "longitude": 126.8259591,
+    "address": "서울 양천구 남부순환로310",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042311",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2607-5850"
+    }
+  },
+  {
+    "id": "child-safety-house:50042312",
+    "name": "쭈쭈슈퍼",
+    "latitude": 37.53873554,
+    "longitude": 126.8292691,
+    "address": "서울 양천구 화곡로8길8",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042312",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-2577"
+    }
+  },
+  {
+    "id": "child-safety-house:50042313",
+    "name": "모닝글로리",
+    "latitude": 37.53885461,
+    "longitude": 126.8311126,
+    "address": "서울 양천구 화곡로10길7",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042313",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-3231"
+    }
+  },
+  {
+    "id": "child-safety-house:50042353",
+    "name": "건강약국",
+    "latitude": 37.53244797,
+    "longitude": 126.8334259,
+    "address": "서울 양천구 곰달래로5길 30",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042353",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2697-0485"
+    }
+  },
+  {
+    "id": "child-safety-house:50042354",
+    "name": "메디팜 성화약국",
+    "latitude": 37.53293944,
+    "longitude": 126.8264935,
+    "address": "서울 양천구 남부순환로40길 63",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042354",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2604-6148"
+    }
+  },
+  {
+    "id": "child-safety-house:50042355",
+    "name": "하나약국",
+    "latitude": 37.53041216,
+    "longitude": 126.8379017,
+    "address": "서울 양천구 월정로 127",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042355",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2606-3979"
+    }
+  },
+  {
+    "id": "child-safety-house:50042356",
+    "name": "제민약국",
+    "latitude": 37.52913588,
+    "longitude": 126.8367588,
+    "address": "서울 양천구 곰달래로10길 9",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042356",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2603-3918"
+    }
+  },
+  {
+    "id": "child-safety-house:50042357",
+    "name": "진생약국",
+    "latitude": 37.52962275,
+    "longitude": 126.8347824,
+    "address": "서울 양천구 곰달래로 20",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042357",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2604-5029"
+    }
+  },
+  {
+    "id": "child-safety-house:50042358",
+    "name": "코사마트",
+    "latitude": 37.53066654,
+    "longitude": 126.8294741,
+    "address": "서울 양천구 남부순환로60길 11",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042358",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042359",
+    "name": "참조은 할인마트",
+    "latitude": 37.53395075,
+    "longitude": 126.8272916,
+    "address": "서울 양천구 남부순환로 40길 37",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042359",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2691-7656"
+    }
+  },
+  {
+    "id": "child-safety-house:50042360",
+    "name": "동인 프라자 약국",
+    "latitude": 37.53482381,
+    "longitude": 126.8279934,
+    "address": "서울 양천구 남부순환로 40길 13",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042360",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042361",
+    "name": "국제안경원",
+    "latitude": 37.52307419,
+    "longitude": 126.8458598,
+    "address": "서울 양천구 오목로 75",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042361",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2603-5773"
+    }
+  },
+  {
+    "id": "child-safety-house:50042362",
+    "name": "조일약국",
+    "latitude": 37.51807567,
+    "longitude": 126.8422542,
+    "address": "서울 양천구 신월로 168",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042362",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042363",
+    "name": "이마트",
+    "latitude": 37.51587619,
+    "longitude": 126.8407083,
+    "address": "서울 양천구 신월로10길 16",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042363",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042364",
+    "name": "한약국",
+    "latitude": 37.52466462,
+    "longitude": 126.8414093,
+    "address": "서울 양천구 월정로 57",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042364",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042365",
+    "name": "월정부동산",
+    "latitude": 37.52340943,
+    "longitude": 126.8421955,
+    "address": "서울 양천구 월정로 41",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042365",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2602-3483"
+    }
+  },
+  {
+    "id": "child-safety-house:50042366",
+    "name": "경창약국",
+    "latitude": 37.52448258,
+    "longitude": 126.8415455,
+    "address": "서울 양천구 월정로 53",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042366",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042367",
+    "name": "청솔약국",
+    "latitude": 37.5242542,
+    "longitude": 126.8421086,
+    "address": "서울 양천구 월정로 50 121호",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042367",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-2105"
+    }
+  },
+  {
+    "id": "child-safety-house:50042368",
+    "name": "샛별슈퍼",
+    "latitude": 37.52592966,
+    "longitude": 126.8434505,
+    "address": "서울 양천구 중앙로55길 54",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042368",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2698-9444"
+    }
+  },
+  {
+    "id": "child-safety-house:50042369",
+    "name": "대성세탁소",
+    "latitude": 37.51952686,
+    "longitude": 126.8403722,
+    "address": "서울 양천구 남부순환로75길 9",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042369",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2697-0012"
+    }
+  },
+  {
+    "id": "child-safety-house:50042370",
+    "name": "우리동네 부동산",
+    "latitude": 37.51881864,
+    "longitude": 126.8444646,
+    "address": "서울 양천구 남부순환로 83길 47",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042370",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2695-4985"
+    }
+  },
+  {
+    "id": "child-safety-house:50042371",
+    "name": "CU 편의점",
+    "latitude": 37.53883438,
+    "longitude": 126.8259591,
+    "address": "서울 양천구 남부순환로310",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042371",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2607-5850"
+    }
+  },
+  {
+    "id": "child-safety-house:50042372",
+    "name": "쭈쭈슈퍼",
+    "latitude": 37.53873554,
+    "longitude": 126.8292691,
+    "address": "서울 양천구 화곡로8길8",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042372",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-2577"
+    }
+  },
+  {
+    "id": "child-safety-house:50042373",
+    "name": "모닝글로리",
+    "latitude": 37.53885461,
+    "longitude": 126.8311126,
+    "address": "서울 양천구 화곡로10길7",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042373",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2690-3231"
+    }
+  },
+  {
+    "id": "child-safety-house:50042631",
+    "name": "참조은할인마트",
+    "latitude": 37.53395075,
+    "longitude": 126.8272916,
+    "address": "서울특별시 양천구 남부순환로40길 37-0,참조은 할인마트",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042631",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2691-7656"
+    }
+  },
+  {
+    "id": "child-safety-house:50042632",
+    "name": "동인 프라자 약국",
+    "latitude": 37.53364615,
+    "longitude": 126.8256232,
+    "address": "서울특별시 양천구 남부순환로40가길 13-0,동인 프라자 약국",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042632",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
+    "id": "child-safety-house:50042635",
+    "name": "CU신월광영점",
+    "latitude": 37.53883438,
+    "longitude": 126.8259591,
+    "address": "서울특별시 양천구 남부순환로 310-0,CU 편의점",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50042635",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2607-5850"
+    }
+  },
+  {
+    "id": "child-safety-house:50043770",
+    "name": "에이스공인중개사무소",
+    "latitude": 37.52340943,
+    "longitude": 126.8421955,
+    "address": "서울특별시 양천구 월정로 41-0",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50043770",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {
+      "phone": "02-2660-8803"
+    }
+  },
+  {
+    "id": "child-safety-house:50043771",
+    "name": "희마트",
+    "latitude": 37.53066654,
+    "longitude": 126.8294741,
+    "address": "서울특별시 양천구 남부순환로60길 11-0",
+    "source": "경찰청 안전Dream 아동안전지킴이집",
+    "sourceId": "50043771",
+    "category": "OTHER",
+    "subtype": "CHILD_SAFETY_HOUSE",
+    "details": {}
+  },
+  {
     "id": "fire-org:1121104",
     "name": "신월119안전센터",
     "latitude": 37.527935,

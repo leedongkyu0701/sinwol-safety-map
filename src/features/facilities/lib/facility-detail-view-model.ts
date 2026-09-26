@@ -148,6 +148,9 @@ export function createFacilityDetailViewModel(
                 },
               ],
         );
+      } else if (facility.subtype === "CHILD_SAFETY_HOUSE") {
+        subtypeLabel = "아동안전지킴이집";
+        addOptionalRow(rows, "전화번호", facility.details.phone);
       } else {
         subtypeLabel = FIRE_ORGANIZATION_SUBTYPE_LABELS[facility.subtype];
       }

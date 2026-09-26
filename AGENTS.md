@@ -40,7 +40,7 @@ Inspect → Plan → Modify → Validate → Report
 
 - 상위 Category는 `FIRE_WATER`, `SHELTER`, `AED`, `OTHER` 네 개다. Category와 Source별 Domain Rule은 `docs/data-policy.md`를 따른다.
 - Raw Source 파일과 `.env.local`은 Commit하지 않는다.
-- `SEOUL_OPEN_DATA_KEY`, `DATA_GO_KR_SERVICE_KEY`에 `NEXT_PUBLIC_`을 붙이지 않는다.
+- `SEOUL_OPEN_DATA_KEY`, `DATA_GO_KR_SERVICE_KEY`, `SAFE182_ESNTL_ID`, `SAFE182_AUTH_KEY`에 `NEXT_PUBLIC_`을 붙이지 않는다.
 - Published JSON에는 서비스에 필요한 최소 필드만 포함하고, 공개 대상이 아닌 Source 필드는 Publish하지 않는다.
 - 사용자 위치는 애플리케이션의 React State에서 관리하며, 자체 서버, URL, Cookie, Storage, Analytics 또는 오류 추적 서비스에 저장하거나 전송하지 않는다. NAVER Maps SDK와 브라우저 등 외부 서비스 제공자의 처리까지 단정하지 않는다.
 

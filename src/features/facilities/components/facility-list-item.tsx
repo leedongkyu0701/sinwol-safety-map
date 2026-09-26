@@ -18,6 +18,17 @@ export function FacilityListItem({
 }: FacilityListItemProps) {
   const { facility, distanceMeters } = result;
   const category = FACILITY_CATEGORY_CONFIG[facility.category];
+  const subtypeLabel = facility.category !== "OTHER"
+    ? undefined
+    : facility.subtype === "HEAT_SHELTER"
+      ? "무더위쉼터"
+      : facility.subtype === "CHILD_SAFETY_HOUSE"
+        ? "아동안전지킴이집"
+        : facility.subtype === "FIRE_STATION"
+          ? "소방서"
+          : facility.subtype === "FIRE_SAFETY_CENTER"
+            ? "119안전센터"
+            : "구조대";
 
   return (
     <button
@@ -49,7 +60,7 @@ export function FacilityListItem({
             )}
           </span>
           <span className="mt-0.5 block text-sm font-medium text-zinc-600">
-            {category.label}
+            {subtypeLabel ?? category.label}
           </span>
           <span className="mt-1 block break-keep text-sm leading-5 text-zinc-500">
             {facility.address}

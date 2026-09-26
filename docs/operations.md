@@ -15,6 +15,8 @@ npm ci
 ```bash
 SEOUL_OPEN_DATA_KEY=
 DATA_GO_KR_SERVICE_KEY=
+SAFE182_ESNTL_ID=
+SAFE182_AUTH_KEY=
 ```
 
 이 값에는 `NEXT_PUBLIC_` 접두사를 사용하지 않습니다. Browser Bundle이나 Published JSON에 포함해서는 안 됩니다.
@@ -64,6 +66,16 @@ npm run data:other:heat-shelter
 ```
 
 ETL은 AREA_CD와 신월동 주소 필터가 일치하는지 검사하고, heat-shelter namespace만 교체합니다. 서로 다른 시설의 동일 좌표는 보존합니다.
+
+### Other / Child Safety House
+
+아동안전지킴이집은 경찰청 안전Dream API(`cl=09`)를 수동으로 조회합니다. `SAFE182_ESNTL_ID`와 `SAFE182_AUTH_KEY`를 `.env.local` 또는 process environment에 설정하고, 양천구 후보의 신월동 Scope를 사람이 확인해 `data/reference/child-safety-house.json`에 INCLUDE/EXCLUDE로 기록한 뒤 실행합니다.
+
+```bash
+npm run data:other:child-safety-house
+```
+
+아동안전지킴이집은 데이터 성격상 Daily GitHub Actions Sync 대상이 아닙니다. 필요할 때 사람이 API를 다시 조회하여 Snapshot을 갱신합니다.
 
 ## 검증 순서
 

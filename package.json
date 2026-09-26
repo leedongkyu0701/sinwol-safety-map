@@ -15,7 +15,8 @@
     "data:shelters": "tsx scripts/data/shelters/index.ts",
     "data:aeds": "tsx scripts/data/aed/index.ts",
     "data:other:fire-org": "tsx scripts/data/other/fire-org/index.ts",
-    "data:other:heat-shelter": "tsx scripts/data/other/heat-shelter/index.ts"
+    "data:other:heat-shelter": "tsx scripts/data/other/heat-shelter/index.ts",
+    "data:other:child-safety-house": "tsx scripts/data/other/child-safety-house/index.ts"
   },
   "dependencies": {
     "@tanstack/react-virtual": "^3.14.13",

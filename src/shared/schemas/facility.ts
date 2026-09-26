@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import {
   DAYS_OF_WEEK,
+  CHILD_SAFETY_HOUSE_SUBTYPE,
   FACILITY_CATEGORIES,
   FIRE_ORGANIZATION_SUBTYPES,
   FIRE_WATER_SUBTYPES,
@@ -9,6 +10,7 @@ import {
   HEAT_SHELTER_SUBTYPE,
   type AedFacility,
   type Facility,
+  type ChildSafetyHouseFacility,
   type FireOrganizationFacility,
   type FireWaterFacility,
   type HeatShelterFacility,
@@ -183,9 +185,22 @@ export const heatShelterFacilitySchema: z.ZodType<HeatShelterFacility> = z
     validateNamespacedId("heat-shelter", facility, context);
   });
 
+export const childSafetyHouseFacilitySchema: z.ZodType<ChildSafetyHouseFacility> = z
+  .object({
+    ...baseFacilityShape,
+    category: z.literal("OTHER"),
+    subtype: z.literal(CHILD_SAFETY_HOUSE_SUBTYPE),
+    details: z.object({ phone: nonEmptyStringSchema.optional() }).strict(),
+  })
+  .strict()
+  .superRefine((facility, context) => {
+    validateNamespacedId("child-safety-house", facility, context);
+  });
+
 export const otherFacilitySchema: z.ZodType<OtherFacility> = z.union([
   fireOrganizationFacilitySchema,
   heatShelterFacilitySchema,
+  childSafetyHouseFacilitySchema,
 ]);
 
 export const facilitySchema: z.ZodType<Facility> = z.union([
@@ -214,5 +229,9 @@ export const fireOrganizationFacilitiesSchema = z
 export const heatShelterFacilitiesSchema = z
   .array(heatShelterFacilitySchema)
   .min(1, "Heat shelter dataset must not be empty");
+
+export const childSafetyHouseFacilitiesSchema = z
+  .array(childSafetyHouseFacilitySchema)
+  .min(1, "Child safety house dataset must not be empty");
 
 export const otherFacilitiesSchema = z.array(otherFacilitySchema);

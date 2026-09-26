@@ -1,10 +1,10 @@
-import type { FacilityCategory } from "@/shared/types/facility";
-
 export const DATA_SOURCE_LINKS = {
-  FIRE_WATER:
+  fireWater:
     "https://data.seoul.go.kr/dataList/OA-21306/A/1/datasetView.do",
-  SHELTER:
+  shelter:
     "https://data.seoul.go.kr/dataList/OA-16149/A/1/datasetView.do",
-  AED: "https://www.data.go.kr/data/15021103/standard.do",
-  OTHER: "https://data.seoul.go.kr/dataList/OA-21072/S/1/datasetView.do",
-} as const satisfies Record<FacilityCategory, string>;
+  aed: "https://www.data.go.kr/data/15021103/standard.do",
+  fireOrg: "https://data.seoul.go.kr/dataList/OA-21072/S/1/datasetView.do",
+  heatShelter: "https://data.seoul.go.kr/dataList/OA-21065/S/1/datasetView.do",
+  childSafetyHouse: "https://www.safe182.go.kr/home/api/guide7.do",
+} as const;

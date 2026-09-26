@@ -26,6 +26,8 @@ import {
   fireOrganizationFacilitySchema,
   fireWaterFacilitiesSchema,
   heatShelterFacilitySchema,
+  childSafetyHouseFacilitiesSchema,
+  childSafetyHouseFacilitySchema,
   otherFacilitiesSchema,
   otherFacilitySchema,
   shelterFacilitiesSchema,
@@ -60,6 +62,12 @@ import {
 } from "../other/heat-shelter/transform";
 import { assertHeatShelterAudit, auditHeatShelterFacilities } from "../other/heat-shelter/audit";
 import { heatShelterSourceRowSchema } from "../other/heat-shelter/schema";
+import { childSafetyHouseReferenceSchema, childSafetyHouseSourceRowSchema } from "../other/child-safety-house/schema";
+import {
+  assertChildSafetyHouseReview,
+  normalizeChildSafetyHousePhone,
+  transformChildSafetyHouseRows,
+} from "../other/child-safety-house/transform";
 import { createFacilityDetailViewModel } from "../../../src/features/facilities/lib/facility-detail-view-model";
 import {
   updateOtherDatasetMetadata,
@@ -203,6 +211,135 @@ assert.equal(
   }).success,
   true,
 );
+
+const childSafetyFixture = (overrides: Record<string, unknown> = {}) =>
+  childSafetyHouseSourceRowSchema.parse({
+    rn: 1,
+    lcSn: 50034669,
+    bsshNm: "신월 테스트 지킴이집",
+    telno: "02-1234-5678",
+    adres: "서울특별시 양천구 신월동 테스트로 1",
+    etcAdres: "101호",
+    zip: "08000",
+    lcinfoLa: 37.52,
+    lcinfoLo: 126.84,
+    cl: "09",
+    clNm: "아동안전지킴이집",
+    scopeCd: null,
+    scope: null,
+    hmpg: null,
+    ...overrides,
+  });
+const childDecision = {
+  schemaVersion: 1 as const,
+  scope: "서울특별시 양천구 신월동" as const,
+  decisions: [
+    {
+      sourceId: "50034669",
+      decision: "INCLUDE" as const,
+      expectedName: "신월 테스트 지킴이집",
+      expectedAddress: "서울특별시 양천구 신월동 테스트로 1",
+      reason: "검증된 신월동 주소",
+    },
+  ],
+};
+assert.equal(childSafetyHouseFacilitySchema.safeParse({
+  ...baseFacility,
+  id: "child-safety-house:50034669",
+  sourceId: "50034669",
+  category: "OTHER",
+  subtype: "CHILD_SAFETY_HOUSE",
+  details: { phone: "02-1234-5678" },
+}).success, true);
+assert.equal(childSafetyHouseFacilitySchema.safeParse({
+  ...baseFacility,
+  id: "wrong:50034669",
+  sourceId: "50034669",
+  category: "OTHER",
+  subtype: "CHILD_SAFETY_HOUSE",
+  details: {},
+}).success, false);
+assert.equal(otherFacilitySchema.safeParse({
+  ...baseFacility,
+  id: "other:1",
+  category: "OTHER",
+  subtype: "UNKNOWN",
+  details: {},
+}).success, false);
+const child = childSafetyFixture();
+const childTransformed = transformChildSafetyHouseRows([child], childDecision);
+const childFacilities = childSafetyHouseFacilitiesSchema.parse(childTransformed.facilities);
+assert.equal(childTransformed.facilities[0].sourceId, "50034669");
+assert.equal(childTransformed.facilities[0].id, "child-safety-house:50034669");
+assert.equal(childTransformed.facilities[0].detailLocation, "101호");
+assert.equal(transformChildSafetyHouseRows([child], childDecision).facilities[0].id, childTransformed.facilities[0].id);
+assert.deepEqual(
+  transformChildSafetyHouseRows([child, childSafetyFixture({ lcSn: 50034670, bsshNm: "다른 신월 시설", telno: null })], {
+    ...childDecision,
+    decisions: [
+      ...childDecision.decisions,
+      { sourceId: "50034670", decision: "INCLUDE", expectedName: "다른 신월 시설", expectedAddress: "서울특별시 양천구 신월동 테스트로 1" },
+    ],
+  }).facilities.map((facility) => facility.sourceId),
+  transformChildSafetyHouseRows([childSafetyFixture({ lcSn: 50034670, bsshNm: "다른 신월 시설", telno: null }), child], {
+    ...childDecision,
+    decisions: [
+      ...childDecision.decisions,
+      { sourceId: "50034670", decision: "INCLUDE", expectedName: "다른 신월 시설", expectedAddress: "서울특별시 양천구 신월동 테스트로 1" },
+    ],
+  }).facilities.map((facility) => facility.sourceId),
+);
+assert.equal(transformChildSafetyHouseRows([childSafetyFixture({ bsshNm: "다른 이름" })], {
+  ...childDecision,
+  decisions: [{ ...childDecision.decisions[0], expectedName: "다른 이름" }],
+}).facilities[0].sourceId, "50034669");
+assert.equal(transformChildSafetyHouseRows([childSafetyFixture({ adres: "서울특별시 양천구 신월동 테스트로 2" })], {
+  ...childDecision,
+  decisions: [{ ...childDecision.decisions[0], expectedAddress: "서울특별시 양천구 신월동 테스트로 2" }],
+}).facilities[0].sourceId, "50034669");
+assert.equal(transformChildSafetyHouseRows([childSafetyFixture({ adres: "서울특별시 양천구 목동로 1" })], {
+  schemaVersion: 1,
+  scope: "서울특별시 양천구 신월동",
+  decisions: [],
+}).candidates.length, 1);
+assert.equal(transformChildSafetyHouseRows([childSafetyFixture({ adres: "서울특별시 강서구 공항대로 1" })], childDecision).candidates.length, 0);
+const childUnreviewed = transformChildSafetyHouseRows([child], { ...childDecision, decisions: [] });
+assert.equal(childUnreviewed.pendingCandidates.length, 1);
+assert.throws(() => assertChildSafetyHouseReview(childUnreviewed), /Unreviewed/);
+assert.equal(transformChildSafetyHouseRows([child], {
+  ...childDecision,
+  decisions: [{ ...childDecision.decisions[0], expectedAddress: "변경된 주소" }],
+}).mismatchedReferenceIds.length, 1);
+assert.throws(() => assertChildSafetyHouseReview(transformChildSafetyHouseRows([], childDecision)), /missing from current Source/);
+assert.equal(transformChildSafetyHouseRows([child], {
+  ...childDecision,
+  decisions: [{ ...childDecision.decisions[0], decision: "EXCLUDE", reason: "경계 밖" }],
+}).facilities.length, 0);
+assert.equal(transformChildSafetyHouseRows([childSafetyFixture({ telno: "--" })], childDecision).facilities[0].details.phone, undefined);
+assert.equal(normalizeChildSafetyHousePhone("031--").malformed, true);
+assert.equal(transformChildSafetyHouseRows([child, child], childDecision).exactDuplicatesCollapsed, 1);
+assert.throws(() => transformChildSafetyHouseRows([child, childSafetyFixture({ telno: "02-9999-9999" })], childDecision), /identity conflict/);
+const distinctAtSamePoint = transformChildSafetyHouseRows([
+  child,
+  childSafetyFixture({ lcSn: 50034670, bsshNm: "다른 지킴이집", telno: null }),
+], {
+  ...childDecision,
+  decisions: [
+    ...childDecision.decisions,
+    { sourceId: "50034670", decision: "INCLUDE", expectedName: "다른 지킴이집", expectedAddress: "서울특별시 양천구 신월동 테스트로 1" },
+  ],
+});
+assert.equal(distinctAtSamePoint.facilities.length, 2);
+assert.equal(distinctAtSamePoint.sameLocationGroups.length, 1);
+assert.equal(childSafetyHouseReferenceSchema.safeParse(childDecision).success, true);
+const childDetail = createFacilityDetailViewModel(childFacilities[0]);
+assert.equal(childDetail.categoryLabel, "기타");
+assert.equal(childDetail.subtypeLabel, "아동안전지킴이집");
+assert.equal(childDetail.rows.some((row) => row.label === "전화번호" && row.value === "02-1234-5678"), true);
+const childWithoutPhone = childSafetyHouseFacilitiesSchema.parse(
+  transformChildSafetyHouseRows([childSafetyFixture({ telno: "--" })], childDecision).facilities,
+)[0];
+assert.equal(createFacilityDetailViewModel(childWithoutPhone).rows.some((row) => row.label === "전화번호"), false);
 for (const subtype of [
   "FIRE_STATION",
   "FIRE_SAFETY_CENTER",
@@ -436,6 +573,14 @@ assert.deepEqual(
     otherMergeFixture("heat-shelter:2"),
   ],
 );
+assert.deepEqual(
+  mergeOtherFacilitiesByIdPrefix(
+    [otherMergeFixture("fire-org:kept"), otherMergeFixture("heat-shelter:kept"), otherMergeFixture("child-safety-house:old"), otherMergeFixture("future:kept")],
+    [otherMergeFixture("child-safety-house:new")],
+    "child-safety-house:",
+  ),
+  [otherMergeFixture("child-safety-house:new"), otherMergeFixture("fire-org:kept"), otherMergeFixture("future:kept"), otherMergeFixture("heat-shelter:kept")],
+);
 assert.throws(() =>
   mergeOtherFacilitiesByIdPrefix(
     [],
@@ -617,6 +762,24 @@ assert.equal(
     0,
   ),
   4,
+);
+const childSafetyHouseMetadata = updateOtherDatasetMetadata(
+  heatShelterMetadata,
+  "childSafetyHouse",
+  {
+    count: 1,
+    source: "경찰청 안전Dream 아동안전지킴이집",
+    fetchedAt: "2026-09-18T07:00:00.000Z",
+  },
+  { totalCount: 5, publishedDataChanged: true },
+);
+assert.equal(childSafetyHouseMetadata.sources.other.count, 5);
+assert.equal(
+  Object.values(childSafetyHouseMetadata.sources.other.datasets ?? {}).reduce(
+    (total, dataset) => total + dataset.count,
+    0,
+  ),
+  5,
 );
 assert.equal(
   metadataSchema.safeParse({

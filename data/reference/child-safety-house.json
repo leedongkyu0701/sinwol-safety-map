@@ -1,0 +1,1119 @@
+{
+  "schemaVersion": 1,
+  "scope": "서울특별시 양천구 신월동",
+  "decisions": [
+  {
+    "sourceId": "50014554",
+    "decision": "EXCLUDE",
+    "expectedName": "연세문구",
+    "expectedAddress": "서울특별시 양천구 목동동로 430-0,연세문구",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50014561",
+    "decision": "EXCLUDE",
+    "expectedName": "앨리스베이커리",
+    "expectedAddress": "서울특별시 양천구 목동서로2길 22-0,한청상가 55호 앨리스베이커리",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50014566",
+    "decision": "EXCLUDE",
+    "expectedName": "으뜸부동산",
+    "expectedAddress": "서울특별시 양천구 목동동로 350-0,으뜸부동산",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50014617",
+    "decision": "EXCLUDE",
+    "expectedName": "신정1동우체국",
+    "expectedAddress": "서울특별시 양천구 신월로 368-0,신정1동우체국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50014629",
+    "decision": "EXCLUDE",
+    "expectedName": "서정문구",
+    "expectedAddress": "서울특별시 양천구 오목로52길 13-0,서정문구",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50014635",
+    "decision": "EXCLUDE",
+    "expectedName": "모닝세탁소",
+    "expectedAddress": "서울특별시 양천구 오목로46길 11-0,모닝세탁소",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50014637",
+    "decision": "EXCLUDE",
+    "expectedName": "삼주 약국",
+    "expectedAddress": "서울특별시 양천구 신목로 86-0,삼주 약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50014645",
+    "decision": "INCLUDE",
+    "expectedName": "국제안경원",
+    "expectedAddress": "서울특별시 양천구 오목로 75-0,국제안경원",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50014658",
+    "decision": "INCLUDE",
+    "expectedName": "거북이 온누리약국",
+    "expectedAddress": "서울특별시 양천구 월정로 57-0,한약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50014714",
+    "decision": "INCLUDE",
+    "expectedName": "쭈쭈슈퍼",
+    "expectedAddress": "서울특별시 양천구 화곡로8길 8-0,쭈쭈슈퍼",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50014721",
+    "decision": "INCLUDE",
+    "expectedName": "모닝글로리",
+    "expectedAddress": "서울특별시 양천구 화곡로10길 7-0,모닝글로리",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50032950",
+    "decision": "EXCLUDE",
+    "expectedName": "목동정문약국",
+    "expectedAddress": "서울특별시 양천구 목동동로 435-0,화성프라자 1층 105호 목동정문약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032953",
+    "decision": "EXCLUDE",
+    "expectedName": "보룡약국",
+    "expectedAddress": "서울특별시 양천구 목동중앙북로 3-0,보룡약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032958",
+    "decision": "EXCLUDE",
+    "expectedName": "가정약국",
+    "expectedAddress": "서울특별시 양천구 목동중앙본로 128-2,가정약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032960",
+    "decision": "EXCLUDE",
+    "expectedName": "한림약국",
+    "expectedAddress": "서울특별시 양천구 중앙로32길 61-0,한림약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032962",
+    "decision": "EXCLUDE",
+    "expectedName": "가까운 온누리약국",
+    "expectedAddress": "서울특별시 양천구 목동서로 349-0,321-6 센트럴프라자 106호 가까운 온누리 약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032966",
+    "decision": "EXCLUDE",
+    "expectedName": "메디팜 서울 약국",
+    "expectedAddress": "서울특별시 양천구 목동동로 59-0,로얄프라자 104호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032971",
+    "decision": "EXCLUDE",
+    "expectedName": "온누리 유미숙 약국",
+    "expectedAddress": "서울특별시 양천구 목동로 185-0,995-1 온누리 유미숙 약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032972",
+    "decision": "INCLUDE",
+    "expectedName": "건강약국",
+    "expectedAddress": "서울특별시 양천구 곰달래로5길 30-0,110-1 건강약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50032975",
+    "decision": "INCLUDE",
+    "expectedName": "제민약국",
+    "expectedAddress": "서울특별시 양천구 곰달래로10길 9-0,229-3 제민약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50032978",
+    "decision": "INCLUDE",
+    "expectedName": "메디팜 성화약국",
+    "expectedAddress": "서울특별시 양천구 남부순환로40길 63-0,177-10 메디팜 성화약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50032979",
+    "decision": "INCLUDE",
+    "expectedName": "진생약국",
+    "expectedAddress": "서울특별시 양천구 곰달래로 20-0,225-17 진생약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50032997",
+    "decision": "EXCLUDE",
+    "expectedName": "DC데일리문구",
+    "expectedAddress": "서울특별시 양천구 목동중앙본로1길 47-0,DC데일리 문구",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50032998",
+    "decision": "EXCLUDE",
+    "expectedName": "진미부동산",
+    "expectedAddress": "서울특별시 양천구 목동동로 350-0 목동5단지아파트,B상가",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50034141",
+    "decision": "EXCLUDE",
+    "expectedName": "한아름 할인마트",
+    "expectedAddress": "서울특별시 양천구 목동중앙남로16다길 34-0,한아름 할인마트",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50034146",
+    "decision": "INCLUDE",
+    "expectedName": "샛별슈퍼",
+    "expectedAddress": "서울특별시 양천구 중앙로55길 54-0,샛별슈퍼",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50040491",
+    "decision": "EXCLUDE",
+    "expectedName": "색연필 신정3동점",
+    "expectedAddress": "서울특별시 양천구 신정로13길 22-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50040494",
+    "decision": "EXCLUDE",
+    "expectedName": "이마트24목동타워점",
+    "expectedAddress": "서울특별시 양천구 목동서로 221-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50040500",
+    "decision": "INCLUDE",
+    "expectedName": "경창약국",
+    "expectedAddress": "서울특별시 양천구 월정로 53-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50040503",
+    "decision": "INCLUDE",
+    "expectedName": "대성세탁소",
+    "expectedAddress": "서울특별시 양천구 남부순환로75길 9-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042280",
+    "decision": "EXCLUDE",
+    "expectedName": "GS25목동타워점",
+    "expectedAddress": "서울 양천구 목동서로 221",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042281",
+    "decision": "EXCLUDE",
+    "expectedName": "용마부동산",
+    "expectedAddress": "서울 양천구 목동서로 100 3단지 관리상가",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042284",
+    "decision": "EXCLUDE",
+    "expectedName": "연세문구",
+    "expectedAddress": "서울 양천구 목동동로 430",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042285",
+    "decision": "EXCLUDE",
+    "expectedName": "목동정문약국",
+    "expectedAddress": "서울 양천구 목동동로 435 화성프라자 1층 105호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042286",
+    "decision": "EXCLUDE",
+    "expectedName": "으뜸부동산",
+    "expectedAddress": "서울 양천구 목동동로 350 B상가 107호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042287",
+    "decision": "EXCLUDE",
+    "expectedName": "앨리스베이커리",
+    "expectedAddress": "서울 양천구 목동서로2길 22 한청상가 55호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042288",
+    "decision": "EXCLUDE",
+    "expectedName": "보룡약국",
+    "expectedAddress": "서울 양천구 목동중앙북로 1층",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042289",
+    "decision": "EXCLUDE",
+    "expectedName": "DC데일리문구",
+    "expectedAddress": "서울 양천구 목동중앙본로1길 47",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042290",
+    "decision": "EXCLUDE",
+    "expectedName": "형제전기",
+    "expectedAddress": "서울 양천구 목동중앙서로7가길 31",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042291",
+    "decision": "EXCLUDE",
+    "expectedName": "한아름 할인마트",
+    "expectedAddress": "서울 양천구 목동중앙남로16다길 34",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042292",
+    "decision": "EXCLUDE",
+    "expectedName": "가정약국",
+    "expectedAddress": "서울 양천구 목동중앙본로 128-2",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042293",
+    "decision": "INCLUDE",
+    "expectedName": "건강약국",
+    "expectedAddress": "서울 양천구 곰달래로5길 30",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042294",
+    "decision": "INCLUDE",
+    "expectedName": "메디팜 성화약국",
+    "expectedAddress": "서울 양천구 남부순환로40길 63",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042295",
+    "decision": "INCLUDE",
+    "expectedName": "하나약국",
+    "expectedAddress": "서울 양천구 월정로 127",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042296",
+    "decision": "INCLUDE",
+    "expectedName": "제민약국",
+    "expectedAddress": "서울 양천구 곰달래로10길 9",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042297",
+    "decision": "INCLUDE",
+    "expectedName": "진생약국",
+    "expectedAddress": "서울 양천구 곰달래로 20",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042298",
+    "decision": "INCLUDE",
+    "expectedName": "코사마트",
+    "expectedAddress": "서울 양천구 남부순환로60길 11",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042299",
+    "decision": "INCLUDE",
+    "expectedName": "참조은 할인마트",
+    "expectedAddress": "서울 양천구 남부순환로 40길 37",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042300",
+    "decision": "INCLUDE",
+    "expectedName": "동인 프라자 약국",
+    "expectedAddress": "서울 양천구 남부순환로 40길 13",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042301",
+    "decision": "INCLUDE",
+    "expectedName": "국제안경원",
+    "expectedAddress": "서울 양천구 오목로 75",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042302",
+    "decision": "INCLUDE",
+    "expectedName": "조일약국",
+    "expectedAddress": "서울 양천구 신월로 168",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042303",
+    "decision": "INCLUDE",
+    "expectedName": "이마트",
+    "expectedAddress": "서울 양천구 신월로10길 16",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042304",
+    "decision": "INCLUDE",
+    "expectedName": "한약국",
+    "expectedAddress": "서울 양천구 월정로 57",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042305",
+    "decision": "INCLUDE",
+    "expectedName": "월정부동산",
+    "expectedAddress": "서울 양천구 월정로 41",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042306",
+    "decision": "INCLUDE",
+    "expectedName": "경창약국",
+    "expectedAddress": "서울 양천구 월정로 53",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042307",
+    "decision": "INCLUDE",
+    "expectedName": "청솔약국",
+    "expectedAddress": "서울 양천구 월정로 50 121호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042308",
+    "decision": "INCLUDE",
+    "expectedName": "샛별슈퍼",
+    "expectedAddress": "서울 양천구 중앙로55길 54",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042309",
+    "decision": "INCLUDE",
+    "expectedName": "대성세탁소",
+    "expectedAddress": "서울 양천구 남부순환로75길 9",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042310",
+    "decision": "INCLUDE",
+    "expectedName": "우리동네 부동산",
+    "expectedAddress": "서울 양천구 남부순환로 83길 47",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042311",
+    "decision": "INCLUDE",
+    "expectedName": "CU 편의점",
+    "expectedAddress": "서울 양천구 남부순환로310",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042312",
+    "decision": "INCLUDE",
+    "expectedName": "쭈쭈슈퍼",
+    "expectedAddress": "서울 양천구 화곡로8길8",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042313",
+    "decision": "INCLUDE",
+    "expectedName": "모닝글로리",
+    "expectedAddress": "서울 양천구 화곡로10길7",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042314",
+    "decision": "EXCLUDE",
+    "expectedName": "수정약국",
+    "expectedAddress": "서울 양천구 중앙로 276",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042315",
+    "decision": "EXCLUDE",
+    "expectedName": "메디팜 서울 약국",
+    "expectedAddress": "서울 양천구 목동동로 59 로얄프라자 104호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042316",
+    "decision": "EXCLUDE",
+    "expectedName": "가까운 온누리약국",
+    "expectedAddress": "서울 양천구 목동서로 349 센트럴프라자 106호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042317",
+    "decision": "EXCLUDE",
+    "expectedName": "한림약국",
+    "expectedAddress": "서울 양천구 중앙로32길 61",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042318",
+    "decision": "EXCLUDE",
+    "expectedName": "모닝프라자",
+    "expectedAddress": "서울 양천구 목동남로4길 6-23 우성@ 2단지 상가 1층 101호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042319",
+    "decision": "EXCLUDE",
+    "expectedName": "신정1동우체국",
+    "expectedAddress": "서울 양천구 신월로 368",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042320",
+    "decision": "EXCLUDE",
+    "expectedName": "보리약국",
+    "expectedAddress": "서울 양천구 신월로 338",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042321",
+    "decision": "EXCLUDE",
+    "expectedName": "야쿠르트 신목점",
+    "expectedAddress": "서울 양천구 은행정로4길 9(신정동)",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042322",
+    "decision": "EXCLUDE",
+    "expectedName": "온누리 유미숙 약국",
+    "expectedAddress": "서울 양천구 목동로 185",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042323",
+    "decision": "EXCLUDE",
+    "expectedName": "쿠쿠양천점",
+    "expectedAddress": "서울 양천구 오목로 174",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042324",
+    "decision": "EXCLUDE",
+    "expectedName": "성일마트",
+    "expectedAddress": "서울 양천구 오목로23길 11-2",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042325",
+    "decision": "EXCLUDE",
+    "expectedName": "서정문구",
+    "expectedAddress": "서울 양천구 오목로 52길 13",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042326",
+    "decision": "EXCLUDE",
+    "expectedName": "모닝세탁소",
+    "expectedAddress": "서울 양천구 오목로46길 11",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042327",
+    "decision": "EXCLUDE",
+    "expectedName": "삼주 약국",
+    "expectedAddress": "서울 양천구 신목로 86",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042328",
+    "decision": "EXCLUDE",
+    "expectedName": "럭키슈퍼(코사마트)",
+    "expectedAddress": "서울 양천구 중앙로52길 39",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042329",
+    "decision": "EXCLUDE",
+    "expectedName": "D마트",
+    "expectedAddress": "서울 양천구 목동동로12길 9 청학@상가",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042330",
+    "decision": "EXCLUDE",
+    "expectedName": "목동 세계로 약국",
+    "expectedAddress": "서울 양천구 목동동로12길 45",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042331",
+    "decision": "EXCLUDE",
+    "expectedName": "동신약국",
+    "expectedAddress": "서울 양천구 목동동로12길 17",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042332",
+    "decision": "EXCLUDE",
+    "expectedName": "가나다 문구",
+    "expectedAddress": "서울 양천구 목동동로12길 15",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042333",
+    "decision": "EXCLUDE",
+    "expectedName": "신정네거리역부동산",
+    "expectedAddress": "서울 양천구 오목로24길 29 101호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042334",
+    "decision": "EXCLUDE",
+    "expectedName": "야쿠르트 양천점",
+    "expectedAddress": "서울 양천구 목동동로 10길 22 1층",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042335",
+    "decision": "EXCLUDE",
+    "expectedName": "신세계 약국",
+    "expectedAddress": "서울 양천구 신정로 312 목동뉴프라자 107호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042336",
+    "decision": "EXCLUDE",
+    "expectedName": "럭키슈퍼",
+    "expectedAddress": "서울 양천구 신정로 293 신트리상가 101호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042337",
+    "decision": "EXCLUDE",
+    "expectedName": "색연필 신정3동점",
+    "expectedAddress": "서울 양천구 신정로 13길 22",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042338",
+    "decision": "EXCLUDE",
+    "expectedName": "삼지공인중개사",
+    "expectedAddress": "서울 양천구 중앙로29길 21 1층",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042339",
+    "decision": "EXCLUDE",
+    "expectedName": "동일하이빌 공인중개사",
+    "expectedAddress": "서울 양천구 신정로11길 20 동일하이빌공인중개사",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042340",
+    "decision": "EXCLUDE",
+    "expectedName": "GS25목동타워점",
+    "expectedAddress": "서울 양천구 목동서로 221",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042341",
+    "decision": "EXCLUDE",
+    "expectedName": "용마부동산",
+    "expectedAddress": "서울 양천구 목동서로 100 3단지 관리상가",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042344",
+    "decision": "EXCLUDE",
+    "expectedName": "연세문구",
+    "expectedAddress": "서울 양천구 목동동로 430",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042345",
+    "decision": "EXCLUDE",
+    "expectedName": "목동정문약국",
+    "expectedAddress": "서울 양천구 목동동로 435 화성프라자 1층 105호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042346",
+    "decision": "EXCLUDE",
+    "expectedName": "으뜸부동산",
+    "expectedAddress": "서울 양천구 목동동로 350 B상가 107호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042347",
+    "decision": "EXCLUDE",
+    "expectedName": "앨리스베이커리",
+    "expectedAddress": "서울 양천구 목동서로2길 22 한청상가 55호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042348",
+    "decision": "EXCLUDE",
+    "expectedName": "보룡약국",
+    "expectedAddress": "서울 양천구 목동중앙북로 1층",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042349",
+    "decision": "EXCLUDE",
+    "expectedName": "DC데일리문구",
+    "expectedAddress": "서울 양천구 목동중앙본로1길 47",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042350",
+    "decision": "EXCLUDE",
+    "expectedName": "형제전기",
+    "expectedAddress": "서울 양천구 목동중앙서로7가길 31",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042351",
+    "decision": "EXCLUDE",
+    "expectedName": "한아름 할인마트",
+    "expectedAddress": "서울 양천구 목동중앙남로16다길 34",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042352",
+    "decision": "EXCLUDE",
+    "expectedName": "가정약국",
+    "expectedAddress": "서울 양천구 목동중앙본로 128-2",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042353",
+    "decision": "INCLUDE",
+    "expectedName": "건강약국",
+    "expectedAddress": "서울 양천구 곰달래로5길 30",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042354",
+    "decision": "INCLUDE",
+    "expectedName": "메디팜 성화약국",
+    "expectedAddress": "서울 양천구 남부순환로40길 63",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042355",
+    "decision": "INCLUDE",
+    "expectedName": "하나약국",
+    "expectedAddress": "서울 양천구 월정로 127",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042356",
+    "decision": "INCLUDE",
+    "expectedName": "제민약국",
+    "expectedAddress": "서울 양천구 곰달래로10길 9",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042357",
+    "decision": "INCLUDE",
+    "expectedName": "진생약국",
+    "expectedAddress": "서울 양천구 곰달래로 20",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042358",
+    "decision": "INCLUDE",
+    "expectedName": "코사마트",
+    "expectedAddress": "서울 양천구 남부순환로60길 11",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042359",
+    "decision": "INCLUDE",
+    "expectedName": "참조은 할인마트",
+    "expectedAddress": "서울 양천구 남부순환로 40길 37",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042360",
+    "decision": "INCLUDE",
+    "expectedName": "동인 프라자 약국",
+    "expectedAddress": "서울 양천구 남부순환로 40길 13",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042361",
+    "decision": "INCLUDE",
+    "expectedName": "국제안경원",
+    "expectedAddress": "서울 양천구 오목로 75",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042362",
+    "decision": "INCLUDE",
+    "expectedName": "조일약국",
+    "expectedAddress": "서울 양천구 신월로 168",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042363",
+    "decision": "INCLUDE",
+    "expectedName": "이마트",
+    "expectedAddress": "서울 양천구 신월로10길 16",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042364",
+    "decision": "INCLUDE",
+    "expectedName": "한약국",
+    "expectedAddress": "서울 양천구 월정로 57",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042365",
+    "decision": "INCLUDE",
+    "expectedName": "월정부동산",
+    "expectedAddress": "서울 양천구 월정로 41",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042366",
+    "decision": "INCLUDE",
+    "expectedName": "경창약국",
+    "expectedAddress": "서울 양천구 월정로 53",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042367",
+    "decision": "INCLUDE",
+    "expectedName": "청솔약국",
+    "expectedAddress": "서울 양천구 월정로 50 121호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042368",
+    "decision": "INCLUDE",
+    "expectedName": "샛별슈퍼",
+    "expectedAddress": "서울 양천구 중앙로55길 54",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042369",
+    "decision": "INCLUDE",
+    "expectedName": "대성세탁소",
+    "expectedAddress": "서울 양천구 남부순환로75길 9",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042370",
+    "decision": "INCLUDE",
+    "expectedName": "우리동네 부동산",
+    "expectedAddress": "서울 양천구 남부순환로 83길 47",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042371",
+    "decision": "INCLUDE",
+    "expectedName": "CU 편의점",
+    "expectedAddress": "서울 양천구 남부순환로310",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042372",
+    "decision": "INCLUDE",
+    "expectedName": "쭈쭈슈퍼",
+    "expectedAddress": "서울 양천구 화곡로8길8",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042373",
+    "decision": "INCLUDE",
+    "expectedName": "모닝글로리",
+    "expectedAddress": "서울 양천구 화곡로10길7",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042374",
+    "decision": "EXCLUDE",
+    "expectedName": "수정약국",
+    "expectedAddress": "서울 양천구 중앙로 276",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042375",
+    "decision": "EXCLUDE",
+    "expectedName": "메디팜 서울 약국",
+    "expectedAddress": "서울 양천구 목동동로 59 로얄프라자 104호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042376",
+    "decision": "EXCLUDE",
+    "expectedName": "가까운 온누리약국",
+    "expectedAddress": "서울 양천구 목동서로 349 센트럴프라자 106호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042377",
+    "decision": "EXCLUDE",
+    "expectedName": "한림약국",
+    "expectedAddress": "서울 양천구 중앙로32길 61",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042378",
+    "decision": "EXCLUDE",
+    "expectedName": "모닝프라자",
+    "expectedAddress": "서울 양천구 목동남로4길 6-23 우성@ 2단지 상가 1층 101호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042379",
+    "decision": "EXCLUDE",
+    "expectedName": "신정1동우체국",
+    "expectedAddress": "서울 양천구 신월로 368",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042380",
+    "decision": "EXCLUDE",
+    "expectedName": "보리약국",
+    "expectedAddress": "서울 양천구 신월로 338",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042381",
+    "decision": "EXCLUDE",
+    "expectedName": "야쿠르트 신목점",
+    "expectedAddress": "서울 양천구 은행정로4길 9(신정동)",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042382",
+    "decision": "EXCLUDE",
+    "expectedName": "온누리 유미숙 약국",
+    "expectedAddress": "서울 양천구 목동로 185",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042383",
+    "decision": "EXCLUDE",
+    "expectedName": "쿠쿠양천점",
+    "expectedAddress": "서울 양천구 오목로 174",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042384",
+    "decision": "EXCLUDE",
+    "expectedName": "성일마트",
+    "expectedAddress": "서울 양천구 오목로23길 11-2",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042385",
+    "decision": "EXCLUDE",
+    "expectedName": "서정문구",
+    "expectedAddress": "서울 양천구 오목로 52길 13",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042386",
+    "decision": "EXCLUDE",
+    "expectedName": "모닝세탁소",
+    "expectedAddress": "서울 양천구 오목로46길 11",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042387",
+    "decision": "EXCLUDE",
+    "expectedName": "삼주 약국",
+    "expectedAddress": "서울 양천구 신목로 86",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042388",
+    "decision": "EXCLUDE",
+    "expectedName": "럭키슈퍼(코사마트)",
+    "expectedAddress": "서울 양천구 중앙로52길 39",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042389",
+    "decision": "EXCLUDE",
+    "expectedName": "D마트",
+    "expectedAddress": "서울 양천구 목동동로12길 9 청학@상가",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042390",
+    "decision": "EXCLUDE",
+    "expectedName": "목동 세계로 약국",
+    "expectedAddress": "서울 양천구 목동동로12길 45",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042391",
+    "decision": "EXCLUDE",
+    "expectedName": "동신약국",
+    "expectedAddress": "서울 양천구 목동동로12길 17",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042392",
+    "decision": "EXCLUDE",
+    "expectedName": "가나다 문구",
+    "expectedAddress": "서울 양천구 목동동로12길 15",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042393",
+    "decision": "EXCLUDE",
+    "expectedName": "신정네거리역부동산",
+    "expectedAddress": "서울 양천구 오목로24길 29 101호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042394",
+    "decision": "EXCLUDE",
+    "expectedName": "야쿠르트 양천점",
+    "expectedAddress": "서울 양천구 목동동로 10길 22 1층",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042395",
+    "decision": "EXCLUDE",
+    "expectedName": "신세계 약국",
+    "expectedAddress": "서울 양천구 신정로 312 목동뉴프라자 107호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042396",
+    "decision": "EXCLUDE",
+    "expectedName": "럭키슈퍼",
+    "expectedAddress": "서울 양천구 신정로 293 신트리상가 101호",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042397",
+    "decision": "EXCLUDE",
+    "expectedName": "색연필 신정3동점",
+    "expectedAddress": "서울 양천구 신정로 13길 22",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042398",
+    "decision": "EXCLUDE",
+    "expectedName": "삼지공인중개사",
+    "expectedAddress": "서울 양천구 중앙로29길 21 1층",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042399",
+    "decision": "EXCLUDE",
+    "expectedName": "동일하이빌 공인중개사",
+    "expectedAddress": "서울 양천구 신정로11길 20 동일하이빌공인중개사",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042631",
+    "decision": "INCLUDE",
+    "expectedName": "참조은할인마트",
+    "expectedAddress": "서울특별시 양천구 남부순환로40길 37-0,참조은 할인마트",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042632",
+    "decision": "INCLUDE",
+    "expectedName": "동인 프라자 약국",
+    "expectedAddress": "서울특별시 양천구 남부순환로40가길 13-0,동인 프라자 약국",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042635",
+    "decision": "INCLUDE",
+    "expectedName": "CU신월광영점",
+    "expectedAddress": "서울특별시 양천구 남부순환로 310-0,CU 편의점",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50042638",
+    "decision": "EXCLUDE",
+    "expectedName": "hy(구)한국야쿠르트 신목점",
+    "expectedAddress": "서울특별시 양천구 은행정로4길 9-0,hy(구)한국야쿠르트 신목점(아동안전수호천사 업소)",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50042639",
+    "decision": "EXCLUDE",
+    "expectedName": "hy(구)한국야쿠르트 양천점",
+    "expectedAddress": "서울특별시 양천구 목동동로10길 22-0,1층 hy(구)한국야쿠르트 양천점(수호천사업소)",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50043770",
+    "decision": "INCLUDE",
+    "expectedName": "에이스공인중개사무소",
+    "expectedAddress": "서울특별시 양천구 월정로 41-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50043771",
+    "decision": "INCLUDE",
+    "expectedName": "희마트",
+    "expectedAddress": "서울특별시 양천구 남부순환로60길 11-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 안에 위치"
+  },
+  {
+    "sourceId": "50043772",
+    "decision": "EXCLUDE",
+    "expectedName": "형제종합인테리어",
+    "expectedAddress": "서울특별시 양천구 목동중앙서로7가길 31-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50044869",
+    "decision": "EXCLUDE",
+    "expectedName": "짐보리 목동점",
+    "expectedAddress": "서울특별시 양천구 오목로 299-0",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50045198",
+    "decision": "EXCLUDE",
+    "expectedName": "양화분식",
+    "expectedAddress": "서울특별시 양천구 목동중앙북로16길 58-0,양화분식",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50045199",
+    "decision": "EXCLUDE",
+    "expectedName": "한국체대 위너스 태권도",
+    "expectedAddress": "서울특별시 양천구 신목로 7-0,한국체대 위너스 태권도",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50045906",
+    "decision": "EXCLUDE",
+    "expectedName": "에제르 주짓수 킥복싱 MMA",
+    "expectedAddress": "서울특별시 양천구 목동중앙로 97-0,B01",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  },
+  {
+    "sourceId": "50045907",
+    "decision": "EXCLUDE",
+    "expectedName": "태낭태사 태권도장",
+    "expectedAddress": "서울특별시 양천구 신정중앙로 67-0,4층",
+    "reason": "좌표가 JUSO 서울시 행정구역 읍면동 신월동 경계 밖에 위치"
+  }
+]
+}

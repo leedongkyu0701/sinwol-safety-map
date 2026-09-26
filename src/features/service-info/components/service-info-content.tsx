@@ -60,7 +60,7 @@ export function ServiceInfoContent() {
                   </div>
 
                   <div className="mt-4 min-w-0 w-full max-w-full divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
-                    {info.sources.map((source) => {
+                    {info.categorySummaries.map((source) => {
                       const category = FACILITY_CATEGORY_CONFIG[source.category];
 
                       return (
@@ -95,9 +95,9 @@ export function ServiceInfoContent() {
                   description="출처별 공개 자료와 갱신일을 표시합니다."
                 >
                   <div className="min-w-0 w-full max-w-full divide-y divide-zinc-200 overflow-hidden rounded-xl border border-zinc-200">
-                    {info.sources.map((source) => (
+                    {info.sourceDetails.map((source) => (
                       <div
-                        key={source.category}
+                        key={source.key}
                         className="grid gap-2 px-4 py-4 sm:grid-cols-[6rem_minmax(0,1fr)] sm:items-start sm:gap-5"
                       >
                         <span className="text-sm font-bold text-zinc-900">
@@ -138,6 +138,10 @@ export function ServiceInfoContent() {
                     <PolicyRow title="시설 기준">
                       대피시설은 사용중으로 확인된 시설만 표시합니다. AED 위치와
                       운영시간은 원천 자료 기준의 참고 정보입니다.
+                    </PolicyRow>
+                    <PolicyRow title="자료 출처 및 이용 조건">
+                      아동안전지킴이집 정보는 경찰청 안전Dream 자료이며, 출처를
+                      표시하고 비상업적 용도로 제공합니다.
                     </PolicyRow>
                     <PolicyRow title="긴급 상황">
                       긴급 신고와 출동 접수는 119 등 관계기관에 요청해 주세요.

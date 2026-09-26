@@ -7,6 +7,7 @@ import {
   fireWaterFacilitiesSchema,
   otherFacilitiesSchema,
   heatShelterFacilitiesSchema,
+  childSafetyHouseFacilitiesSchema,
   shelterFacilitiesSchema,
 } from "../../../src/shared/schemas/facility";
 import {
@@ -46,6 +47,11 @@ import {
   HEAT_SHELTER_METADATA_KEY,
   HEAT_SHELTER_SOURCE_NAME,
 } from "../other/heat-shelter/constants";
+import {
+  CHILD_SAFETY_HOUSE_ID_PREFIX,
+  CHILD_SAFETY_HOUSE_METADATA_KEY,
+  CHILD_SAFETY_HOUSE_SOURCE_NAME,
+} from "../other/child-safety-house/constants";
 import { calculateFileSha256 } from "./file-hash";
 import { readJsonFileIfExists } from "./write-json";
 
@@ -302,6 +308,11 @@ function verifyOther(metadata: DataMetadata): number {
   );
   const heatShelterMetadata =
     metadata.sources.other.datasets?.[HEAT_SHELTER_METADATA_KEY];
+  const childSafetyHouseFacilities = childSafetyHouseFacilitiesSchema.parse(
+    facilities.filter((facility) => facility.id.startsWith(CHILD_SAFETY_HOUSE_ID_PREFIX)),
+  );
+  const childSafetyHouseMetadata =
+    metadata.sources.other.datasets?.[CHILD_SAFETY_HOUSE_METADATA_KEY];
 
   assertUniqueValues(
     facilities.map((facility) => facility.id),
@@ -314,6 +325,10 @@ function verifyOther(metadata: DataMetadata): number {
   assertUniqueValues(
     heatShelterFacilities.map((facility) => facility.sourceId),
     "heat shelter sourceId",
+  );
+  assertUniqueValues(
+    childSafetyHouseFacilities.map((facility) => facility.sourceId),
+    "child safety house sourceId",
   );
   assert.equal(
     facilities.every((facility) => facility.category === "OTHER"),
@@ -387,12 +402,38 @@ function verifyOther(metadata: DataMetadata): number {
     );
   }
 
+  if (childSafetyHouseFacilities.length > 0 || childSafetyHouseMetadata !== undefined) {
+    assert.notEqual(
+      childSafetyHouseMetadata,
+      undefined,
+      "Child safety house metadata is required when child safety house rows exist",
+    );
+    assert.equal(
+      childSafetyHouseMetadata?.count,
+      childSafetyHouseFacilities.length,
+      "Child safety house metadata count must match rows",
+    );
+    assert.equal(
+      childSafetyHouseMetadata?.source,
+      CHILD_SAFETY_HOUSE_SOURCE_NAME,
+      "Child safety house metadata source must match configured source",
+    );
+    assert.equal(
+      typeof childSafetyHouseMetadata?.fetchedAt,
+      "string",
+      "Child safety house metadata must contain fetchedAt",
+    );
+  }
+
   console.log(`OTHER rows: ${facilities.length.toLocaleString("en-US")}`);
   console.log(
     `Fire organization rows: ${fireOrgFacilities.length.toLocaleString("en-US")}`,
   );
   console.log(
     `Heat shelter rows: ${heatShelterFacilities.length.toLocaleString("en-US")}`,
+  );
+  console.log(
+    `Child safety house rows: ${childSafetyHouseFacilities.length.toLocaleString("en-US")}`,
   );
 
   return facilities.length;
