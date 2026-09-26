@@ -8,6 +8,7 @@ import {
   CHILD_SAFETY_HOUSE_CANDIDATE_ADDRESS_TOKEN,
   CHILD_SAFETY_HOUSE_CLASS_CODE,
   CHILD_SAFETY_HOUSE_CLASS_NAME,
+  CHILD_SAFETY_HOUSE_DUPLICATE_COORDINATE_DISTANCE_METERS,
   CHILD_SAFETY_HOUSE_SOURCE_NAME,
 } from "./constants";
 import type {
@@ -40,10 +41,190 @@ export interface ChildSafetyHouseTransformResult {
   exactDuplicatesCollapsed: number;
   duplicateSourceIds: string[];
   sameLocationGroups: Array<{ coordinate: string; sourceIds: string[] }>;
+  probableDuplicateGroups: ChildSafetyHouseProbableDuplicateGroup[];
 };
+
+export interface ChildSafetyHouseProbableDuplicateGroup {
+  records: Array<{
+    sourceId: string;
+    name: string;
+    address: string;
+    phone?: string;
+    latitude: number;
+    longitude: number;
+  }>;
+  comparisons: Array<{
+    sourceIds: [string, string];
+    sameNormalizedName: boolean;
+    sameNormalizedAddress: boolean;
+    samePhone: boolean;
+    distanceMeters: number;
+  }>;
+}
 
 function normalizedReviewText(value: string): string {
   return value.normalize("NFKC").trim().replace(/\s+/g, " ");
+}
+
+function normalizedReviewAddress(value: string): string {
+  return normalizedReviewText(value)
+    .replace(/^서울특별시(?= 양천구)/u, "서울")
+    .replace(/(\d+)-0(?=[,\s]|$)/gu, "$1");
+}
+
+function distanceInMeters(
+  first: Pick<ChildSafetyHouseFacility, "latitude" | "longitude">,
+  second: Pick<ChildSafetyHouseFacility, "latitude" | "longitude">,
+): number {
+  const earthRadiusMeters = 6_371_000;
+  const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
+  const latitudeDelta = toRadians(second.latitude - first.latitude);
+  const longitudeDelta = toRadians(second.longitude - first.longitude);
+  const haversine =
+    Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(toRadians(first.latitude)) *
+      Math.cos(toRadians(second.latitude)) *
+      Math.sin(longitudeDelta / 2) ** 2;
+
+  return 2 * earthRadiusMeters * Math.asin(Math.sqrt(haversine));
+}
+
+export function findChildSafetyHouseProbableDuplicateGroups(
+  facilities: readonly ChildSafetyHouseFacility[],
+): ChildSafetyHouseProbableDuplicateGroup[] {
+  const parentById = new Map(
+    facilities.map((facility) => [facility.sourceId, facility.sourceId]),
+  );
+  const findRoot = (sourceId: string): string => {
+    const parent = parentById.get(sourceId);
+    if (parent === undefined || parent === sourceId) return sourceId;
+    const root = findRoot(parent);
+    parentById.set(sourceId, root);
+    return root;
+  };
+  const comparisons: ChildSafetyHouseProbableDuplicateGroup["comparisons"] = [];
+
+  for (let firstIndex = 0; firstIndex < facilities.length; firstIndex += 1) {
+    const first = facilities[firstIndex];
+    if (first === undefined) continue;
+
+    for (
+      let secondIndex = firstIndex + 1;
+      secondIndex < facilities.length;
+      secondIndex += 1
+    ) {
+      const second = facilities[secondIndex];
+      if (second === undefined || first.sourceId === second.sourceId) continue;
+
+      const sameNormalizedName =
+        normalizedReviewText(first.name) === normalizedReviewText(second.name);
+      if (!sameNormalizedName) continue;
+
+      const sameNormalizedAddress =
+        normalizedReviewAddress(first.address) ===
+        normalizedReviewAddress(second.address);
+      const samePhone =
+        first.details.phone !== undefined &&
+        first.details.phone === second.details.phone;
+      const distanceMeters = distanceInMeters(first, second);
+
+      if (
+        !sameNormalizedAddress &&
+        !(samePhone && distanceMeters <= CHILD_SAFETY_HOUSE_DUPLICATE_COORDINATE_DISTANCE_METERS)
+      ) {
+        continue;
+      }
+
+      comparisons.push({
+        sourceIds: [first.sourceId, second.sourceId],
+        sameNormalizedName,
+        sameNormalizedAddress,
+        samePhone,
+        distanceMeters,
+      });
+      const firstRoot = findRoot(first.sourceId);
+      const secondRoot = findRoot(second.sourceId);
+      if (firstRoot !== secondRoot) parentById.set(secondRoot, firstRoot);
+    }
+  }
+
+  const facilitiesByRoot = new Map<string, ChildSafetyHouseFacility[]>();
+  for (const facility of facilities) {
+    const root = findRoot(facility.sourceId);
+    const group = facilitiesByRoot.get(root) ?? [];
+    group.push(facility);
+    facilitiesByRoot.set(root, group);
+  }
+
+  return [...facilitiesByRoot.values()]
+    .filter((group) => group.length > 1)
+    .map((group) => {
+      const ordered = [...group].sort((first, second) =>
+        first.sourceId.localeCompare(second.sourceId),
+      );
+      const sourceIds = new Set(ordered.map((facility) => facility.sourceId));
+      return {
+        records: ordered.map((facility) => ({
+          sourceId: facility.sourceId,
+          name: facility.name,
+          address: facility.address,
+          ...(facility.details.phone === undefined
+            ? {}
+            : { phone: facility.details.phone }),
+          latitude: facility.latitude,
+          longitude: facility.longitude,
+        })),
+        comparisons: comparisons
+          .filter((comparison) =>
+            comparison.sourceIds.every((id) => sourceIds.has(id)),
+          )
+          .sort((first, second) =>
+            first.sourceIds.join(":").localeCompare(second.sourceIds.join(":")),
+          ),
+      };
+    })
+    .sort((first, second) =>
+      first.records[0]?.sourceId.localeCompare(second.records[0]?.sourceId ?? "") ?? 0,
+    );
+}
+
+export function findReviewedDuplicateExclusionSourceIds(
+  reference: ChildSafetyHouseReference,
+  existingSourceIds: ReadonlySet<string>,
+): string[] {
+  const decisionsById = new Map(
+    reference.decisions.map((decision) => [decision.sourceId, decision]),
+  );
+  const duplicateReasonPattern =
+    /^sourceId (\d+)와 동일 실제 시설(?: 및 전화번호)?로 확인된 SafeDream 중복 레코드$/u;
+
+  return reference.decisions
+    .filter((decision) => {
+      if (
+        decision.decision !== "EXCLUDE" ||
+        !existingSourceIds.has(decision.sourceId)
+      ) {
+        return false;
+      }
+
+      const match = decision.reason?.match(duplicateReasonPattern);
+      if (match === undefined || match === null) return false;
+
+      const representativeSourceId = match[1];
+      const representative =
+        representativeSourceId === undefined
+          ? undefined
+          : decisionsById.get(representativeSourceId);
+      if (representative?.decision !== "INCLUDE") {
+        throw new Error(
+          `Reviewed duplicate exclusion ${decision.sourceId} must reference an INCLUDE representative`,
+        );
+      }
+
+      return true;
+    })
+    .map((decision) => decision.sourceId)
+    .sort();
 }
 
 function sourceText(value: unknown): string | undefined {
@@ -225,6 +406,7 @@ export function transformChildSafetyHouseRows(
   const sameLocationGroups = [...locationMap.entries()]
     .filter(([, sourceIds]) => sourceIds.length > 1)
     .map(([coordinate, sourceIds]) => ({ coordinate, sourceIds: sourceIds.sort() }));
+  const probableDuplicateGroups = findChildSafetyHouseProbableDuplicateGroups(facilities);
 
   return {
     facilities,
@@ -239,6 +421,7 @@ export function transformChildSafetyHouseRows(
     exactDuplicatesCollapsed,
     duplicateSourceIds: [...duplicateSourceIds].sort(),
     sameLocationGroups,
+    probableDuplicateGroups,
   };
 }
 

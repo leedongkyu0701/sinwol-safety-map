@@ -64,6 +64,8 @@ import { assertHeatShelterAudit, auditHeatShelterFacilities } from "../other/hea
 import { heatShelterSourceRowSchema } from "../other/heat-shelter/schema";
 import { childSafetyHouseReferenceSchema, childSafetyHouseSourceRowSchema } from "../other/child-safety-house/schema";
 import {
+  findChildSafetyHouseProbableDuplicateGroups,
+  findReviewedDuplicateExclusionSourceIds,
   assertChildSafetyHouseReview,
   normalizeChildSafetyHousePhone,
   transformChildSafetyHouseRows,
@@ -269,6 +271,61 @@ assert.equal(otherFacilitySchema.safeParse({
 const child = childSafetyFixture();
 const childTransformed = transformChildSafetyHouseRows([child], childDecision);
 const childFacilities = childSafetyHouseFacilitiesSchema.parse(childTransformed.facilities);
+const childDuplicateRecord = {
+  ...childFacilities[0]!,
+  id: "child-safety-house:50034670",
+  sourceId: "50034670",
+};
+const sameAddressDuplicateGroups = findChildSafetyHouseProbableDuplicateGroups([
+  childFacilities[0]!,
+  childDuplicateRecord,
+]);
+assert.equal(sameAddressDuplicateGroups.length, 1);
+assert.deepEqual(
+  sameAddressDuplicateGroups[0]?.records.map((record) => record.sourceId),
+  ["50034669", "50034670"],
+);
+const nearAddressDuplicateGroups = findChildSafetyHouseProbableDuplicateGroups([
+  childFacilities[0]!,
+  {
+    ...childDuplicateRecord,
+    address: "서울 양천구 테스트로 1",
+    latitude: childDuplicateRecord.latitude + 0.00001,
+  },
+]);
+assert.equal(nearAddressDuplicateGroups.length, 1);
+assert.equal(nearAddressDuplicateGroups[0]?.comparisons[0]?.sameNormalizedAddress, false);
+assert.equal(nearAddressDuplicateGroups[0]?.comparisons[0]?.samePhone, true);
+assert.ok(
+  (nearAddressDuplicateGroups[0]?.comparisons[0]?.distanceMeters ?? Infinity) <= 5,
+);
+const normalizedRoadAddressGroups = findChildSafetyHouseProbableDuplicateGroups([
+  {
+    ...childFacilities[0]!,
+    id: "child-safety-house:50040500",
+    sourceId: "50040500",
+    name: "경창약국",
+    address: "서울특별시 양천구 월정로 53-0",
+    latitude: 37.52448258,
+    longitude: 126.8415455,
+    details: {},
+  },
+  {
+    ...childDuplicateRecord,
+    id: "child-safety-house:50042306",
+    sourceId: "50042306",
+    name: "경창약국",
+    address: "서울 양천구 월정로 53",
+    latitude: 37.52448258,
+    longitude: 126.8415455,
+    details: {},
+  },
+]);
+assert.equal(normalizedRoadAddressGroups.length, 1);
+assert.equal(
+  normalizedRoadAddressGroups[0]?.comparisons[0]?.sameNormalizedAddress,
+  true,
+);
 assert.equal(childTransformed.facilities[0].sourceId, "50034669");
 assert.equal(childTransformed.facilities[0].id, "child-safety-house:50034669");
 assert.equal(childTransformed.facilities[0].detailLocation, "101호");
@@ -331,7 +388,65 @@ const distinctAtSamePoint = transformChildSafetyHouseRows([
 });
 assert.equal(distinctAtSamePoint.facilities.length, 2);
 assert.equal(distinctAtSamePoint.sameLocationGroups.length, 1);
+assert.equal(distinctAtSamePoint.probableDuplicateGroups.length, 0);
+const sameNameDistinctSources = transformChildSafetyHouseRows([
+  child,
+  childSafetyFixture({ lcSn: 50034670 }),
+], {
+  ...childDecision,
+  decisions: [
+    ...childDecision.decisions,
+    {
+      sourceId: "50034670",
+      decision: "INCLUDE",
+      expectedName: "신월 테스트 지킴이집",
+      expectedAddress: "서울특별시 양천구 신월동 테스트로 1",
+    },
+  ],
+});
+assert.equal(sameNameDistinctSources.facilities.length, 2);
+assert.equal(sameNameDistinctSources.probableDuplicateGroups[0]?.records.length, 2);
 assert.equal(childSafetyHouseReferenceSchema.safeParse(childDecision).success, true);
+assert.deepEqual(
+  findReviewedDuplicateExclusionSourceIds(
+    {
+      ...childDecision,
+      decisions: [
+        ...childDecision.decisions,
+        {
+          sourceId: "50034670",
+          decision: "EXCLUDE",
+          expectedName: "신월 테스트 지킴이집",
+          expectedAddress: "서울특별시 양천구 신월동 테스트로 1",
+          reason:
+            "sourceId 50034669와 동일 실제 시설로 확인된 SafeDream 중복 레코드",
+        },
+      ],
+    },
+    new Set(["50034670"]),
+  ),
+  ["50034670"],
+);
+assert.throws(
+  () =>
+    findReviewedDuplicateExclusionSourceIds(
+      {
+        ...childDecision,
+        decisions: [
+          {
+            sourceId: "50034670",
+            decision: "EXCLUDE",
+            expectedName: "신월 테스트 지킴이집",
+            expectedAddress: "서울특별시 양천구 신월동 테스트로 1",
+            reason:
+              "sourceId 50034669와 동일 실제 시설로 확인된 SafeDream 중복 레코드",
+          },
+        ],
+      },
+      new Set(["50034670"]),
+    ),
+  /must reference an INCLUDE representative/,
+);
 const childDetail = createFacilityDetailViewModel(childFacilities[0]);
 assert.equal(childDetail.categoryLabel, "기타");
 assert.equal(childDetail.subtypeLabel, "아동안전지킴이집");

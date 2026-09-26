@@ -19,6 +19,7 @@ export interface ChildSafetyHouseAudit {
   duplicateSourceIds: string[];
   exactDuplicatesCollapsed: number;
   sameLocationGroups: ChildSafetyHouseTransformResult["sameLocationGroups"];
+  probableDuplicateGroups: ChildSafetyHouseTransformResult["probableDuplicateGroups"];
   coordinateRange?: { latitude: [number, number]; longitude: [number, number] };
   snapshotBaseline: "MATCH" | "DIFF";
   totalOtherRows: number;
@@ -60,6 +61,7 @@ export function createChildSafetyHouseAudit(
     duplicateSourceIds: result.duplicateSourceIds,
     exactDuplicatesCollapsed: result.exactDuplicatesCollapsed,
     sameLocationGroups: result.sameLocationGroups,
+    probableDuplicateGroups: result.probableDuplicateGroups,
     ...(facilities.length === 0
       ? {}
       : {
@@ -91,6 +93,22 @@ export function printChildSafetyHouseAudit(audit: ChildSafetyHouseAudit): void {
   console.log(`- Exact duplicates collapsed: ${audit.exactDuplicatesCollapsed}`);
   console.log(`- Duplicate lcSn: ${audit.duplicateSourceIds.length}`);
   console.log(`- Same-location groups: ${JSON.stringify(audit.sameLocationGroups)}`);
+  console.log(
+    `- HIGH-CONFIDENCE probable duplicate groups among INCLUDE rows: ${audit.probableDuplicateGroups.length}`,
+  );
+  for (const [index, group] of audit.probableDuplicateGroups.entries()) {
+    console.log(`  - Probable duplicate group #${index + 1}`);
+    for (const record of group.records) {
+      console.log(
+        `    ${record.sourceId}\t${record.name}\t${record.address}\t${record.phone ?? "(no phone)"}\t${record.latitude},${record.longitude}`,
+      );
+    }
+    for (const comparison of group.comparisons) {
+      console.log(
+        `    comparison ${comparison.sourceIds.join(" / ")}: same normalized name=${comparison.sameNormalizedName}, address=${comparison.sameNormalizedAddress}, phone=${comparison.samePhone}, distance=${comparison.distanceMeters.toFixed(2)}m; manual review only`,
+      );
+    }
+  }
   console.log(`- Published coordinate range: ${JSON.stringify(audit.coordinateRange ?? null)}`);
   console.log(`- OTHER rows after merge: ${audit.totalOtherRows}`);
 }

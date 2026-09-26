@@ -63,7 +63,9 @@ Source의 X/Y는 ITRF2000_MTM 중부원점(EPSG:5186) 좌표이며 ETL에서 WGS
 
 무더위쉼터의 시설 구분, 이용 구분, 기본·연장·추가 운영시간과 존재하는 비고를 보존한다. `EXT_OPR_YN` 또는 `ADD_OPR_YN`이 `N`이면 해당 시간 그룹이 비어 있는 것이 정상이며, `Y`인 그룹의 요일·시작·종료 누락이나 알 수 없는 한국어 요일은 검증 실패다. 동일 Identity와 publishable 값이 완전히 같은 반복 행만 collapse한다. 같은 Identity의 publishable 값이 다르면 수동 확인을 위해 Publish를 중단한다. 좌표가 같아도 서로 다른 시설은 유지하고 audit에 기록한다.
 
-아동안전지킴이집 Source는 경찰청 안전Dream 안전지도 API(`cl=09`)다. 독립 Source Identity `lcSn`을 `sourceId`로 사용하며 상위 Category는 `OTHER`, subtype은 `CHILD_SAFETY_HOUSE`, Published ID namespace는 `child-safety-house:`다. 신월동 포함 여부는 주소 문자열이나 좌표로 추정하지 않고, `data/reference/child-safety-house.json`의 사람이 확인한 INCLUDE/EXCLUDE 결정으로만 정한다. 주소에 양천구가 포함된 Row는 검토 후보 발견에만 사용하며 새 후보가 미검토이거나 등록 이름·주소가 바뀌면 Publish를 중단한다. 첫 Reference는 서울시 행정구역 읍면동 위치정보(JUSO, 2015)의 신월동 경계와 Source 좌표를 대조해 작성했으며, 경계 근접 후보는 없었다. 전화번호는 선택 필드이며 유효하지 않은 값은 추정·수정하지 않고 생략한다. 동일 좌표의 서로 다른 `lcSn`은 합치지 않는다. 경찰청 약관에 따라 비상업적 용도로 이용하고 `/info`에 `[자료 출처: 경찰청]`를 표시한다. 이 데이터는 Daily Sync 대상이 아닌 수동 Snapshot으로 갱신한다.
+아동안전지킴이집 Source는 경찰청 안전Dream 안전지도 API(`cl=09`)다. 독립 Source Identity `lcSn`을 `sourceId`로 보존하며 상위 Category는 `OTHER`, subtype은 `CHILD_SAFETY_HOUSE`, Published ID namespace는 `child-safety-house:`다. Source Record 수와 Published Facility 수는 항상 같지 않을 수 있다. 서로 다른 `lcSn`이 동일한 실제 시설을 가리킨다고 사람이 확인한 경우, 더 완전한 Source Row 하나를 대표로 INCLUDE하고 중복 Source ID는 `data/reference/child-safety-house.json`에서 EXCLUDE한다. 중복 제외 reason에는 대표 `sourceId`를 기록한다. ETL은 이름·주소·전화번호·좌표로 자동 deduplicate하지 않는다.
+
+신월동 포함 여부는 주소 문자열이나 좌표로 추정하지 않고 Reference의 사람이 확인한 INCLUDE/EXCLUDE 결정으로만 정한다. 주소에 양천구가 포함된 Row는 검토 후보 발견에만 사용하며 새 후보가 미검토이거나 등록 이름/주소가 바뀌면 Publish를 중단한다. 첫 Reference는 서울시 행정구역 읍면동 위치정보(JUSO, 2015)의 신월동 경계와 Source 좌표를 대조해 작성했으며, 경계 근접 후보는 없었다. 전화번호는 선택 필드이며 유효하지 않은 값은 추정·수정하지 않고 생략한다. 동일 좌표만으로는 중복을 판단하지 않고 서로 다른 이름의 시설은 보존한다. Audit의 probable duplicate는 정규화된 이름·주소, 또는 동일 전화번호와 5m 이내 좌표를 이용한 정보 제공용 검토 후보일 뿐이며 자동 제외나 Publish 실패 조건이 아니다. 경찰청 약관에 따라 비상업적 용도로 이용하고 `/info`에 `[자료 출처: 경찰청]`를 표시한다. 이 데이터는 Daily Sync 대상이 아닌 수동 Snapshot으로 갱신한다.
 
 ## Identity and Deduplication
 

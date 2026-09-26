@@ -30,7 +30,11 @@ import {
 } from "./constants";
 import { fetchChildSafetyHouseSource } from "./fetch";
 import { readChildSafetyHouseReference } from "./reference";
-import { assertChildSafetyHouseReview, transformChildSafetyHouseRows } from "./transform";
+import {
+  assertChildSafetyHouseReview,
+  findReviewedDuplicateExclusionSourceIds,
+  transformChildSafetyHouseRows,
+} from "./transform";
 
 async function run(): Promise<void> {
   const existingOther = otherFacilitiesSchema.parse(
@@ -70,10 +74,21 @@ async function run(): Promise<void> {
   const childDataChanged =
     JSON.stringify(existingChildFacilities) !== JSON.stringify(facilities);
   const previousDataset = existingMetadata?.sources.other.datasets?.[CHILD_SAFETY_HOUSE_METADATA_KEY];
+  const reviewedDuplicateExclusions = findReviewedDuplicateExclusionSourceIds(
+    reference,
+    new Set(existingChildFacilities.map((facility) => facility.sourceId)),
+  );
+  const previousCountForGuard =
+    previousDataset?.count === existingChildFacilities.length
+      ? previousDataset.count - reviewedDuplicateExclusions.length
+      : previousDataset?.count;
+  console.log(
+    `Reviewed duplicate exclusions from previous snapshot: ${reviewedDuplicateExclusions.length}`,
+  );
   assertReasonableRecordCount({
     label: "child safety house",
     nextCount: facilities.length,
-    previousCount: previousDataset?.count,
+    previousCount: previousCountForGuard,
     maxDecreaseRatio: CHILD_SAFETY_HOUSE_MAX_COUNT_DECREASE_RATIO,
   });
   const canReuseFetchedAt =
